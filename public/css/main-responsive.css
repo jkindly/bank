@@ -1,0 +1,6 @@
+/* T O P  B A R */
+@media (max-width: 1000px) {
+    .top-content, .top-bar, main {
+        width: auto;
+    }
+}

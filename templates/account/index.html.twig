@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block userName %}
+    <div class="user-control user-name">
+        {{ account.name }} {{ account.surname }}
+    </div>
+{% endblock %}
+
+{% block body %}
+    <main>
+        {% if account.bankAccounts|length == 0 %}
+            <h3 class="your-accounts">Nie posiadasz jeszcze żadnego otwartego rachunku</h3>
+        {% else %}
+            <h3 class="your-accounts">Twoje rachunki</h3>
+            <div class="container">
+                {% for bankAccount in account.bankAccounts %}
+                    <div class="row">
+                        <div class="col-12 col-md-6 p-0">
+                            <div class="user-account" id="account-nr{{ loop.index }}">
+                                <div class="user-account-type">
+                                    Konto {{ bankAccount.accountType }}
+                                </div>
+                                <div class="user-account-number">
+                                    {{ bankAccount.accountNumber }}
+                                </div>
+                                <div class="user-account-balance">
+                                    {{ bankAccount.balance }} PLN
+                                </div>
+                                <div class="user-account-available-funds">
+                                    {{ bankAccount.availableFunds }} PLN
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </main>
+{% endblock %}
