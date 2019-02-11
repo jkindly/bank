@@ -38,16 +38,29 @@ footer {
 
 
 /* START LOGIN BOX */
+.login-page-container {
+    /*border: 1px dotted black;*/
+    margin-top: 100px;
+}
+
+.login-brand {
+    text-align: center;
+}
+
 .login-container {
     width: 300px;
-    height: 300px;
+    height: 320px;
     border: 1px solid black;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    margin: 100px auto 0 auto;
+    margin: 10px auto 0 auto;
     text-align: center;
     padding-top: 10px;
+}
+
+.login-container > h1 {
+
 }
 
 .login-box-field {
@@ -68,8 +81,22 @@ footer {
     border: 1px solid #2A83C7;
 }
 
+input[type='checkbox'] {
+    outline: 0;
+}
+
+.remember-me {
+    font-size: 1.6rem;
+    /*border: 1px dotted black;*/
+    text-align: left;
+    width: 260px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+}
+
 .login-button {
-    margin-top: 20px;
+    margin-top: 10px;
     background-color: #2A83C7;
     line-height: 1px;
     font-size: 2.8rem;
@@ -86,6 +113,11 @@ footer {
     font-size: 1.6rem;
     margin-top: 5px;
     color: #707070;
+}
+
+.login-invalid-credentials {
+    font-size: 1.4rem;
+    color: red;
 }
 /* END LOGIN BOX */
 

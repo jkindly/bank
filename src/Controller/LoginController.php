@@ -2,38 +2,34 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController extends AbstractController
 {
     /**
-     * @Route("/login", name="login")
+     * @Route("/login", name="app_login")
      */
-    public function index()
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        return $this->render('login/index.html.twig', [
-            'controller_name' => 'LoginController',
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('login/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error
         ]);
     }
 
     /**
-     * @Route("/new-user", name="new_user")
+     * @Route("/logout", name="app_logout")
      */
-    public function newUser() {
-        $entityManager = $this->getDoctrine()->getManager();
+    public function logout()
+    {
 
-        $user = new User();
-        $user->setName('Jakub')
-            ->setSurname('Kozupa')
-            ->setLogin('j.kozupa')
-            ->setPassword('mnkctnob');
-
-        $entityManager->persist($user);
-        $entityManager->flush();
-
-        return new Response(sprintf('Added new user with name: %s, surname: %s and login: %s', $user->getName(), $user->getSurname(), $user->getLogin()));
     }
 }

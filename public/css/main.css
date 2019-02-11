@@ -16,6 +16,11 @@ main {
     /*border: 1px dotted black;*/
 }
 
+a:link, a:visited, a:checked {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* START TOP BAR */
 .logo {
     position: absolute;
@@ -29,7 +34,7 @@ main {
 }
 
 .top-content {
-    width: 1000px;
+    width: 1140px;
     height: 150px;
     margin: 0 auto;
     text-align: center;
@@ -41,15 +46,17 @@ main {
     bottom: -2px;
     padding: 0 !important;
     margin: 0 !important;
-    width: 100%;
+    width: 400px;
+    /*height: 30px;*/
 }
 
 .nav-item:last-child {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    padding: 0;
-    margin: 0;
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*padding: 0;*/
+    /*margin: 0;*/
+    /*margin-right: 20px;*/
 }
 
 .nav-item-underscore {
@@ -75,7 +82,7 @@ main {
     /*border: 1px dotted black;*/
     width: 0;
     height: 0;
-    top: 20px;
+    top: 10px;
     left: 10px;
     vertical-align: top;
 }

@@ -15,13 +15,31 @@
 
 {% block body %}
     <main>
-        <div class="login-container">
-            <h1>Logowanie do systemu bankowości</h1>
-            <input type="text" class="login-box-field login-field" placeholder="&#xf007;"> <br>
-            <input type="password" class="login-box-field password-field" placeholder="&#xf023;">
-            <input type="submit" value="Zaloguj" class="login-box-field login-button">
-            <div class="login-problem">
-                <a href="#">Problem z logowaniem?</a>
+        <div class="login-page-container">
+            <div class="login-brand">
+                <img src="{{ asset('img/logo.png') }}" alt="Free Bank">
+            </div>
+            <div class="login-container">
+                <h1>Logowanie do systemu bankowości</h1>
+                <form method="post">
+                    {% if error %}
+                        <div class="login-invalid-credentials">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    <input type="text" name="username" value="{{ last_username }}" class="login-box-field login-field" placeholder="&#xf007;"> <br>
+                    <input type="password" name="password" class="login-box-field password-field" placeholder="&#xf023;">
+                    <div class="remember-me">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Zapamiętaj mnie
+                        </label>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <button class="login-box-field login-button">
+                        Zaloguj
+                    </button>
+                    <div class="login-problem">
+                        <a href="#">Problem z logowaniem?</a>
+                    </div>
+                </form>
             </div>
         </div>
     </main>

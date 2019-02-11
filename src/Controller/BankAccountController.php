@@ -2,30 +2,25 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
+use App\Entity\BankAccount;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BankAccountController extends AbstractController
+class BankAccountController extends BaseController
 {
     /**
-     * @Route("/account/{login}", name="app_account")
+     * @Route("/account", name="app_account")
      */
-    public function index($login)
+    public function index()
     {
-        $em = $this->getDoctrine()->getManager();
+        $bankAccount = $this->getDoctrine()
+            ->getRepository(BankAccount::class)
+            ->findAll();
 
-        $account = $em->getRepository(User::class)
-            ->findOneBy(['login' => $login]);
-
-        if (!$account) {
-            throw $this->createNotFoundException(
-                'Nie znaleziono użytkownika o loginie: ' . $login
-            );
-        }
-
-        return $this->render('account/index.html.twig', [
-            'account' => $account
-        ]);
+        return $this->render('account/account.html.twig',
+            [
+                'bankAccount' => $bankAccount
+            ]);
     }
 }
