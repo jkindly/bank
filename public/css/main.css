@@ -8,11 +8,12 @@ body {
     color: #707070;
     font-family: 'Lato', sans-serif;
     background-image: url('../img/dust_scratches.png');
+    font-size: 2rem;
 }
 
 main {
-    width: 1000px;
-    margin: 0 auto;
+    width: 1140px;
+    /*margin: 0 auto;*/
     /*border: 1px dotted black;*/
 }
 
@@ -124,10 +125,15 @@ a:link, a:visited, a:checked {
     font-size: 2rem;
     padding-bottom: 0 !important;
     margin: 0 !important;
+    outline: 0;
 }
 
 .nav-link:hover {
     color: rgb(0, 123, 255) !important;
+}
+
+.row {
+    margin: 0 !important;
 }
 
 /* END BOOTSTRAP SELF-CONFIG */
@@ -204,3 +210,74 @@ footer {
     font-weight: 700;
 }
 /* END MAIN CONTENT OF ACCOUNTS */
+
+
+/* START CONTENT OF TRANSFER */
+.container-transfer {
+    margin: 0 auto;
+    /*border: 1px dotted black;*/
+    text-align: center;
+}
+
+.transfer-type {
+    display: inline-block;
+    margin: 5px 10px 0 10px;
+    padding: 0 2px 0 2px;
+    /*border: 1px dotted black;*/
+}
+
+.transfer-options {
+    /*text-align: center;*/
+    /*border: 1px dotted black;*/
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.transfer-option {
+    height: 60px;
+    margin: 30px 10px 0 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: white;flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #C1C1C0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.transfer-option > .fas {
+    font-size: 4rem;
+    display: flex;
+    justify-content: left;
+}
+
+.transfer-option span {
+    flex-grow: 1;
+}
+
+.transfer-option > .fa-user-alt {
+    color: #29B007;
+}
+
+.transfer-option > .fa-exchange-alt {
+    color: rgb(0, 123, 255);
+}
+
+.transfer-option > .fa-hourglass-half {
+    color: #DFD914;
+}
+
+.user-login-logs {
+    font-size: 1rem;
+    margin-top: 50px;
+}
+/* END CONTENT OF TRANSFER */

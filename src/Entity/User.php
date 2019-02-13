@@ -57,9 +57,15 @@ class User implements UserInterface
      */
     private $bankAccounts;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\LoginLogs", mappedBy="user", orphanRemoval=true)
+     */
+    private $loginLogs;
+
     public function __construct()
     {
         $this->bankAccounts = new ArrayCollection();
+        $this->loginLogs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,6 +202,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($bankAccount->getUser() === $this) {
                 $bankAccount->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|LoginLogs[]
+     */
+    public function getLoginLogs(): Collection
+    {
+        return $this->loginLogs;
+    }
+
+    public function addLoginLog(LoginLogs $loginLog): self
+    {
+        if (!$this->loginLogs->contains($loginLog)) {
+            $this->loginLogs[] = $loginLog;
+            $loginLog->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLoginLog(LoginLogs $loginLog): self
+    {
+        if ($this->loginLogs->contains($loginLog)) {
+            $this->loginLogs->removeElement($loginLog);
+            // set the owning side to null (unless already changed)
+            if ($loginLog->getUser() === $this) {
+                $loginLog->setUser(null);
             }
         }
 

@@ -15,6 +15,7 @@ class BankAccountFixture extends Fixture implements DependentFixtureInterface
     {
         $bankAccount1 = new BankAccount();
         $bankAccount2 = new BankAccount();
+        $bankAccount3 = new BankAccount();
 
         $bankAccount1
             ->setAccountType('standard')
@@ -30,8 +31,16 @@ class BankAccountFixture extends Fixture implements DependentFixtureInterface
             ->setAvailableFunds(0.00)
             ->setUser($this->getReference('user'));
 
+        $bankAccount3
+            ->setAccountType('standard')
+            ->setAccountNumber(Account::randomAccountNumber())
+            ->setBalance(0.00)
+            ->setAvailableFunds(0.00)
+            ->setUser($this->getReference('admin'));
+
         $manager->persist($bankAccount1);
         $manager->persist($bankAccount2);
+        $manager->persist($bankAccount3);
 
         $manager->flush();
     }

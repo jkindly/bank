@@ -1,39 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{#{% block userName %}#}
-    {#<div class="user-control user-name">#}
-        {#{{ account.name }} {{ account.surname }}#}
-    {#</div>#}
-{#{% endblock %}#}
-
 {% block body %}
     <main>
-        {% if account.bankAccounts|length == 0 %}
+        {% if bankAccounts|length == 0 %}
             <h3 class="your-accounts">Nie posiadasz jeszcze żadnego otwartego rachunku</h3>
         {% else %}
             <h3 class="your-accounts">Twoje rachunki</h3>
-            <div class="container">
-                {% for bankAccount in account.bankAccounts %}
-                    <div class="row">
-                        <div class="col-12 col-md-6 p-0">
-                            <div class="user-account" id="account-nr{{ loop.index }}">
-                                <div class="user-account-type">
-                                    Konto {{ bankAccount.accountType }}
-                                </div>
-                                <div class="user-account-number">
-                                    {{ bankAccount.accountNumber }}
-                                </div>
-                                <div class="user-account-balance">
-                                    {{ bankAccount.balance }} PLN
-                                </div>
-                                <div class="user-account-available-funds">
-                                    {{ bankAccount.availableFunds }} PLN
-                                </div>
+            {% for bankAccount in bankAccounts %}
+                <div class="row">
+                    <div class="col-12 col-md-6 p-0">
+                        <div class="user-account" id="account-nr{{ loop.index }}">
+                            <div class="user-account-type">
+                                Konto {{ bankAccount.accountType }}
+                            </div>
+                            <div class="user-account-number">
+                                {{ bankAccount.accountNumber }}
+                            </div>
+                            <div class="user-account-balance">
+                                {{ bankAccount.balance }} PLN
+                            </div>
+                            <div class="user-account-available-funds">
+                                {{ bankAccount.availableFunds }} PLN
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
         {% endif %}
+        <div class="user-login-logs">
+            {% for success in loginLogsSuccess %}
+                <div class="user-login-log-success">
+                    Ostatnia <b>udana</b> próba logowania: {{ success.createdAt|date("d.m.Y H:i:s") }}
+                </div>
+            {% endfor %}
+
+            {% if loginLogFailed %}
+                {% for failed in loginLogFailed %}
+                    <div class="user-login-log-failed">
+                        Ostatnia <b>nieudana</b> próba logowania: {{ failed.createdAt|date("d.m.Y H:i:s") }}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="user-login-log-failed">
+                    Ostatnia <b>nieudana</b> próba logowania: BRAK
+                </div>
+            {% endif %}
+        </div>
     </main>
 {% endblock %}

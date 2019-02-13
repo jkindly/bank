@@ -3,8 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\BankAccount;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\LoginLogs;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BankAccountController extends BaseController
@@ -12,15 +11,29 @@ class BankAccountController extends BaseController
     /**
      * @Route("/account", name="app_account")
      */
-    public function index()
+    public function getUserAccounts()
     {
-        $bankAccount = $this->getDoctrine()
+        $userId = $this->getUser()->getId();
+
+        $bankAccounts = $this->getDoctrine()
             ->getRepository(BankAccount::class)
-            ->findAll();
+            ->findBy(['user' => $userId])
+        ;
+
+        $userLogSuccess = $this->getDoctrine()
+            ->getRepository(LoginLogs::class)
+            ->findLatestUserLoginLog($userId, 1)
+        ;
+
+        $userLogFailed = $this->getDoctrine()
+            ->getRepository(LoginLogs::class)
+            ->findLatestUserLoginLog($userId, 0);
 
         return $this->render('account/account.html.twig',
             [
-                'bankAccount' => $bankAccount
+                'bankAccounts' => $bankAccounts,
+                'loginLogsSuccess' => $userLogSuccess,
+                'loginLogFailed' => $userLogFailed
             ]);
     }
 }

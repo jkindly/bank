@@ -12,7 +12,7 @@ class TransferController extends AbstractController
      */
     public function index()
     {
-        return $this->render('transfer/index.html.twig', [
+        return $this->render('transfer/transfer.html.twig', [
             'controller_name' => 'TransferController',
         ]);
     }

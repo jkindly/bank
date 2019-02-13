@@ -21,7 +21,7 @@ class UserFixture extends Fixture
     {
 
         $user = new User();
-        $user2 = new User();
+        $admin = new User();
 
         $user
             ->setFirstName('Jakub')
@@ -30,7 +30,7 @@ class UserFixture extends Fixture
             ->setEmail('kozupa.jakub@gmail.com')
             ->setPassword($this->passwordEncoder->encodePassword($user, 'mnkctnob'));
 
-        $user2
+        $admin
             ->setFirstName('Admin')
             ->setLastName('Admin')
             ->setUsername('admin')
@@ -39,10 +39,11 @@ class UserFixture extends Fixture
             ->setRoles(['ROLE_ADMIN']);
 
         $manager->persist($user);
-        $manager->persist($user2);
+        $manager->persist($admin);
 
         $manager->flush();
 
         $this->addReference('user', $user);
+        $this->addReference('admin', $admin);
     }
 }

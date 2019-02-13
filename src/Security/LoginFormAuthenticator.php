@@ -2,12 +2,15 @@
 
 namespace App\Security;
 
+use App\Entity\LoginLogs;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -25,14 +28,19 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $router;
     private $csrfTokenManager;
     private $passwordEncoder;
+    private $user;
+    private $em;
+    private $username;
+    private $isSuccess;
 
-    public function __construct(UserRepository $userRepository, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManager,
+    public function __construct(EntityManagerInterface $em, UserRepository $userRepository, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManager,
                                 UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->userRepository = $userRepository;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->em = $em;
     }
 
     public function supports(Request $request)
@@ -65,7 +73,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if(!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
-        return $this->userRepository->findOneBy(['username' => $credentials['username']]);
+
+        $this->user = $this->userRepository->findOneBy(['username' => $credentials['username']]);
+        $this->username = $credentials['username'];
+
+        return $this->user;
     }
 
     public function checkCredentials($credentials, UserInterface $user)
@@ -75,6 +87,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        $this->isSuccess = true;
+
+        $this->loginLogsFlush();
+
         if($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
@@ -85,5 +101,27 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     protected function getLoginUrl()
     {
         return $this->router->generate('app_login');
+    }
+
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    {
+        if ($this->user != NULL) {
+            $this->isSuccess = false;
+            $this->loginLogsFlush();
+        }
+        return parent::onAuthenticationFailure($request, $exception);
+    }
+
+    public function loginLogsFlush() {
+        $loginLogs = new LoginLogs();
+
+        $loginLogs
+            ->setUsername($this->username)
+            ->setUser($this->user)
+            ->setIsSuccess($this->isSuccess)
+        ;
+
+        $this->em->persist($loginLogs);
+        $this->em->flush();
     }
 }
