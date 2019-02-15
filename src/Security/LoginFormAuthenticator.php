@@ -102,7 +102,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         return $this->router->generate('app_login');
     }
-
+    
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         if ($this->user != NULL) {

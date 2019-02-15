@@ -3,18 +3,70 @@
 {% block title %}Free Bank - historia operacji{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<main>
+    <div class="container-transfer-history">
+        <section class="account-select-to-show-history">
+            <h1>Pokaż historię z rachunku</h1>
+            {% for userBankAccount in userBankAccounts %}
+                <div class="choose-account">
+                    <div class="choose-account-type">Konto standard</div>
+                    <div class="choose-account-number">{{ userBankAccount.accountNumber }}</div>
+                </div>
+            {% else %}
+                <div class="choose-account">
+                    <div class="choose-account-number">Brak rachunku</div>
+                </div>
+            {% endfor %}
+        </section>
+        <table class="transfer-history">
+            <thead>
+                <tr>
+                    <th class="transfer-history-header transfer-history-type">Typ</th>
+                    <th class="transfer-history-header transfer-date-header">Data</th>
+                    <th class="transfer-history-header transfer-description-header">Opis</th>
+                    <th class="transfer-history-header transfer-amount-header">Kwota</th>
+                </tr>
+            </thead>
+            <tbody class="tbody-transfer-history">
+                {% if userBankAccounts|length == 1 %}
+                    {% for transferHistory in transfersHistory %}
+                        {% if transferHistory.senderAccountNumber == '77 1140 2004 2791 6581 7819 3183' %}
+                            <tr class="transfer-history-element">
+                                <td><i class="fas fa-long-arrow-alt-right" title="Przelew wychodzący"></i></td>
+                                <td>{{ transferHistory.createdAt|date("d.m.Y") }}</td>
+                                <td>{{ transferHistory.receiverName }}</td>
+                                <td class="transfer-amount transfer-amount-outgoing">-{{ transferHistory.amount }} PLN</td>
+                            </tr>
+                        {% else %}
+                            <tr class="transfer-history-element">
+                                <td><i class="fas fa-long-arrow-alt-left" title="Przelew przychodzący"></i></td>
+                                <td>{{ transferHistory.createdAt|date("d.m.Y") }}</td>
+                                <td>{{ transferHistory.receiverName }}</td>
+                                <td class="transfer-amount transfer-amount-incoming">{{ transferHistory.amount }} PLN</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% elseif userBankAccounts|length > 1 %}
+                    <tr>
+                        <td colspan="4">
+                            <i class="fas fa-long-arrow-alt-left"></i>
+                            Wybierz rachunek po lewo, aby wyświetlić historię transakcji.
+                        </td>
+                    </tr>
+                {% elseif userBankAccounts|length == 0 %}
+                    <tr>
+                        <td colspan="4">
+                            Brak historii, ponieważ nie posiadasz żadnego rachunku.
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/jakub/Desktop/symfony/FreeBank/src/Controller/TransferHistoryController.php'|file_link(0) }}">src/Controller/TransferHistoryController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/jakub/Desktop/symfony/FreeBank/templates/transfer_history/index.html.twig'|file_link(0) }}">templates/transfer_history/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/account-history.js') }}"></script>
 {% endblock %}

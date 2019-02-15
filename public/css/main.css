@@ -139,11 +139,11 @@ a:link, a:visited, a:checked {
 /* END BOOTSTRAP SELF-CONFIG */
 
 /* STAR FOOTER */
-.footer-position {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
+/*.footer-position {*/
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+/*}*/
 
 footer {
     height: 100px;
@@ -281,3 +281,131 @@ footer {
     margin-top: 50px;
 }
 /* END CONTENT OF TRANSFER */
+
+
+/* START CONTENT OF TRANSFER HISTORY */
+.container-transfer-history {
+    flex-direction: row;
+    display: flex;
+    font-size: 1.4rem;
+    margin-top: 50px;
+}
+
+.account-select-to-show-history {
+    /*display: flex;*/
+    margin-left: auto;
+    margin-right: 10px;
+    /*margin-top: 50px;*/
+}
+
+.account-select-to-show-history h1 {
+    font-size: 1.4rem;
+    padding-top: 8px;
+    font-weight: 700;
+}
+
+.choose-account {
+    border: 1px solid #DFDFDF;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgba(249, 249, 249, 0.5);
+    margin-bottom: 5px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: relative;
+}
+
+.choose-account-type {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-size: 1rem;
+}
+
+.choose-account-number {
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*bottom: 5px;*/
+}
+
+.transfer-history {
+    /*width: 600px;*/
+    /*display: flex;*/
+    font-size: 1.4rem;
+    margin-right: auto;
+    /*background-color: rgba(249, 249, 249, 0.5);*/
+}
+
+.transfer-history td, th {
+    padding: 8px;
+}
+
+.transfer-history-element:hover {
+    background-color: rgba(249, 249, 249, 0.7);
+    cursor: pointer;
+}
+
+.transfer-history td {
+    border-bottom: 1px solid #DFDFDF;
+}
+
+.transfer-history-header {
+
+}
+
+.transfer-history-type {
+    width: 50px;
+}
+
+.transfer-date-header {
+    width: 100px;
+}
+
+.transfer-description-header {
+    width: 300px;
+}
+
+.transfer-amount-header {
+    width: 150px;
+}
+
+.transfer-date-header {
+    width: 100px;
+}
+
+.transfer-description-header {
+    width: 300px;
+}
+
+.transfer-amount-header {
+    /*width: 100px;*/
+    text-align: right;
+}
+
+.transfer-amount {
+    text-align: right;
+    /*font-weight: 700;*/
+}
+
+.transfer-amount-outgoing {
+    /*color: red;*/
+    font-weight: 700;
+}
+
+.transfer-amount-incoming {
+    color: green;
+}
+
+td > .fa-long-arrow-alt-right {
+    color: red;
+}
+
+td > .fa-long-arrow-alt-left {
+    color: green;
+}
+/* END CONTENT OF TRANSFER HISTORY */

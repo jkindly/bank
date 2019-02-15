@@ -62,10 +62,16 @@ class User implements UserInterface
      */
     private $loginLogs;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Transfer", mappedBy="user", orphanRemoval=true)
+     */
+    private $transfers;
+
     public function __construct()
     {
         $this->bankAccounts = new ArrayCollection();
         $this->loginLogs = new ArrayCollection();
+        $this->transfers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -233,6 +239,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($loginLog->getUser() === $this) {
                 $loginLog->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Transfer[]
+     */
+    public function getTransfers(): Collection
+    {
+        return $this->transfers;
+    }
+
+    public function addTransfer(Transfer $transfer): self
+    {
+        if (!$this->transfers->contains($transfer)) {
+            $this->transfers[] = $transfer;
+            $transfer->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransfer(Transfer $transfer): self
+    {
+        if ($this->transfers->contains($transfer)) {
+            $this->transfers->removeElement($transfer);
+            // set the owning side to null (unless already changed)
+            if ($transfer->getUser() === $this) {
+                $transfer->setUser(null);
             }
         }
 

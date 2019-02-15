@@ -20,7 +20,7 @@ class BankAccountRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return BankAccount[] Returns an array of BankAccount objects
+    //  * @return Account[] Returns an array of Account objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class BankAccountRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?BankAccount
+    public function findOneBySomeField($value): ?Account
     {
         return $this->createQueryBuilder('b')
             ->andWhere('b.exampleField = :val')
