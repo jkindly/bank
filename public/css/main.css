@@ -291,6 +291,10 @@ footer {
     margin-top: 50px;
 }
 
+.transfer-history {
+    position: relative;
+}
+
 .account-select-to-show-history {
     /*display: flex;*/
     margin-left: auto;
@@ -333,7 +337,7 @@ footer {
     /*bottom: 5px;*/
 }
 
-.transfer-history {
+.transfers {
     /*width: 600px;*/
     /*display: flex;*/
     font-size: 1.4rem;
@@ -341,8 +345,31 @@ footer {
     /*background-color: rgba(249, 249, 249, 0.5);*/
 }
 
-.transfer-history td, th {
+.transfers td, th {
     padding: 8px;
+}
+
+.transfer-history-element {
+    height: 40px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.transfer-history-element-expanded {
+    /*height: 300px;*/
+    position: relative;
+    width: 600px;
+    vertical-align: top;
+    background-color: rgba(249, 249, 249, 0.7);
+    border-left: 1px solid #DFDFDF;
+    border-right: 1px solid #DFDFDF;
+    border-bottom: 1px solid #DFDFDF;
+}
+
+.history-row-underline {
+    border-bottom: 1px solid #DFDFDF;
 }
 
 .transfer-history-element:hover {
@@ -350,7 +377,7 @@ footer {
     cursor: pointer;
 }
 
-.transfer-history td {
+.tbody-transfer-history > tr {
     border-bottom: 1px solid #DFDFDF;
 }
 
@@ -407,5 +434,44 @@ td > .fa-long-arrow-alt-right {
 
 td > .fa-long-arrow-alt-left {
     color: green;
+}
+
+.show-more-transfers {
+    border: 1px solid #DFDFDF;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 2px;
+    margin-top: 5px;
+    margin-bottom: 100px;
+    background-color: rgba(249, 249, 249, 0.5);
+    cursor: pointer;
+    color: inherit;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
+    width: 100px;
+    text-align: center;
+}
+
+.loading {
+    /*position: absolute;*/
+    /*width: 150px;*/
+    /*margin: 0 auto;*/
+    /*top: 50px;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    display: none;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.loading-details {
+    text-align: center;
 }
 /* END CONTENT OF TRANSFER HISTORY */

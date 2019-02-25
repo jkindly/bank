@@ -19,17 +19,17 @@ class BankAccountFixture extends Fixture implements DependentFixtureInterface
 
         $bankAccount1
             ->setAccountType('standard')
-            ->setAccountNumber(Account::randomAccountNumber())
+            ->setAccountNumber('77 1140 2004 2791 6581 7819 3183')
             ->setBalance(0.00)
             ->setAvailableFunds(0.00)
-            ->setUser($this->getReference('user'));
+            ->setUser($this->getReference('kuba'));
 
         $bankAccount2
             ->setAccountType('firmowe')
-            ->setAccountNumber(Account::randomAccountNumber())
+            ->setAccountNumber('77 1140 2004 2791 6581 7819 1234')
             ->setBalance(0.00)
             ->setAvailableFunds(0.00)
-            ->setUser($this->getReference('user'));
+            ->setUser($this->getReference('jkowalski'));
 
         $bankAccount3
             ->setAccountType('standard')

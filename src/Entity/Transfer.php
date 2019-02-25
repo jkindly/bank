@@ -12,6 +12,8 @@ class Transfer
 {
     use TimestampableEntity;
 
+
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -51,6 +53,17 @@ class Transfer
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $receiverAddress;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $receiverCity;
+
 
     public function getId(): ?int
     {
@@ -125,6 +138,30 @@ class Transfer
     public function setReceiverName(string $receiverName): self
     {
         $this->receiverName = $receiverName;
+
+        return $this;
+    }
+
+    public function getReceiverAddress(): ?string
+    {
+        return $this->receiverAddress;
+    }
+
+    public function setReceiverAddress(?string $receiverAddress): self
+    {
+        $this->receiverAddress = $receiverAddress;
+
+        return $this;
+    }
+
+    public function getReceiverCity(): ?string
+    {
+        return $this->receiverCity;
+    }
+
+    public function setReceiverCity(?string $receiverCity): self
+    {
+        $this->receiverCity = $receiverCity;
 
         return $this;
     }

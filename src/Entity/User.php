@@ -67,6 +67,16 @@ class User implements UserInterface
      */
     private $transfers;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $city;
+
     public function __construct()
     {
         $this->bankAccounts = new ArrayCollection();
@@ -272,6 +282,30 @@ class User implements UserInterface
                 $transfer->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

@@ -22,12 +22,15 @@ class UserFixture extends Fixture
 
         $user = new User();
         $admin = new User();
+        $jkowalski = new User();
 
         $user
             ->setFirstName('Jakub')
             ->setLastName('Kozupa')
             ->setUsername('j.kozupa')
             ->setEmail('kozupa.jakub@gmail.com')
+            ->setAddress('Lipowa 57/59')
+            ->setCity('Bydgoszcz')
             ->setPassword($this->passwordEncoder->encodePassword($user, 'mnkctnob'));
 
         $admin
@@ -35,15 +38,29 @@ class UserFixture extends Fixture
             ->setLastName('Admin')
             ->setUsername('admin')
             ->setEmail('admin@freebank.pl')
+            ->setAddress('Karpacka 39B/70')
+            ->setCity('Inowrocław')
             ->setPassword($this->passwordEncoder->encodePassword($user, 'mnkctnob'))
             ->setRoles(['ROLE_ADMIN']);
 
+        $jkowalski
+            ->setFirstName('Jan')
+            ->setLastName('Kowalski')
+            ->setUsername('j.kowalski')
+            ->setEmail('j.kowalski@gmail.com')
+            ->setAddress('Nieznana 10')
+            ->setCity('Bydgoszcz')
+            ->setPassword($this->passwordEncoder->encodePassword($user, 'mnkctnob'));
+
+
         $manager->persist($user);
         $manager->persist($admin);
+        $manager->persist($jkowalski);
 
         $manager->flush();
 
-        $this->addReference('user', $user);
+        $this->addReference('kuba', $user);
         $this->addReference('admin', $admin);
+        $this->addReference('jkowalski', $jkowalski);
     }
 }

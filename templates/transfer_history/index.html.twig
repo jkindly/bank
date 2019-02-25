@@ -9,8 +9,10 @@
             <h1>Pokaż historię z rachunku</h1>
             {% for userBankAccount in userBankAccounts %}
                 <div class="choose-account">
-                    <div class="choose-account-type">Konto standard</div>
-                    <div class="choose-account-number">{{ userBankAccount.accountNumber }}</div>
+                    <div class="account-nr{{ loop.index }}">
+                        <div class="choose-account-type">Konto standard</div>
+                        <div class="choose-account-number">{{ userBankAccount.accountNumber }}</div>
+                    </div>
                 </div>
             {% else %}
                 <div class="choose-account">
@@ -18,27 +20,28 @@
                 </div>
             {% endfor %}
         </section>
-        <table class="transfer-history">
-            <thead>
+        <section class="transfer-history">
+            <table class="transfers">
+                <thead>
                 <tr>
                     <th class="transfer-history-header transfer-history-type">Typ</th>
                     <th class="transfer-history-header transfer-date-header">Data</th>
                     <th class="transfer-history-header transfer-description-header">Opis</th>
                     <th class="transfer-history-header transfer-amount-header">Kwota</th>
                 </tr>
-            </thead>
-            <tbody class="tbody-transfer-history">
+                </thead>
+                <tbody class="tbody-transfer-history">
                 {% if userBankAccounts|length == 1 %}
                     {% for transferHistory in transfersHistory %}
                         {% if transferHistory.senderAccountNumber == '77 1140 2004 2791 6581 7819 3183' %}
-                            <tr class="transfer-history-element">
+                            <tr class="transfer-history-element" id="{{ transferHistory.id }}">
                                 <td><i class="fas fa-long-arrow-alt-right" title="Przelew wychodzący"></i></td>
                                 <td>{{ transferHistory.createdAt|date("d.m.Y") }}</td>
                                 <td>{{ transferHistory.receiverName }}</td>
                                 <td class="transfer-amount transfer-amount-outgoing">-{{ transferHistory.amount }} PLN</td>
                             </tr>
                         {% else %}
-                            <tr class="transfer-history-element">
+                            <tr class="transfer-history-element" id="{{ transferHistory.id }}">
                                 <td><i class="fas fa-long-arrow-alt-left" title="Przelew przychodzący"></i></td>
                                 <td>{{ transferHistory.createdAt|date("d.m.Y") }}</td>
                                 <td>{{ transferHistory.receiverName }}</td>
@@ -60,8 +63,15 @@
                         </td>
                     </tr>
                 {% endif %}
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+            {% if userBankAccounts|length == 1 %}
+                <div class='show-more-transfers'>Pokaż więcej</div>
+            {% endif %}
+            <div class="loading">
+                <img src="{{ asset('img/loading.gif') }}" width="150px" height="150px" alt="Ładowanie">
+            </div>
+        </section>
     </div>
 </main>
 {% endblock %}
