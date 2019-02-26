@@ -91,9 +91,6 @@ class TransferHistoryController extends BaseController
      */
     public function showTransferDetails(Request $request)
     {
-//        $transferDetails = $this->getDoctrine()->getRepository(Transfer::class)
-//            ->find(10481);
-//        dd($transferDetails);
 
         if ($request->isXmlHttpRequest()) {
             $transferId = $request->request->get('transferId');

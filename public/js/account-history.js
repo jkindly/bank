@@ -149,6 +149,7 @@ $(function() {
         let transferId = parseInt($(this).attr('id'));
         let currentElement = $(this);
         let elementExpanded = $('.transfer-history-element-expanded');
+        $('.transfer-history-element').addClass('disabled');
 
         // if element doesn't exists in DOM then append it after clicked element
         if (!elementExpanded[0]) {
@@ -159,6 +160,7 @@ $(function() {
         } else {
             if ($(currentElement).next().is('.transfer-history-element-expanded')) {
                 elementExpanded.remove();
+                $('.transfer-history-element').removeClass('disabled');
             } else {
                 elementExpanded.remove();
                 getHistoryDetails(transferId, currentElement);
@@ -239,6 +241,7 @@ $(function() {
             },
             complete: function() {
                 $('.loading-details').remove();
+                $('.transfer-history-element').removeClass('disabled');
             },
             error: function() {
                 let string =

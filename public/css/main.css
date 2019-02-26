@@ -474,4 +474,10 @@ td > .fa-long-arrow-alt-left {
 .loading-details {
     text-align: center;
 }
+
+.disabled {
+    pointer-events:none;
+    /*background-color: grey;*/
+    opacity: 0.3;
+}
 /* END CONTENT OF TRANSFER HISTORY */
