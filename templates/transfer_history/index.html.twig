@@ -38,14 +38,18 @@
                                 <td><i class="fas fa-long-arrow-alt-right" title="Przelew wychodzący"></i></td>
                                 <td>{{ transferHistory.createdAt|date("d.m.Y") }}</td>
                                 <td>{{ transferHistory.receiverName }}</td>
-                                <td class="transfer-amount transfer-amount-outgoing">-{{ transferHistory.amount }} PLN</td>
+                                <td class="transfer-amount transfer-amount-outgoing">
+                                    -{{ transferHistory.amount|number_format(2, ',', ' ') }} PLN
+                                </td>
                             </tr>
                         {% else %}
                             <tr class="transfer-history-element" id="{{ transferHistory.id }}">
                                 <td><i class="fas fa-long-arrow-alt-left" title="Przelew przychodzący"></i></td>
                                 <td>{{ transferHistory.createdAt|date("d.m.Y") }}</td>
                                 <td>{{ transferHistory.receiverName }}</td>
-                                <td class="transfer-amount transfer-amount-incoming">{{ transferHistory.amount }} PLN</td>
+                                <td class="transfer-amount transfer-amount-incoming">
+                                    {{ transferHistory.amount|number_format(2, ',', ' ') }} PLN
+                                </td>
                             </tr>
                         {% endif %}
                     {% endfor %}

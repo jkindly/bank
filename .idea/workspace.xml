@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41e28ab7-6ae8-4f4f-9a7c-fde45366af01" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/account/account.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TransferHistoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TransferHistoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/transfer_history/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/transfer_history/index.html.twig" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/vendor/composer/" />
     <ignored path="$PROJECT_DIR$/vendor/doctrine/annotations/" />
@@ -91,6 +89,27 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/TransferHistoryController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="46" column="100" selection-start-line="46" selection-start-column="100" selection-end-line="46" selection-end-column="100" />
+              <folding>
+                <element signature="e#34#58#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/transfer_history/index.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="714">
+              <caret line="51" column="32" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
@@ -104,18 +123,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="539">
               <caret line="50" column="43" selection-start-line="50" selection-start-column="43" selection-end-line="50" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Transfer.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
-              <caret line="54" column="18" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="18" />
-              <folding>
-                <element signature="e#30#62#0#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -159,7 +166,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/account/account.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
@@ -175,18 +182,6 @@
               <caret line="5" selection-start-line="5" selection-end-line="5" />
               <folding>
                 <element signature="e#12#26#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DataFixtures/TransferFixture.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="68" column="46" selection-start-line="68" selection-start-column="46" selection-end-line="68" selection-end-column="46" />
-              <folding>
-                <element signature="e#36#60#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -259,7 +254,6 @@
         <option value="$PROJECT_DIR$/src/Controller/BaseController.php" />
         <option value="$PROJECT_DIR$/public/js/jquery-3.3.1.min.js" />
         <option value="$PROJECT_DIR$/public/js/jquery-3.3.1.js" />
-        <option value="$PROJECT_DIR$/templates/transfer_history/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/LoginController.php" />
         <option value="$PROJECT_DIR$/templates/login/login.html.twig" />
         <option value="$PROJECT_DIR$/src/DataFixtures/UserFixture.php" />
@@ -268,13 +262,14 @@
         <option value="$PROJECT_DIR$/src/DataFixtures/TransferFixture.php" />
         <option value="$PROJECT_DIR$/src/Repository/TransferRepository.php" />
         <option value="$PROJECT_DIR$/public/js/account-history.js" />
-        <option value="$PROJECT_DIR$/src/Controller/TransferHistoryController.php" />
         <option value="$PROJECT_DIR$/public/js/main.js" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/public/css/main.css" />
         <option value="$PROJECT_DIR$/templates/tests/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/TestsController.php" />
         <option value="$PROJECT_DIR$/templates/account/account.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/TransferHistoryController.php" />
+        <option value="$PROJECT_DIR$/templates/transfer_history/index.html.twig" />
       </list>
     </option>
   </component>
@@ -458,6 +453,12 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="account" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="bank" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bank" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="transfer_history" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -517,12 +518,12 @@
       <workItem from="1550739931290" duration="12045000" />
       <workItem from="1551133480790" duration="4945000" />
       <workItem from="1551195216140" duration="1873000" />
-      <workItem from="1551219643325" duration="2054000" />
+      <workItem from="1551219643325" duration="2347000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="141165000" />
+    <option name="totallyTimeSpent" value="141458000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -751,13 +752,6 @@
     <entry file="file://$PROJECT_DIR$/public/img/loading.gif">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/transfer_history/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
-          <caret line="70" selection-start-line="70" selection-end-line="72" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1309">
@@ -812,16 +806,6 @@
           <caret line="31" column="52" selection-start-line="31" selection-start-column="52" selection-end-line="31" selection-end-column="52" />
           <folding>
             <element signature="e#36#63#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/TransferHistoryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-          <folding>
-            <element signature="e#34#58#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -923,6 +907,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="88" selection-start-line="22" selection-start-column="88" selection-end-line="22" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/TransferHistoryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="46" column="100" selection-start-line="46" selection-start-column="100" selection-end-line="46" selection-end-column="100" />
+          <folding>
+            <element signature="e#34#58#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/transfer_history/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="51" column="32" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
         </state>
       </provider>
     </entry>

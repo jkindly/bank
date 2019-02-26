@@ -44,7 +44,7 @@ class TransferHistoryController extends BaseController
                     'receiverName' => $transferForChoosedAccount->getReceiverName(),
                     'title' => $transferForChoosedAccount->getTitle(),
                     'createdAt'    => $transferForChoosedAccount->getCreatedAt()->format('d.m.Y'),
-                    'amount'       => $transferForChoosedAccount->getAmount(),
+                    'amount'       => number_format($transferForChoosedAccount->getAmount(), 2, ',', ' '),
                 );
                 $jsonData[$idx++] = $temp;
             }
@@ -78,7 +78,7 @@ class TransferHistoryController extends BaseController
                     'receiverName' => $transfer->getReceiverName(),
                     'title' => $transfer->getTitle(),
                     'createdAt'    => $transfer->getCreatedAt()->format('d.m.Y'),
-                    'amount'       => $transfer->getAmount(),
+                    'amount'       => number_format($transfer->getAmount(), 2, ',', ' '),
                 );
                 $jsonData[$idx++] = $temp;
             }
@@ -110,7 +110,7 @@ class TransferHistoryController extends BaseController
                 'receiverCity' => $transferDetails->getReceiverCity(),
                 'title' => $transferDetails->getTitle(),
                 'createdAt' => $transferDetails->getCreatedAt()->format('d.m.Y'),
-                'amount' => $transferDetails->getAmount(),
+                'amount' => number_format($transferDetails->getAmount(), 2, ',', ' '),
             );
 
             return new JsonResponse($transferDetailsArray);
