@@ -17,10 +17,10 @@
                                 {{ bankAccount.accountNumber }}
                             </div>
                             <div class="user-account-balance">
-                                {{ bankAccount.balance }} PLN
+                                {{ bankAccount.balance|number_format(2, ',', ' ') }} PLN
                             </div>
                             <div class="user-account-available-funds">
-                                {{ bankAccount.availableFunds }} PLN
+                                {{ bankAccount.availableFunds|number_format(2, ',', ' ') }} PLN
                             </div>
                         </div>
                     </div>
