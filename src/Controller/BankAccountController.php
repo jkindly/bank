@@ -11,7 +11,7 @@ class BankAccountController extends BaseController
     /**
      * @Route("/account", name="app_account")
      */
-    public function getUserAccounts()
+    public function accounts()
     {
         $userId = $this->getUser()->getId();
 

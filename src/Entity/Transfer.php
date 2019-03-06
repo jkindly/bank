@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TransferRepository")
@@ -29,17 +30,20 @@ class Transfer
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Proszę wypełnić pole odbiorcy")
      */
     private $receiverName;
 
     // todo change length field receiverAccountNumber
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Proszę wypełnić nr rachunku odbiorcy")
      */
     private $receiverAccountNumber;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @Assert\NotBlank(message="Proszę wprowadzić kwotę")
      */
     private $amount;
 
@@ -63,6 +67,16 @@ class Transfer
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $receiverCity;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isSuccess;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
 
 
     public function getId(): ?int
@@ -162,6 +176,30 @@ class Transfer
     public function setReceiverCity(?string $receiverCity): self
     {
         $this->receiverCity = $receiverCity;
+
+        return $this;
+    }
+
+    public function getIsSuccess(): ?bool
+    {
+        return $this->isSuccess;
+    }
+
+    public function setIsSuccess(bool $isSuccess): self
+    {
+        $this->isSuccess = $isSuccess;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Free Bank - przelew krajowy{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container-transfer">
+            <div class="transfer-type normal-transfer nav-item-underscore">Przelew jednorazowy</div>
+            <div class="transfer-type periodic-transfer">Przelew cykliczny</div>
+
+            {{ form_start(transferForm) }}
+                <table class="transfer-domestic">
+                    <tr>
+                        <td class="text-left">{{ form_label(transferForm.senderAccountNumber) }}</td>
+                        <td>{{ form_widget(transferForm.senderAccountNumber) }}</td>
+                        {#<td>{{ form_errors(transferForm.accounts) }}</td>#}
+                    </tr>
+                    <tr>
+                        <td class="text-left">{{ form_label(transferForm.receiverName) }}</td>
+                        <td>{{ form_widget(transferForm.receiverName,
+                                {'attr': {'class': 'send-transfer-receiver'}}) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="send-transfer-error">
+                            {% for error in transferForm.receiverName.vars.errors %}
+                                <p>{{ error.message }}</p>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">{{ form_label(transferForm.receiverAccountNumber) }}</td>
+                        <td>{{ form_widget(transferForm.receiverAccountNumber,
+                                {'attr': {'class': 'send-transfer-receiver-account-number'}}) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="send-transfer-error">
+                            {% for error in transferForm.receiverAccountNumber.vars.errors %}
+                                <p>{{ error.message }}</p>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">{{ form_label(transferForm.title) }}</td>
+                        <td>{{ form_widget(transferForm.title) }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">{{ form_label(transferForm.amount) }}</td>
+                        <td>{{ form_widget(transferForm.amount,
+                                {'attr': {'class': 'send-transfer-amount'}}) }} PLN
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="send-transfer-error">
+                            {% for error in transferForm.amount.vars.errors %}
+                                <p>{{ error.message }}</p>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><button type="submit" class="send-transfer-btn">Wyślij przelew</button></td>
+                    </tr>
+                </table>
+            {{ form_end(transferForm) }}
+
+        </div>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/transfer.js') }}"></script>
+{% endblock %}

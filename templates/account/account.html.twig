@@ -5,8 +5,20 @@
         {% if bankAccounts|length == 0 %}
             <h3 class="your-accounts">Nie posiadasz jeszcze żadnego otwartego rachunku</h3>
         {% else %}
-            <h3 class="your-accounts">Twoje rachunki</h3>
+            {% set totalBalance = 0 %}
+            {% set totalAvailableFunds = 0 %}
+            <div class="row">
+                <div class="col-12 col-md-6 p-0">
+                    <div class="account-headers">
+                        <h3 class="your-accounts">Twoje rachunki</h3>
+                        <div class="account-balance-header">Saldo</div>
+                        <div class="account-available-funds-header">Dostępne środki</div>
+                    </div>
+                </div>
+            </div>
             {% for bankAccount in bankAccounts %}
+                {% set totalBalance = totalBalance + bankAccount.balance %}
+                {% set totalAvailableFunds = totalAvailableFunds + bankAccount.availableFunds %}
                 <div class="row">
                     <div class="col-12 col-md-6 p-0">
                         <div class="user-account" id="account-nr{{ loop.index }}">
@@ -26,6 +38,15 @@
                     </div>
                 </div>
             {% endfor %}
+            <div class="row">
+                <div class="col-12 col-md-6 p-0">
+                    <div class="total-funds">
+                        <p>Razem:</p>
+                        <div class="total-balance">{{ totalBalance|number_format(2, ',', ' ') }} PLN</div>
+                        <div class="total-available-funds">{{ totalAvailableFunds|number_format(2, ',', ' ') }} PLN</div>
+                    </div>
+                </div>
+            </div>
         {% endif %}
         <div class="user-login-logs">
             {% for success in loginLogsSuccess %}

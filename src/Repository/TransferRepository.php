@@ -22,9 +22,13 @@ class TransferRepository extends ServiceEntityRepository
     public function findAllTransfersLimit5(string $accountNumber)
     {
         return $this->createQueryBuilder('t')
+            ->andWhere('t.isSuccess = :isSuccess')
             ->andWhere('t.senderAccountNumber = :accNumber')
             ->orWhere('t.receiverAccountNumber = :accNumber')
-            ->setParameter(':accNumber', $accountNumber)
+            ->setParameters([
+                ':isSuccess' => true,
+                ':accNumber' => $accountNumber
+            ])
             ->orderBy('t.createdAt', 'DESC')
             ->setMaxResults(5)
             ->getQuery()
@@ -35,12 +39,14 @@ class TransferRepository extends ServiceEntityRepository
     public function findNext5Transfers(int $transferId, string $accountNumber)
     {
         return $this->createQueryBuilder('t')
+            ->andWhere('t.isSuccess = :isSuccess')
             ->andWhere('t.senderAccountNumber = :accNumber')
             ->orWhere('t.receiverAccountNumber = :accNumber')
             ->andWhere('t.id < :transferId')
             ->setParameters([
-                'accNumber' => $accountNumber,
-                'transferId' => $transferId
+                ':isSuccess' => true,
+                ':accNumber' => $accountNumber,
+                ':transferId' => $transferId
             ])
             ->orderBy('t.createdAt', 'DESC')
             ->setMaxResults(5)

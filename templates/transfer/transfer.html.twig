@@ -9,8 +9,10 @@
             <div class="transfer-type periodic-transfer">Przelew cykliczny</div>
             <ul class="transfer-options">
                 <li class="col-3 transfer-option domestic-transfer">
-                    <i class="fas fa-user-alt"></i>
-                    <span>Do osoby lub firmy</span>
+                    <a href="{{ path('app_transfer_domestic') }}">
+                        <i class="fas fa-user-alt"></i>
+                        <span>Do osoby lub firmy</span>
+                    </a>
                 </li>
                 <li class="col-3 transfer-option own-transfer">
                     <i class="fas fa-exchange-alt"></i>

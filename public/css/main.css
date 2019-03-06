@@ -158,6 +158,52 @@ footer {
     margin-top: 15px;
 }
 
+.account-headers {
+    position: relative;
+}
+
+.account-balance-header {
+    position: absolute;
+    right: 140px;
+    bottom: 0;
+    font-size: 1.2rem;
+}
+
+.account-available-funds-header {
+    position: absolute;
+    right: 5px;
+    bottom: 0;
+    font-size: 1.2rem;
+}
+
+.total-funds {
+    position: relative;
+    height: 30px;
+    font-size: 1.5rem;
+}
+
+.total-funds > p {
+    position: absolute;
+    bottom: 0;
+    right: 280px;
+    padding: 0 !important;
+    margin: 0 !important;
+
+}
+
+.total-balance {
+    position: absolute;
+    right: 140px;
+    bottom: 0;
+}
+
+.total-available-funds {
+    position: absolute;
+    right: 5px;
+    bottom: 0;
+    font-weight: 700;
+}
+
 .user-account {
     height: 60px;
     border: 1px solid #9E9E9E;
@@ -197,7 +243,7 @@ footer {
 
 .user-account-balance {
     position: absolute;
-    right: 120px;
+    right: 140px;
     top: 20px;
     font-size: 1.5rem;
 }
@@ -481,3 +527,66 @@ td > .fa-long-arrow-alt-left {
     opacity: 0.3;
 }
 /* END CONTENT OF TRANSFER HISTORY */
+
+
+/* START CONTENT OF TRANSFERS */
+.transfer-domestic {
+    margin: 50px auto 0 auto;
+    /*font-size: 1.4rem;*/
+    text-align: left;
+}
+
+.transfer-domestic input, select, textarea {
+    background-color: white;
+    border-radius: 5px;
+    color: #707070;
+    border: 1px solid #707070;
+    padding: 3px;
+    /*text-align: center;*/
+}
+
+.transfer-domestic td {
+    padding: 5px;
+}
+
+.send-transfer-receiver {
+    width: 100%;
+}
+
+.send-transfer-receiver-account-number {
+    width: 70%;
+}
+
+.send-transfer-title {
+    width: 70%;
+    resize: vertical;
+    min-height: 50px;
+    max-height: 200px;
+}
+
+.send-transfer-amount {
+    width: 30%;
+}
+
+.send-transfer-btn {
+    background-color: #2A83C7;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.send-transfer-btn:hover {
+    background-color: #3493DB;
+}
+
+.send-transfer-error {
+    color: red;
+    font-size: 1.4rem;
+}
+
+.send-transfer-error > p {
+    margin: -10px 0 0 0;
+}
+/* END CONTENT OF TRANSFER */

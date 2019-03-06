@@ -1,8 +1,8 @@
-$(function() {
+(function($) {
 
     let transfers = $('.transfers');
     let tbody = $('.tbody-transfer-history');
-    let showMoreBtn = $('.show-more-transfers');
+    // let showMoreBtn = $('.show-more-transfers');
     let transferHistory = $('.transfer-history');
     let loading = $('.loading');
     let endTransfers;
@@ -27,7 +27,7 @@ $(function() {
                 loading.show();
             },
             success: function(data) {
-                showMoreBtn.css('display', 'none');
+                $('.show-more-transfers').css('display', 'none');
                 tbody.css('display', 'none');
                 tbody.html("");
                 $('div').remove('.show-more-transfers');
@@ -85,7 +85,7 @@ $(function() {
             accountNumber = $('.choose-account').children().children('.choose-account-number').text();
         }
         let transferId = parseInt($('.transfer-history-element').last().attr('id'));
-        showMoreBtn.css('display', 'none');
+        $('.show-more-transfers').css('display', 'none');
         $.ajax({
             url:      '/history/show-more-transfers',
             type:     'POST',
@@ -130,7 +130,7 @@ $(function() {
                             tbody.append(string).stop().show(800);
                         }
                     }
-                    showMoreBtn.show();
+                    $('.show-more-transfers').show();
                 }
             },
             complete: function() {
@@ -253,4 +253,4 @@ $(function() {
         });
     }
 
-});
+}(jQuery));

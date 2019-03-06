@@ -19,6 +19,16 @@ class BankAccountRepository extends ServiceEntityRepository
         parent::__construct($registry, BankAccount::class);
     }
 
+    public function getUserAccounts($userId)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Account[] Returns an array of Account objects
     //  */

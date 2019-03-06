@@ -12,10 +12,11 @@ class TestsController extends AbstractController
      */
     public function index()
     {
-        $amount = '12345.67';
+        $user = $this->getUser();
+        $bankAccounts = $user->getBankAccounts()->toArray();
 
-        $formatter = new \NumberFormatter('en_GB',  NumberFormatter::CURRENCY);
-        echo 'UK: ', $formatter->formatCurrency($amount, 'EUR'), PHP_EOL;
+        dd($bankAccounts[0]);
+
 
 
         return $this->render('tests/index.html.twig', [
