@@ -55,6 +55,19 @@ class TransferRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findTransfersInQueue()
+    {
+        return $this->createQueryBuilder('t')
+            ->innerJoin('t.user', 'u')
+            ->addSelect('u')
+            ->andWhere('t.isSuccess = 1')
+            ->andWhere('t.isCompleted = 0')
+            ->orderBy('t.createdAt', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    public function findTransferDetails(int $transferId, int $userId)
 //    {
 //        return $this->createQueryBuilder('t')

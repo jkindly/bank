@@ -19,11 +19,9 @@ class TransferController extends AbstractController
         return $this->render('transfer/transfer.html.twig');
     }
 
-
     /**
      * @Route("/transfer/domestic", name="app_transfer_domestic")
      */
-
     public function domesticTransfer(Request $request, TransferGenerator $transferGenerator)
     {
         $form = $this->createForm(TransferFormType::class);
@@ -47,21 +45,16 @@ class TransferController extends AbstractController
 
             $transferGenerator->sendTransfer($transfer);
 
-            $transferStatus = $transferGenerator->getTransferStatus();
-
-            if ($transferStatus == 'transfer_success') {
-                $this->addFlash('success', 'Przelew został nadany');
-            } elseif ($transferStatus == 'not_enough_funds') {
-                $this->addFlash('success', 'Za mało środków na koncie');
-            } elseif ($transferStatus == 'receiver_acc_not_exists') {
-                $this->addFlash('success', 'Rachunek odbiorcy nie istnieje');
-            }
+            $this->addFlash(
+                $transferGenerator->getTransferStatus(),
+                $transferGenerator->getTransferStatusMessage()
+            );
 
             return $this->redirectToRoute('app_transfer_domestic');
         }
 
         return $this->render('transfer/transfer-domestic.twig', [
-            'transferForm' => $form->createView()
+            'transferForm' => $form->createView(),
         ]);
     }
 }

@@ -24,7 +24,7 @@ class Transfer
 
     // todo change length field senderAccountNumber
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=32)
      */
     private $senderAccountNumber;
 
@@ -36,7 +36,7 @@ class Transfer
 
     // todo change length field receiverAccountNumber
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=32)
      * @Assert\NotBlank(message="Proszę wypełnić nr rachunku odbiorcy")
      */
     private $receiverAccountNumber;
@@ -78,6 +78,11 @@ class Transfer
      */
     private $status;
 
+    /**
+     * @var boolean
+     * @ORM\Column(type="boolean")
+     */
+    private $isCompleted = false;
 
     public function getId(): ?int
     {
@@ -200,6 +205,18 @@ class Transfer
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getIsCompleted(): ?bool
+    {
+        return $this->isCompleted;
+    }
+
+    public function setIsCompleted(bool $isCompleted): self
+    {
+        $this->isCompleted = $isCompleted;
 
         return $this;
     }

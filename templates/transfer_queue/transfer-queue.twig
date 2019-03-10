@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Free Bank - zarządzanie{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container-transfer-queue">
+            <h1>Kolejka transferów</h1>
+            <table class="transfer-queue" border="1">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Nadawca</th>
+                        <th>Odbiorca</th>
+                        <th>Nr rachunku nadawcy</th>
+                        <th>Nr rachunku odbiorcy</th>
+                        <th>Kwota</th>
+                        <th>Tytuł</th>
+                        <th>Akceptuj</th>
+                        <th>Odrzuć</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for transfer in transferQueue %}
+                    <tr>
+                        <td>{{ transfer.createdAt|date("d.m.Y H:i") }}</td>
+                        <td>{{ transfer.user.firstname }} {{ transfer.user.lastname }}</td>
+                        <td>{{ transfer.receiverName }}</td>
+                        <td>{{ transfer.senderAccountNumber }}</td>
+                        <td>{{ transfer.receiverAccountNumber }}</td>
+                        <td>1 200,00 PLN</td>
+                        <td>{{ transfer.title|truncate(25) }}</td>
+                        <td class="transfer-queue-decision transfer-queue-confirm">
+                            <i class="fas fa-check-circle"></i>
+                        </td>
+                        <td class="transfer-queue-decision transfer-queue-decline">
+                            <i class="fas fa-times-circle"></i>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+{% endblock %}

@@ -8,12 +8,32 @@
             <div class="transfer-type normal-transfer nav-item-underscore">Przelew jednorazowy</div>
             <div class="transfer-type periodic-transfer">Przelew cykliczny</div>
 
+            {% for message in app.flashes('success') %}
+                <div class="row justify-content-md-center">
+                    <div class="col-6 justify-content-md-center">
+                        <div class="transfer-alert transfer-success">
+                            <i class="fas fa-check-circle"></i>
+                            <h3>{{ message }}</h3>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('failed') %}
+                <div class="row justify-content-md-center">
+                    <div class="col-6 justify-content-md-center">
+                        <div class="transfer-alert transfer-failed">
+                            <i class="fas fa-times-circle"></i>
+                            <h3>{{ message }}</h3>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
             {{ form_start(transferForm) }}
                 <table class="transfer-domestic">
                     <tr>
                         <td class="text-left">{{ form_label(transferForm.senderAccountNumber) }}</td>
                         <td>{{ form_widget(transferForm.senderAccountNumber) }}</td>
-                        {#<td>{{ form_errors(transferForm.accounts) }}</td>#}
+                        <td>{{ form_errors(transferForm.senderAccountNumber) }}</td>
                     </tr>
                     <tr>
                         <td class="text-left">{{ form_label(transferForm.receiverName) }}</td>
@@ -67,7 +87,6 @@
                     </tr>
                 </table>
             {{ form_end(transferForm) }}
-
         </div>
     </main>
 {% endblock %}

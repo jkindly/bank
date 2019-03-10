@@ -67,6 +67,8 @@ class TransferFixture extends Fixture
                 ->setTitle('Opłata za mieszkanie + prąd')
                 ->setReceiverAddress('Nieznana 10')
                 ->setReceiverCity('Bydgoszcz')
+                ->setIsSuccess(true)
+                ->setStatus('Transfer success')
                 ->setAmount(mt_rand(1, 100000)/10)
                 ->setCreatedAt($faker->dateTimeThisMonth($max = 'now', $timezone = 'Europe/Berlin'));
 //                ->setCreatedAt(new \DateTime('2019-02-1'.$i.' 21:02:0'.$i));

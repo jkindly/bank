@@ -17,6 +17,9 @@ class TransferGenerator
 {
     private $em;
     private $transferStatus;
+    private $transferStatusMessage;
+    private $senderAvailableFunds;
+    private $sendingAmount;
 
     public function __construct(EntityManagerInterface $em)
     {
@@ -28,7 +31,7 @@ class TransferGenerator
      */
     public function sendTransfer($transfer)
     {
-        $sendingAmount = $transfer->getAmount();
+        $this->sendingAmount = $transfer->getAmount();
 
         $senderBankAccount = $this->em->getRepository(BankAccount::class)
             ->findOneBy([
@@ -42,59 +45,80 @@ class TransferGenerator
             ])
         ;
 
-        $senderAvailableFunds = $senderBankAccount->getAvailableFunds();
-        $senderBalance = $senderBankAccount->getBalance();
+        $this->senderAvailableFunds = $senderBankAccount->getAvailableFunds();
+
+        $senderAccountNumber = $senderBankAccount->getAccountNumber();
 
         // checking if receiver bank account exists
         if ($receiverBankAccount) {
-            $receiverAvailableFunds = $receiverBankAccount->getAvailableFunds();
-            $receiverBalance = $receiverBankAccount->getBalance();
-
-            // checking if sender has enough available funds to send transfer
-            if ($senderAvailableFunds >= $sendingAmount) {
-                // updating balance and available funds to sender
-                $senderBankAccount
-                    ->setAvailableFunds($senderAvailableFunds - $sendingAmount)
-                    ->setBalance($senderBalance - $sendingAmount)
-                ;
-
-                // updating balance and available funds to receiver
-                $receiverBankAccount
-                    ->setAvailableFunds($receiverAvailableFunds + $sendingAmount)
-                    ->setBalance($receiverBalance + $sendingAmount)
-                ;
-
-                $transfer
-                    ->setIsSuccess(true)
-                    ->setStatus('Transfer success')
-                ;
-                $this->setTransferStatus('transfer_success');
-            } else {
+            $receiverAccountNumber = $receiverBankAccount->getAccountNumber();
+            //checking if receiver acc number is the same as sender
+            if ($receiverAccountNumber == $senderAccountNumber) {
                 $transfer
                     ->setIsSuccess(false)
-                    ->setStatus('Not enough funds')
+                    ->setStatus('Cant transfer to the same acc number')
                 ;
-                $this->setTransferStatus('not_enough_funds');
+                $this->setTransferStatus('failed');
+                $this->setTransferStatusMessage('Nie możesz wykonać przelewu na ten sam numer rachunku');
+            } else {
+                // checking if sender has enough available funds to send transfer
+                if ($this->senderAvailableFunds >= $this->sendingAmount) {
+                    // checking if transfer amount is higher than 0.00 PLN
+                    if ($transfer->getAmount() > 0.00) {
+                        $transfer
+                            ->setIsSuccess(true)
+                            ->setStatus('Transfer success');
+                        $this->setTransferStatus('success');
+                        $this->setTransferStatusMessage('Przelew został przyjęty do realizacji');
+
+                        $senderBankAccount
+                            ->setAvailableFunds($this->senderAvailableFunds - $this->sendingAmount);
+                    } else {
+                        $transfer
+                            ->setIsSuccess(false)
+                            ->setStatus('Amount of transfer must be higher than zero');
+                        $this->setTransferStatus('failed');
+                        $this->setTransferStatusMessage('Kwota przelewu musi być większa niż 0.00 PLN');
+                    }
+                } else {
+                    $transfer
+                        ->setIsSuccess(false)
+                        ->setStatus('Not enough funds')
+                    ;
+                    $this->setTransferStatus('failed');
+                    $this->setTransferStatusMessage('Nie masz wystarczających środków na koncie');
+                }
             }
         } else {
             $transfer
                 ->setIsSuccess(false)
                 ->setStatus('Receiver account not exists')
             ;
-            $this->setTransferStatus('receiver_acc_not_exists');
+            $this->setTransferStatus('failed');
+            $this->setTransferStatusMessage('Podany numer rachunku odbiorcy nie istnieje');
         }
 
         $this->em->persist($transfer);
         $this->em->flush();
     }
 
-    public function setTransferStatus($transferStatus)
+    public function getTransferStatus()
+    {
+        return $this->transferStatus;
+    }
+
+    public function setTransferStatus($transferStatus): void
     {
         $this->transferStatus = $transferStatus;
     }
 
-    public function getTransferStatus()
+    public function getTransferStatusMessage()
     {
-        return $this->transferStatus;
+        return $this->transferStatusMessage;
+    }
+
+    public function setTransferStatusMessage($transferStatusMessage): void
+    {
+        $this->transferStatusMessage = $transferStatusMessage;
     }
 }
