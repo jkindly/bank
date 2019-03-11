@@ -7,22 +7,26 @@
         <div class="container-transfer">
             <div class="transfer-type normal-transfer nav-item-underscore">Przelew jednorazowy</div>
             <div class="transfer-type periodic-transfer">Przelew cykliczny</div>
-            <ul class="transfer-options">
-                <li class="col-3 transfer-option domestic-transfer">
-                    <a href="{{ path('app_transfer_domestic') }}">
-                        <i class="fas fa-user-alt"></i>
-                        <span>Do osoby lub firmy</span>
-                    </a>
-                </li>
-                <li class="col-3 transfer-option own-transfer">
-                    <i class="fas fa-exchange-alt"></i>
-                    <span>Na własne konto</span>
-                </li>
-                <li class="col-3 transfer-option zus-transfer">
-                    <i class="fas fa-hourglass-half"></i>
-                    <span>Do ZUS-u</span>
-                </li>
-            </ul>
+            {% if bankAccount|length == 0 %}
+                <div>Nie możesz wykonać przelewu, ponieważ nie posiadasz żadnego rachunku bankowego</div>
+            {% else %}
+                <ul class="transfer-options">
+                    <li class="col-3 transfer-option domestic-transfer">
+                        <a href="{{ path('app_transfer_domestic') }}">
+                            <i class="fas fa-user-alt"></i>
+                            <span>Do osoby lub firmy</span>
+                        </a>
+                    </li>
+                    <li class="col-3 transfer-option own-transfer">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Na własne konto</span>
+                    </li>
+                    <li class="col-3 transfer-option zus-transfer">
+                        <i class="fas fa-hourglass-half"></i>
+                        <span>Do ZUS-u</span>
+                    </li>
+                </ul>
+            {% endif %}
         </div>
     </main>
 {% endblock %}

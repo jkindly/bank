@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Transfer;
+use App\Transfer\TransferFinalize;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TransferQueueController extends AbstractController
@@ -19,5 +22,19 @@ class TransferQueueController extends AbstractController
         return $this->render('transfer_queue/transfer-queue.twig', [
             'transferQueue' => $transferQueue,
         ]);
+    }
+
+    /**
+     * @Route("/transfer/queue/accept", name="transfer_accept")
+     */
+    public function transferAccept(Request $request, EntityManagerInterface $em, TransferFinalize $transferFinalize)
+    {
+//        $transferId = 10494;
+        $transferId = $request->request->get('transferId');
+        $transfer = $em->getRepository(Transfer::class)->find($transferId);
+
+        $transferFinalize->completeTransfer($transfer);
+
+        return new JsonResponse('done');
     }
 }

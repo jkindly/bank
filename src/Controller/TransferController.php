@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\BankAccount;
 use App\Entity\Transfer;
 use App\Form\TransferFormType;
 use App\Transfer\TransferGenerator;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,9 +16,16 @@ class TransferController extends AbstractController
     /**
      * @Route("/transfer", name="app_transfer")
      */
-    public function transfer()
+    public function transfer(EntityManagerInterface $em)
     {
-        return $this->render('transfer/transfer.html.twig');
+        $userId = $this->getUser()->getId();
+
+        $bankAccount = $em->getRepository(BankAccount::class)
+            ->findBy(['user' => $userId]);
+
+        return $this->render('transfer/transfer.html.twig', [
+            'bankAccount' => $bankAccount
+        ]);
     }
 
     /**

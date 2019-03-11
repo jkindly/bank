@@ -21,25 +21,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                {% for transfer in transferQueue %}
+                {% if transferQueue is not empty %}
+                    {% for transfer in transferQueue %}
+                        <tr id="{{ transfer.id }}">
+                            <td>{{ transfer.createdAt|date("d.m.Y H:i") }}</td>
+                            <td>{{ transfer.user.firstname }} {{ transfer.user.lastname }}</td>
+                            <td>{{ transfer.receiverName }}</td>
+                            <td>{{ transfer.senderAccountNumber }}</td>
+                            <td>{{ transfer.receiverAccountNumber }}</td>
+                            <td>1 200,00 PLN</td>
+                            <td>{{ transfer.title|truncate(25) }}</td>
+                            <td class="transfer-queue-decision transfer-queue-confirm">
+                                <i class="fas fa-check-circle"></i>
+                            </td>
+                            <td class="transfer-queue-decision transfer-queue-decline">
+                                <i class="fas fa-times-circle"></i>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
                     <tr>
-                        <td>{{ transfer.createdAt|date("d.m.Y H:i") }}</td>
-                        <td>{{ transfer.user.firstname }} {{ transfer.user.lastname }}</td>
-                        <td>{{ transfer.receiverName }}</td>
-                        <td>{{ transfer.senderAccountNumber }}</td>
-                        <td>{{ transfer.receiverAccountNumber }}</td>
-                        <td>1 200,00 PLN</td>
-                        <td>{{ transfer.title|truncate(25) }}</td>
-                        <td class="transfer-queue-decision transfer-queue-confirm">
-                            <i class="fas fa-check-circle"></i>
-                        </td>
-                        <td class="transfer-queue-decision transfer-queue-decline">
-                            <i class="fas fa-times-circle"></i>
-                        </td>
+                        <td colspan="9">Brak transferów do realizacji</td>
                     </tr>
-                {% endfor %}
+                {% endif %}
                 </tbody>
             </table>
         </div>
     </main>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/transfer.js') }}"></script>
 {% endblock %}

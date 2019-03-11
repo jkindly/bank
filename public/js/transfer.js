@@ -23,4 +23,21 @@
         return /^[\d+ ]*$/.test(value);
     });
 
+    $('.transfer-queue-decision > .fa-check-circle').click(function() {
+        let transferId = parseInt($(this).parent().parent().attr('id'));
+        let transferRow = $(this).parent().parent();
+        $.ajax({
+            url: '/transfer/queue/accept',
+            type: 'POST',
+            data: {transferId : transferId},
+            dataType: 'json',
+            async: true,
+            success: function(data) {
+                if ($('.transfer-queue > tbody').length == 0) {
+                    $(this).html('brak');
+                }
+            }
+        });
+    });
+
 }(jQuery));
