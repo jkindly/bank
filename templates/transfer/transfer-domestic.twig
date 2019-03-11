@@ -8,7 +8,7 @@
             <div class="transfer-type normal-transfer nav-item-underscore">Przelew jednorazowy</div>
             <div class="transfer-type periodic-transfer">Przelew cykliczny</div>
 
-            {% for message in app.flashes('success') %}
+            {% for message in app.flashes('to_finalize') %}
                 <div class="row justify-content-md-center">
                     <div class="col-6 justify-content-md-center">
                         <div class="transfer-alert transfer-success">

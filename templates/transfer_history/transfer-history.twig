@@ -33,7 +33,7 @@
                 <tbody class="tbody-transfer-history">
                 {% if userBankAccounts|length == 1 %}
                     {% for transferHistory in transfersHistory %}
-                        {% if transferHistory.senderAccountNumber == '77 1140 2004 2791 6581 7819 3183' %}
+                        {% if transferHistory.senderAccountNumber == accountNumber %}
                             <tr class="transfer-history-element" id="{{ transferHistory.id }}">
                                 <td><i class="fas fa-long-arrow-alt-right" title="Przelew wychodzący"></i></td>
                                 <td>{{ transferHistory.createdAt|date("d.m.Y") }}</td>

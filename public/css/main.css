@@ -283,22 +283,32 @@ footer {
 }
 
 .transfer-option {
+    width: 240px;
     height: 60px;
-    margin: 30px 10px 0 10px;
+    padding: 0 10px 0 10px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    background-color: white;flex-direction: row;
+    background-color: white;
+    flex-direction: row;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid #C1C1C0;
+    cursor: pointer;
+}
+
+.transfer-options > a {
+    display: block;
+    height: 60px;
+    margin: 30px 10px 0 10px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    cursor: pointer;
+    outline: none;
 }
+
 
 .transfer-option > .fas {
     font-size: 4rem;
@@ -333,6 +343,8 @@ footer {
 .container-transfer-history {
     flex-direction: row;
     display: flex;
+    /*align-items: center;*/
+    justify-content: center;
     font-size: 1.4rem;
     margin-top: 50px;
 }
@@ -343,14 +355,14 @@ footer {
 
 .account-select-to-show-history {
     /*display: flex;*/
-    margin-left: auto;
-    margin-right: 10px;
+    /*margin-left: auto;*/
+    /*margin-right: 10px;*/
     /*margin-top: 50px;*/
 }
 
 .account-select-to-show-history h1 {
     font-size: 1.4rem;
-    padding-top: 8px;
+    padding-top: 5px;
     font-weight: 700;
 }
 
@@ -361,7 +373,7 @@ footer {
     border-radius: 5px;
     padding: 10px;
     background-color: rgba(249, 249, 249, 0.5);
-    margin-bottom: 5px;
+    margin: 0 10px 5px 0;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -638,6 +650,7 @@ td > .fa-long-arrow-alt-left {
 .transfer-queue {
     margin: 20px auto 0 auto;
     font-size: 1.4rem;
+    width: 100%;
 }
 
 .transfer-queue td, th {

@@ -25,30 +25,40 @@ class TransferFinalize
     /**
      * @var Transfer $transfer
      */
-    public function completeTransfer($transfer)
+    public function makeDecision($transfer, $transferDecision)
     {
-        $transferAmount = $transfer->getAmount();
         $senderAccNumber = $transfer->getSenderAccountNumber();
-        $receiverAccNumber = $transfer->getReceiverAccountNumber();
-
-        /**
-         * @var BankAccount $receiverAccount
-         * @var BankAccount $senderAccount
-         */
         $senderAccount = $this->em->getRepository(BankAccount::class)
             ->findOneBy(['accountNumber' => $senderAccNumber]);
-        $receiverAccount = $this->em->getRepository(BankAccount::class)
-            ->findOneBy(['accountNumber' => $receiverAccNumber]);
+        $senderAvailableFunds = $senderAccount->getAvailableFunds();
+        $transferAmount = $transfer->getAmount();
 
-        $senderBalance = $senderAccount->getBalance();
-        $receiverBalance = $receiverAccount->getBalance();
-        $receiverAvailableFunds = $receiverAccount->getAvailableFunds();
+        if ($transferDecision == 'confirm') {
+            $receiverAccNumber = $transfer->getReceiverAccountNumber();
+            $senderBalance = $senderAccount->getBalance();
+            /**
+             * @var BankAccount $receiverAccount
+             * @var BankAccount $senderAccount
+             */
+            $receiverAccount = $this->em->getRepository(BankAccount::class)
+                ->findOneBy(['accountNumber' => $receiverAccNumber]);
 
-        $receiverAccount->setAvailableFunds($receiverAvailableFunds + $transferAmount);
-        $receiverAccount->setBalance($receiverBalance + $transferAmount);
+            $receiverBalance = $receiverAccount->getBalance();
+            $receiverAvailableFunds = $receiverAccount->getAvailableFunds();
 
-        $senderAccount->setBalance($senderBalance - $transferAmount);
+            $receiverAccount->setAvailableFunds($receiverAvailableFunds + $transferAmount);
+            $receiverAccount->setBalance($receiverBalance + $transferAmount);
 
+            $senderAccount->setBalance($senderBalance - $transferAmount);
+
+            $transfer->setStatus('Success');
+            $transfer->setIsSuccess(1);
+        } elseif ($transferDecision == 'decline') {
+            $senderAccount->setAvailableFunds($senderAvailableFunds + $transferAmount);
+            $transfer->setStatus('Declined by admin');
+        } else {
+            // error jakiś jebany z dupy
+        }
         $transfer->setIsCompleted(true);
 
         $this->em->persist($transfer);

@@ -23,21 +23,59 @@
         return /^[\d+ ]*$/.test(value);
     });
 
-    $('.transfer-queue-decision > .fa-check-circle').click(function() {
+    // accepting or declining transfers
+    $('.transfer-queue-decision').children().click(function() {
+        let transferDecision;
+        if ($(this).parent().hasClass('transfer-queue-decline')) {
+            transferDecision = 'decline';
+        } else if ($(this).parent().hasClass('transfer-queue-confirm')) {
+            transferDecision = 'confirm';
+        } else {
+            transferDecision = 'error';
+        }
         let transferId = parseInt($(this).parent().parent().attr('id'));
         let transferRow = $(this).parent().parent();
+        let transferTBody = $('.transfer-queue > tbody');
+        let transferCount = transferTBody.children('tr').length;
         $.ajax({
-            url: '/transfer/queue/accept',
+            url: '/manage/transfer-queue/decision',
             type: 'POST',
-            data: {transferId : transferId},
+            data: {
+                transferId : transferId,
+                transferDecision: transferDecision
+            },
             dataType: 'json',
             async: true,
             success: function(data) {
-                if ($('.transfer-queue > tbody').length == 0) {
-                    $(this).html('brak');
+                if (transferCount === 1) {
+                    transferRow.remove();
+                    transferTBody.html("<tr><td colspan='9'>Brak transferów do realizacji</td></tr>");
+                } else {
+                    transferRow.remove();
                 }
             }
         });
     });
+    // $('.transfer-queue-decision > .fa-check-circle').click(function() {
+    //     let transferId = parseInt($(this).parent().parent().attr('id'));
+    //     let transferRow = $(this).parent().parent();
+    //     let transferTBody = $('.transfer-queue > tbody');
+    //     let transferCount = transferTBody.children('tr').length;
+    //     $.ajax({
+    //         url: '/transfer/queue/accept',
+    //         type: 'POST',
+    //         data: {transferId : transferId},
+    //         dataType: 'json',
+    //         async: true,
+    //         success: function(data) {
+    //             if (transferCount === 1) {
+    //                 transferRow.remove();
+    //                 transferTBody.html("<tr><td colspan='9'>Brak transferów do realizacji</td></tr>");
+    //             } else {
+    //                 transferRow.remove();
+    //             }
+    //         }
+    //     });
+    // });
 
 }(jQuery));

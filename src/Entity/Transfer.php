@@ -69,9 +69,10 @@ class Transfer
     private $receiverCity;
 
     /**
+     * @var boolean
      * @ORM\Column(type="boolean")
      */
-    private $isSuccess;
+    private $isSuccess = false;
 
     /**
      * @ORM\Column(type="string", length=255)

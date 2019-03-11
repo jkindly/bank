@@ -13,27 +13,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class TransferQueueController extends AbstractController
 {
     /**
-     * @Route("/transfer/queue", name="app_transfer_queue")
+     * @Route("/manage/transfer-queue", name="app_transfer_queue")
      */
     public function index(EntityManagerInterface $em)
     {
         $transferQueue = $em->getRepository(Transfer::class)->findTransfersInQueue();
 
-        return $this->render('transfer_queue/transfer-queue.twig', [
+        return $this->render('manage/transfer-queue.twig', [
             'transferQueue' => $transferQueue,
         ]);
     }
 
     /**
-     * @Route("/transfer/queue/accept", name="transfer_accept")
+     * @Route("/manage/transfer-queue/decision", name="transfer_decision")
      */
     public function transferAccept(Request $request, EntityManagerInterface $em, TransferFinalize $transferFinalize)
     {
-//        $transferId = 10494;
+//        $transferId = 103;
         $transferId = $request->request->get('transferId');
+        $transferDecision = $request->request->get('transferDecision');
         $transfer = $em->getRepository(Transfer::class)->find($transferId);
 
-        $transferFinalize->completeTransfer($transfer);
+        $transferFinalize->makeDecision($transfer, $transferDecision);
 
         return new JsonResponse('done');
     }

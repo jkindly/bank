@@ -33,6 +33,11 @@ class TransferController extends AbstractController
      */
     public function domesticTransfer(Request $request, TransferGenerator $transferGenerator)
     {
+        // If user doesn't have any account, access to domestic transfer is denied
+        if ($this->getUser()->getBankAccounts()->isEmpty()) {
+            return $this->redirectToRoute('app_transfer');
+        }
+
         $form = $this->createForm(TransferFormType::class);
 
         $form->handleRequest($request);

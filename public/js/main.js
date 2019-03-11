@@ -1,8 +1,12 @@
 (function($) {
 
-    //underscoring menu items with blue bar
-    console.log(window.location.pathname);
-    let currentPath = window.location.pathname;
-    $('.nav-item a[href="'+currentPath+'"]').parent().addClass('nav-item-underscore');
+    let hrefLength = document.location.href.split('/').length;
+    let currentPath = document.location.href.split('/');
+
+    if (hrefLength > 4) {
+        $('.nav-item a[href="/'+currentPath[3]+'/'+currentPath[4]+'"]').parent().addClass('nav-item-underscore');
+    } else {
+        $('.nav-item a[href="/'+currentPath[3]+'"]').parent().addClass('nav-item-underscore');
+    }
 
 }(jQuery));

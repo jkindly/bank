@@ -24,13 +24,13 @@
                 {% if transferQueue is not empty %}
                     {% for transfer in transferQueue %}
                         <tr id="{{ transfer.id }}">
-                            <td>{{ transfer.createdAt|date("d.m.Y H:i") }}</td>
-                            <td>{{ transfer.user.firstname }} {{ transfer.user.lastname }}</td>
-                            <td>{{ transfer.receiverName }}</td>
-                            <td>{{ transfer.senderAccountNumber }}</td>
-                            <td>{{ transfer.receiverAccountNumber }}</td>
-                            <td>1 200,00 PLN</td>
-                            <td>{{ transfer.title|truncate(25) }}</td>
+                            <td class="transfer-queue-date">{{ transfer.createdAt|date("d.m.Y H:i") }}</td>
+                            <td class="transfer-queue-sender-name">{{ transfer.user.firstname }} {{ transfer.user.lastname }}</td>
+                            <td class="transfer-queue-receiver-name">{{ transfer.receiverName }}</td>
+                            <td class="transfer-queue-sender-acc-number">{{ transfer.senderAccountNumber }}</td>
+                            <td class="transfer-queue-receiver-acc-number">{{ transfer.receiverAccountNumber }}</td>
+                            <td class="transfer-queue-amount">{{ transfer.amount|number_format(2, ',', ' ') }}</td>
+                            <td class="transfer-queue-title">{{ transfer.title|truncate(25) }}</td>
                             <td class="transfer-queue-decision transfer-queue-confirm">
                                 <i class="fas fa-check-circle"></i>
                             </td>

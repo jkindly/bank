@@ -10,22 +10,26 @@
             {% if bankAccount|length == 0 %}
                 <div>Nie możesz wykonać przelewu, ponieważ nie posiadasz żadnego rachunku bankowego</div>
             {% else %}
-                <ul class="transfer-options">
-                    <li class="col-3 transfer-option domestic-transfer">
-                        <a href="{{ path('app_transfer_domestic') }}">
+                <div class="transfer-options">
+                    <a href="{{ path('app_transfer_domestic') }}">
+                        <div class="transfer-option domestic-transfer">
                             <i class="fas fa-user-alt"></i>
                             <span>Do osoby lub firmy</span>
-                        </a>
-                    </li>
-                    <li class="col-3 transfer-option own-transfer">
-                        <i class="fas fa-exchange-alt"></i>
-                        <span>Na własne konto</span>
-                    </li>
-                    <li class="col-3 transfer-option zus-transfer">
-                        <i class="fas fa-hourglass-half"></i>
-                        <span>Do ZUS-u</span>
-                    </li>
-                </ul>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="transfer-option own-transfer">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Na własne konto</span>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="transfer-option zus-transfer">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>Do ZUS-u</span>
+                        </div>
+                    </a>
+                </div>
             {% endif %}
         </div>
     </main>

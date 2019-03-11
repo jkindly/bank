@@ -27,6 +27,7 @@ class TransferHistoryController extends BaseController
                 ->findAllTransfersLimit5($accountNumber);
         } else {
             $transfersHistory = [];
+            $accountNumber = null;
         }
 
         if ($request->isXmlHttpRequest()) {
@@ -51,9 +52,10 @@ class TransferHistoryController extends BaseController
             return new JsonResponse($jsonData);
         }
 
-        return $this->render('transfer_history/index.html.twig', [
+        return $this->render('transfer_history/transfer-history.twig', [
             'transfersHistory' => $transfersHistory,
-            'userBankAccounts' => $userBankAccounts
+            'userBankAccounts' => $userBankAccounts,
+            'accountNumber' => $accountNumber
         ]);
     }
 

@@ -23,10 +23,14 @@ class TransferRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.isSuccess = :isSuccess')
+            ->andWhere('t.isCompleted = :isCompleted')
             ->andWhere('t.senderAccountNumber = :accNumber')
             ->orWhere('t.receiverAccountNumber = :accNumber')
+            ->andWhere('t.isSuccess = :isSuccess')
+            ->andWhere('t.isCompleted = :isCompleted')
             ->setParameters([
                 ':isSuccess' => true,
+                ':isCompleted' => true,
                 ':accNumber' => $accountNumber
             ])
             ->orderBy('t.createdAt', 'DESC')
@@ -40,11 +44,15 @@ class TransferRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.isSuccess = :isSuccess')
+            ->andWhere('t.isCompleted = :isCompleted')
             ->andWhere('t.senderAccountNumber = :accNumber')
             ->orWhere('t.receiverAccountNumber = :accNumber')
+            ->andWhere('t.isSuccess = :isSuccess')
+            ->andWhere('t.isCompleted = :isCompleted')
             ->andWhere('t.id < :transferId')
             ->setParameters([
                 ':isSuccess' => true,
+                ':isCompleted' => true,
                 ':accNumber' => $accountNumber,
                 ':transferId' => $transferId
             ])
@@ -57,11 +65,13 @@ class TransferRepository extends ServiceEntityRepository
 
     public function findTransfersInQueue()
     {
+        $status = "Transfer send to finalize";
         return $this->createQueryBuilder('t')
             ->innerJoin('t.user', 'u')
             ->addSelect('u')
-            ->andWhere('t.isSuccess = 1')
+            ->andWhere('t.status = :status')
             ->andWhere('t.isCompleted = 0')
+            ->setParameter(':status', $status)
             ->orderBy('t.createdAt', 'ASC')
             ->getQuery()
             ->getResult()

@@ -55,7 +55,7 @@ class TransferGenerator
             //checking if receiver acc number is the same as sender
             if ($receiverAccountNumber == $senderAccountNumber) {
                 $transfer
-                    ->setIsSuccess(false)
+//                    ->setIsSuccess(false)
                     ->setStatus('Cant transfer to the same acc number')
                 ;
                 $this->setTransferStatus('failed');
@@ -66,23 +66,23 @@ class TransferGenerator
                     // checking if transfer amount is higher than 0.00 PLN
                     if ($transfer->getAmount() > 0.00) {
                         $transfer
-                            ->setIsSuccess(true)
-                            ->setStatus('Transfer success');
-                        $this->setTransferStatus('success');
+//                            ->setIsSuccess(true)
+                            ->setStatus('Transfer send to finalize');
+                        $this->setTransferStatus('to_finalize');
                         $this->setTransferStatusMessage('Przelew został przyjęty do realizacji');
 
                         $senderBankAccount
                             ->setAvailableFunds($this->senderAvailableFunds - $this->sendingAmount);
                     } else {
                         $transfer
-                            ->setIsSuccess(false)
+//                            ->setIsSuccess(false)
                             ->setStatus('Amount of transfer must be higher than zero');
                         $this->setTransferStatus('failed');
                         $this->setTransferStatusMessage('Kwota przelewu musi być większa niż 0.00 PLN');
                     }
                 } else {
                     $transfer
-                        ->setIsSuccess(false)
+//                        ->setIsSuccess(false)
                         ->setStatus('Not enough funds')
                     ;
                     $this->setTransferStatus('failed');
@@ -91,7 +91,7 @@ class TransferGenerator
             }
         } else {
             $transfer
-                ->setIsSuccess(false)
+//                ->setIsSuccess(false)
                 ->setStatus('Receiver account not exists')
             ;
             $this->setTransferStatus('failed');
