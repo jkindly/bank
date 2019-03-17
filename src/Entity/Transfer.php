@@ -85,6 +85,16 @@ class Transfer
      */
     private $isCompleted = false;
 
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $senderFundsAfterTransfer;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $receiverFundsAfterTransfer;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -218,6 +228,30 @@ class Transfer
     public function setIsCompleted(bool $isCompleted): self
     {
         $this->isCompleted = $isCompleted;
+
+        return $this;
+    }
+
+    public function getSenderFundsAfterTransfer()
+    {
+        return $this->senderFundsAfterTransfer;
+    }
+
+    public function setSenderFundsAfterTransfer($senderFundsAfterTransfer): self
+    {
+        $this->senderFundsAfterTransfer = $senderFundsAfterTransfer;
+
+        return $this;
+    }
+
+    public function getReceiverFundsAfterTransfer()
+    {
+        return $this->receiverFundsAfterTransfer;
+    }
+
+    public function setReceiverFundsAfterTransfer($receiverFundsAfterTransfer): self
+    {
+        $this->receiverFundsAfterTransfer = $receiverFundsAfterTransfer;
 
         return $this;
     }

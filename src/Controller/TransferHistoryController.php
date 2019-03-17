@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Transfer;
+use App\Utils\BankAccountUtils;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -102,6 +103,8 @@ class TransferHistoryController extends BaseController
             $transferDetailsArray = array(
                 'transferId' => $transferDetails->getId(),
                 'senderAccountNumber' => $transferDetails->getSenderAccountNumber(),
+                'senderFundsAfterTransfer' => BankAccountUtils::renderAmount($transferDetails->getSenderFundsAfterTransfer()),
+                'receiverFundsAfterTransfer' => BankAccountUtils::renderAmount($transferDetails->getReceiverFundsAfterTransfer()),
                 'senderFirstName' => $transferDetails->getUser()->getFirstName(),
                 'senderLastName' => $transferDetails->getUser()->getLastName(),
                 'senderAddress' => $transferDetails->getUser()->getAddress(),
@@ -112,7 +115,7 @@ class TransferHistoryController extends BaseController
                 'receiverCity' => $transferDetails->getReceiverCity(),
                 'title' => $transferDetails->getTitle(),
                 'createdAt' => $transferDetails->getCreatedAt()->format('d.m.Y'),
-                'amount' => number_format($transferDetails->getAmount(), 2, ',', ' '),
+                'amount' => BankAccountUtils::renderAmount($transferDetails->getAmount()),
             );
 
             return new JsonResponse($transferDetailsArray);

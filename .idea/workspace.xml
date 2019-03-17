@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/public/js/account-history.js" line="66" />
+    <bookmark url="file://$PROJECT_DIR$/public/js/transfer-history.js" line="75" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41e28ab7-6ae8-4f4f-9a7c-fde45366af01" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/transfer.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/transfer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TransferController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TransferController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/account-history.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/transfer-history.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/jquery-3.3.1.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/jquery-3.3.1.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/TransferHistoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TransferHistoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TransferQueueController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TransferQueueController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/BankAccountFixture.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/BankAccountFixture.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/TransferFixture.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/TransferFixture.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/UserFixture.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/UserFixture.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Transfer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Transfer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/TransferRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/TransferRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/BankAccountRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/BankAccountRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Transfer/TransferFinalize.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transfer/TransferFinalize.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Transfer/TransferGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Transfer/TransferGenerator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/transfer/transfer-domestic.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/transfer/transfer-domestic.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/transfer/transfer.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/transfer/transfer.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/transfer_history/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/transfer_history/transfer-history.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/transfer_queue/transfer-queue.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/manage/transfer-queue.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Utils/Account.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/BankAccountUtils.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/transfer_history/transfer-history.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/transfer_history/transfer-history.twig" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/vendor/composer/" />
     <ignored path="$PROJECT_DIR$/vendor/doctrine/annotations/" />
@@ -115,11 +114,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Transfer/TransferGenerator.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="679">
-              <caret line="94" column="39" selection-start-line="94" selection-start-column="39" selection-end-line="94" selection-end-column="39" />
+            <state relative-caret-position="475">
+              <caret line="81" column="42" selection-start-line="81" selection-start-column="42" selection-end-line="82" selection-end-column="68" />
               <folding>
                 <element signature="e#114#141#0#PHP" expanded="true" />
               </folding>
@@ -130,8 +129,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/Transfer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="74" column="30" selection-start-line="74" selection-start-column="30" selection-end-line="74" selection-end-column="30" />
+            <state relative-caret-position="441">
+              <caret line="239" column="20" selection-start-line="239" selection-start-column="20" selection-end-line="239" selection-end-column="20" />
               <folding>
                 <element signature="e#30#62#0#PHP" expanded="true" />
               </folding>
@@ -140,12 +139,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/TransferQueueController.php">
+        <entry file="file://$PROJECT_DIR$/src/Form/TransferFormType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="36" column="70" selection-start-line="36" selection-start-column="70" selection-end-line="36" selection-end-column="70" />
+            <state relative-caret-position="560">
+              <caret line="56" column="14" lean-forward="true" selection-start-line="56" selection-start-column="14" selection-end-line="56" selection-end-column="14" />
               <folding>
-                <element signature="e#34#58#0#PHP" expanded="true" />
+                <element signature="e#110#137#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -154,8 +153,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Transfer/TransferFinalize.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="662">
-              <caret line="57" column="54" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
+            <state relative-caret-position="816">
+              <caret line="53" column="96" selection-start-line="53" selection-start-column="96" selection-end-line="53" selection-end-column="96" />
               <folding>
                 <element signature="e#114#141#0#PHP" expanded="true" />
               </folding>
@@ -166,46 +165,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/TransferController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="35" column="82" selection-start-line="35" selection-start-column="82" selection-end-line="35" selection-end-column="82" />
+            <state relative-caret-position="509">
+              <caret line="59" column="40" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="44" />
               <folding>
                 <element signature="e#34#61#0#PHP" expanded="true" />
-                <element signature="e#1085#1099#1#PHP" expanded="true" />
-                <element signature="e#1961#1984#1#PHP" expanded="true" />
+                <element signature="e#2176#2199#1#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/transfer_history/transfer-history.twig">
+        <entry file="file://$PROJECT_DIR$/public/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="37" column="74" selection-start-line="37" selection-start-column="74" selection-end-line="37" selection-end-column="74" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/account-history.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1468">
-              <caret line="255" column="8" selection-start-line="255" selection-start-column="8" selection-end-line="255" selection-end-column="8" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#td#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/TransferHistoryController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-306">
-              <caret line="54" column="68" selection-start-line="54" selection-start-column="68" selection-end-line="54" selection-end-column="68" />
-              <folding>
-                <element signature="e#34#58#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="782">
+              <caret line="394" column="30" selection-start-line="394" selection-start-column="30" selection-end-line="394" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -213,7 +187,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/transfer/transfer-domestic.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
+            <state relative-caret-position="-698">
               <caret line="10" column="54" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
               <folding>
                 <element signature="e#12#26#0#Twig" expanded="true" />
@@ -231,6 +205,27 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/transfer_history/transfer-history.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="52" column="99" selection-start-line="52" selection-start-column="99" selection-end-line="52" selection-end-column="99" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/TransferHistoryController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="106" column="130" selection-start-line="106" selection-start-column="130" selection-end-line="106" selection-end-column="130" />
+              <folding>
+                <element signature="e#34#58#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -242,10 +237,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>show</find>
-      <find>transfer-history-elem</find>
-      <find>transf</find>
-      <find>colsp</find>
       <find>border-bottom</find>
       <find>expa</find>
       <find>transfer-history</find>
@@ -272,6 +263,10 @@
       <find>sendtra</find>
       <find>transfer-options</find>
       <find>transfer-history-c</find>
+      <find>brak hi</find>
+      <find>brak his</find>
+      <find>opis</find>
+      <find>accountnumber</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -280,9 +275,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/user_settings/index.html.twig" />
-        <option value="$PROJECT_DIR$/templates/user_settings/settings.html.twig" />
-        <option value="$PROJECT_DIR$/config/packages/security.yaml" />
         <option value="$PROJECT_DIR$/src/Controller/UserSettingsController.php" />
         <option value="$PROJECT_DIR$/src/Utils/Account.php" />
         <option value="$PROJECT_DIR$/config/packages/stof_doctrine_extensions.yaml" />
@@ -319,18 +311,21 @@
         <option value="$PROJECT_DIR$/src/Controller/TransferController.php" />
         <option value="$PROJECT_DIR$/templates/transfer_queue/transfer-queue.twig" />
         <option value="$PROJECT_DIR$/templates/transfer_history/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/TransferHistoryController.php" />
-        <option value="$PROJECT_DIR$/public/css/main.css" />
         <option value="$PROJECT_DIR$/public/js/main.js" />
         <option value="$PROJECT_DIR$/public/js/transfer.js" />
         <option value="$PROJECT_DIR$/templates/transfer/transfer-domestic.twig" />
-        <option value="$PROJECT_DIR$/src/Transfer/TransferGenerator.php" />
         <option value="$PROJECT_DIR$/src/Migrations/Version20190311223754.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Transfer.php" />
         <option value="$PROJECT_DIR$/src/Migrations/Version20190311224033.php" />
-        <option value="$PROJECT_DIR$/src/Transfer/TransferFinalize.php" />
         <option value="$PROJECT_DIR$/src/Controller/TransferQueueController.php" />
         <option value="$PROJECT_DIR$/src/Repository/TransferRepository.php" />
+        <option value="$PROJECT_DIR$/src/Utils/BankAccount.php" />
+        <option value="$PROJECT_DIR$/public/css/main.css" />
+        <option value="$PROJECT_DIR$/src/Entity/Transfer.php" />
+        <option value="$PROJECT_DIR$/src/Controller/TransferHistoryController.php" />
+        <option value="$PROJECT_DIR$/src/Transfer/TransferFinalize.php" />
+        <option value="$PROJECT_DIR$/templates/transfer_history/transfer-history.twig" />
+        <option value="$PROJECT_DIR$/public/js/transfer-history.js" />
+        <option value="$PROJECT_DIR$/src/Transfer/TransferGenerator.php" />
       </list>
     </option>
   </component>
@@ -489,6 +484,12 @@
               <item name="bank" type="b2602c69:ProjectViewProjectNode" />
               <item name="bank" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Form" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bank" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bank" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Repository" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -496,6 +497,12 @@
               <item name="bank" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Transfer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bank" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bank" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bank" type="b2602c69:ProjectViewProjectNode" />
@@ -594,11 +601,12 @@
       <workItem from="1551864764393" duration="14702000" />
       <workItem from="1552304187232" duration="501000" />
       <workItem from="1552304770697" duration="5758000" />
+      <workItem from="1552849625874" duration="6637000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="207130000" />
+    <option name="totallyTimeSpent" value="213798000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -613,7 +621,7 @@
     <frame x="0" y="-1" width="1920" height="1040" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16061899" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16221985" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -693,13 +701,6 @@
           <folding>
             <element signature="e#36#60#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Utils/Account.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -816,25 +817,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/framework-bundle/Controller/ControllerTrait.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="162" column="39" lean-forward="true" selection-start-line="162" selection-start-column="39" selection-end-line="162" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20190311113717.php">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/TransferFormType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="36" column="38" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
-          <folding>
-            <element signature="e#110#137#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/services.yaml">
       <provider selected="true" editor-type-id="text-editor">
@@ -850,9 +834,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BankAccount.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BankAccount.php" />
     <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2029">
@@ -860,31 +842,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/transfer/transfer.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="36" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BankAccount/UserBankAccount.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BankAccount/UserBankAccount.php" />
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/tables.rnc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="296">
           <caret line="216" column="16" selection-start-line="216" selection-start-column="16" selection-end-line="216" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="375" column="25" selection-start-line="375" selection-start-column="25" selection-end-line="375" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -912,35 +874,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/transfer/transfer-domestic.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="54" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/TransferController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="35" column="82" selection-start-line="35" selection-start-column="82" selection-end-line="35" selection-end-column="82" />
-          <folding>
-            <element signature="e#34#61#0#PHP" expanded="true" />
-            <element signature="e#1085#1099#1#PHP" expanded="true" />
-            <element signature="e#1961#1984#1#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20190311223754.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="24" column="102" selection-start-line="24" selection-start-column="102" selection-end-line="24" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20190311223754.php" />
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20190311223953.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -951,26 +885,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Transfer/TransferFinalize.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="662">
-          <caret line="57" column="54" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
-          <folding>
-            <element signature="e#114#141#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Transfer/TransferGenerator.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="679">
-          <caret line="94" column="39" selection-start-line="94" selection-start-column="39" selection-end-line="94" selection-end-column="39" />
-          <folding>
-            <element signature="e#114#141#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/TransferRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
@@ -978,20 +892,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Transfer.php">
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/framework-bundle/Controller/ControllerTrait.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="74" column="30" selection-start-line="74" selection-start-column="30" selection-end-line="74" selection-end-column="30" />
-          <folding>
-            <element signature="e#30#62#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/transfer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="33" column="39" selection-start-line="33" selection-start-column="39" selection-end-line="33" selection-end-column="39" />
+        <state relative-caret-position="296">
+          <caret line="156" column="23" selection-start-line="156" selection-start-column="23" selection-end-line="156" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -1005,29 +909,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/transfer_history/transfer-history.twig">
+    <entry file="file://$PROJECT_DIR$/templates/transfer/transfer.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="37" column="74" selection-start-line="37" selection-start-column="74" selection-end-line="37" selection-end-column="74" />
+        <state relative-caret-position="442">
+          <caret line="26" column="36" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/account-history.js">
+    <entry file="file://$PROJECT_DIR$/src/Utils/BankAccountUtils.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1468">
-          <caret line="255" column="8" selection-start-line="255" selection-start-column="8" selection-end-line="255" selection-end-column="8" />
+        <state relative-caret-position="442">
+          <caret line="31" column="51" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/transfer/transfer-domestic.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-698">
+          <caret line="10" column="54" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="394" column="30" selection-start-line="394" selection-start-column="30" selection-end-line="394" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/transfer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="33" column="39" selection-start-line="33" selection-start-column="39" selection-end-line="33" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/TransferHistoryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="106" column="130" selection-start-line="106" selection-start-column="130" selection-end-line="106" selection-end-column="130" />
+          <folding>
+            <element signature="e#34#58#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/transfer_history/transfer-history.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="52" column="99" selection-start-line="52" selection-start-column="99" selection-end-line="52" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/transfer-history.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-340">
+          <caret line="10" column="84" selection-start-line="10" selection-start-column="84" selection-end-line="10" selection-end-column="84" />
           <folding>
             <element signature="n#style#0;n#div#0;n#td#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/TransferHistoryController.php">
+    <entry file="file://$PROJECT_DIR$/src/Transfer/TransferFinalize.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-306">
-          <caret line="54" column="68" selection-start-line="54" selection-start-column="68" selection-end-line="54" selection-end-column="68" />
+        <state relative-caret-position="816">
+          <caret line="53" column="96" selection-start-line="53" selection-start-column="96" selection-end-line="53" selection-end-column="96" />
           <folding>
-            <element signature="e#34#58#0#PHP" expanded="true" />
+            <element signature="e#114#141#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/TransferFormType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="56" column="14" lean-forward="true" selection-start-line="56" selection-start-column="14" selection-end-line="56" selection-end-column="14" />
+          <folding>
+            <element signature="e#110#137#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/TransferController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="509">
+          <caret line="59" column="40" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="44" />
+          <folding>
+            <element signature="e#34#61#0#PHP" expanded="true" />
+            <element signature="e#2176#2199#1#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Transfer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="239" column="20" selection-start-line="239" selection-start-column="20" selection-end-line="239" selection-end-column="20" />
+          <folding>
+            <element signature="e#30#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Transfer/TransferGenerator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="81" column="42" selection-start-line="81" selection-start-column="42" selection-end-line="82" selection-end-column="68" />
+          <folding>
+            <element signature="e#114#141#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

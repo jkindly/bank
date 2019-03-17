@@ -11,6 +11,7 @@ namespace App\Transfer;
 
 use App\Entity\BankAccount;
 use App\Entity\Transfer;
+use App\Utils\BankAccountUtils;
 use Doctrine\ORM\EntityManagerInterface;
 
 class TransferGenerator
@@ -68,8 +69,11 @@ class TransferGenerator
                         $transfer
 //                            ->setIsSuccess(true)
                             ->setStatus('Transfer send to finalize');
+                        $transfer->setSenderFundsAfterTransfer($this->senderAvailableFunds - $this->sendingAmount);
                         $this->setTransferStatus('to_finalize');
-                        $this->setTransferStatusMessage('Przelew został przyjęty do realizacji');
+                        $this->setTransferStatusMessage(
+                            'Przelew na kwotę ' . BankAccountUtils::renderAmount($transfer->getAmount()) . ' PLN został przyjęty do realizacji'
+                        );
 
                         $senderBankAccount
                             ->setAvailableFunds($this->senderAvailableFunds - $this->sendingAmount);

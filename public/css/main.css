@@ -367,6 +367,7 @@ footer {
 }
 
 .choose-account {
+    min-width: 250px;
     border: 1px solid #DFDFDF;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -380,6 +381,18 @@ footer {
     -ms-user-select: none;
     user-select: none;
     position: relative;
+}
+
+.choose-account-selected {
+    background-color: #BDE2F5;
+    color: #3D3D3D;
+    border: 1px solid #A2CDE2;
+}
+
+.choose-account:hover {
+    background-color: #BDE2F5;
+    color: #3D3D3D;
+    border: 1px solid #A2CDE2;
 }
 
 .choose-account-type {

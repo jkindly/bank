@@ -8,8 +8,17 @@
     let endTransfers;
     let accountNumber;
 
+    if ($('.choose-account').length === 1) accountNumber = $('.choose-account-number').html();
+
     $('.choose-account').click(function() {
+        let accountCount = $(this).children().children().length;
+        if (accountCount === 0) {
+            return;
+        }
         accountNumber = $(this).children().children('.choose-account-number').text();
+        $(this).addClass('choose-account-selected');
+        $('.choose-account').not(this).removeClass('choose-account-selected');
+        // $('.choose-account').not(this).css('background-color', 'rgba(249, 249, 249, 0.5)');
         tbody.html("");
         $('div').remove('.show-more-transfers');
         endTransfers = false;
@@ -46,7 +55,7 @@
                                 "<tr class='transfer-history-element' id='" + transfer['transferId'] + "'>" +
                                     "<td><i class='fas fa-long-arrow-alt-right' title='Przelew wychodzący'></i></td>" +
                                     "<td>" + transfer['createdAt'] + "</td>" +
-                                    "<td>" + transfer['receiverName'] + "</td>" +
+                                    "<td>" + transfer['receiverName'] + ", " + transfer['title'] + "</td>" +
                                     "<td class='transfer-amount transfer-amount-outgoing'> -" + transfer['amount'] + " PLN</td>" +
                                 "</tr>";
                             tbody.append(string).stop().show(800);
@@ -55,7 +64,7 @@
                                 "<tr class='transfer-history-element' id='" + transfer['transferId'] + "'>" +
                                     "<td><i class='fas fa-long-arrow-alt-left' title='Przelew przychodzący'></i></td>" +
                                     "<td>" + transfer['createdAt'] + "</td>" +
-                                    "<td>" + transfer['receiverName'] + "</td>" +
+                                    "<td>" + transfer['receiverName'] + ", " + transfer['title'] + "</td>" +
                                     "<td class='transfer-amount transfer-amount-incoming'> " + transfer['amount'] + " PLN</td>" +
                                 "</tr>";
                             tbody.append(string).stop().show(800);
@@ -189,6 +198,11 @@
             success: function(data) {
                 if (data['receiverAddress'] === null) data['receiverAddress'] = '';
                 if (data['receiverCity'] === null) data['receiverCity'] = '';
+                console.log('Data: ' + typeof data['senderAccountNumber']);
+                console.log('Pobrany: ' + typeof accountNumber + ', ' + accountNumber);
+                let fundsAfter = data['senderAccountNumber'] != accountNumber ?
+                    data['receiverFundsAfterTransfer'] :
+                    data['senderFundsAfterTransfer'];
                 let string =
                     "<td colspan='4' class='transfer-history-element-expanded' class='p-0'>" +
                         "<table>" +
@@ -223,8 +237,8 @@
                                 "<td>" + data['amount'] + " PLN</td>" +
                             "</tr>" +
                             "<tr class='history-row-underline'>" +
-                                "<td>Saldo po transakcji</td>" +
-                                "<td>2311.23 PLN</td>" +
+                                "<td>Środki po transkacji</td>" +
+                                "<td>" + fundsAfter + " PLN</td>" +
                             "</tr>" +
                             "<tr>" +
                                 "<td>Data transakcji</td>" +

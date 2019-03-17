@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Transfer;
-use App\Utils\Account;
+use App\Utils\BankAccountUtils;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
@@ -21,9 +21,9 @@ class TransferFixture extends Fixture
 //
 //            if($faker->boolean()) {
 //                $transfer->setSenderAccountNumber('77 1140 2004 2791 6581 7819 3183');
-//                $transfer->setReceiverAccountNumber(Account::randomAccountNumber());
+//                $transfer->setReceiverAccountNumber(BankAccountUtils::randomAccountNumber());
 //            } else {
-//                $transfer->setSenderAccountNumber(Account::randomAccountNumber());
+//                $transfer->setSenderAccountNumber(BankAccountUtils::randomAccountNumber());
 //                $transfer->setReceiverAccountNumber('77 1140 2004 2791 6581 7819 3183');
 //            }
 //
@@ -47,8 +47,8 @@ class TransferFixture extends Fixture
 //
 //            $transfer
 //                ->setUser($this->getReference('admin'))
-//                ->setSenderAccountNumber(Account::randomAccountNumber())
-//                ->setReceiverAccountNumber(Account::randomAccountNumber())
+//                ->setSenderAccountNumber(BankAccountUtils::randomAccountNumber())
+//                ->setReceiverAccountNumber(BankAccountUtils::randomAccountNumber())
 //                ->setReceiverName($faker->name)
 //                ->setTitle($faker->text(50))
 //                ->setAmount(mt_rand(1, 100000)/10)

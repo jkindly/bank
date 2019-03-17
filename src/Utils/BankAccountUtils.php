@@ -9,9 +9,10 @@
 namespace App\Utils;
 
 
-class Account
+class BankAccountUtils
 {
-    public static function randomAccountNumber() {
+    public static function randomAccountNumber()
+    {
         $controlSum    = '77';
         $billingNumber1 = '1140';
         $billingNumber2 = '2004';
@@ -24,5 +25,10 @@ class Account
             $restNumber[1] . ' ' . $restNumber[2] . ' ' . $restNumber[3];
 
         return $accountNumber;
+    }
+
+    public static function renderAmount($amount)
+    {
+        return number_format($amount, 2, ',', ' ');
     }
 }

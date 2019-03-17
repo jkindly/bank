@@ -51,6 +51,7 @@ class TransferFinalize
 
             $senderAccount->setBalance($senderBalance - $transferAmount);
 
+            $transfer->setReceiverFundsAfterTransfer($receiverAvailableFunds + $transferAmount);
             $transfer->setStatus('Success');
             $transfer->setIsSuccess(1);
         } elseif ($transferDecision == 'decline') {
