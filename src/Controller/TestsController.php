@@ -10,17 +10,26 @@ class TestsController extends AbstractController
     /**
      * @Route("/tests", name="tests")
      */
-    public function index()
+    public function index(\Swift_Mailer $mailer)
     {
-        $user = $this->getUser();
-        $bankAccounts = $user->getBankAccounts()->toArray();
+        $code = 123456123;
+        $message = (new \Swift_Message('Kod transakcji'))
+            ->setFrom('transfer@freebank.pl')
+            ->setTo('kozupa.jakub@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    'tests/index.html.twig',
+                    ['code' => $code]
+                ),
+                'text/html'
+            )
+        ;
 
-        dd($bankAccounts[0]);
-
+        $mailer->send($message);
 
 
         return $this->render('tests/index.html.twig', [
-            'controller_name' => 'TestsController',
+            'code' => $code
         ]);
     }
 }

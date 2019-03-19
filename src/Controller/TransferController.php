@@ -4,8 +4,9 @@ namespace App\Controller;
 
 use App\Entity\BankAccount;
 use App\Entity\Transfer;
+use App\Form\TransferFinalizeFormType;
 use App\Form\TransferFormType;
-use App\Transfer\TransferGenerator;
+use App\Transfer\TransferDomestic;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +32,7 @@ class TransferController extends AbstractController
     /**
      * @Route("/transfer/domestic", name="app_transfer_domestic")
      */
-    public function domesticTransfer(Request $request, TransferGenerator $transferGenerator)
+    public function domesticTransfer(Request $request, TransferDomestic $transferDomestic)
     {
         // If user doesn't have any account, access to domestic transfer is denied
         if ($this->getUser()->getBankAccounts()->isEmpty()) {
@@ -43,6 +44,7 @@ class TransferController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $data = $form->getData();
 
             $transfer = new Transfer();
@@ -57,18 +59,41 @@ class TransferController extends AbstractController
                 ->setTitle($data->getTitle())
                 ->setSenderAccountNumber($senderAccountNumber->getAccountNumber());
 
-            $transferGenerator->sendTransfer($transfer);
+            $validateTransfer = $transferDomestic->validateTransfer($transfer, $this->getUser());
 
-            $this->addFlash(
-                $transferGenerator->getTransferStatus(),
-                $transferGenerator->getTransferStatusMessage()
-            );
+            if ($validateTransfer) {
+                return $this->redirectToRoute('transfer_domestic_verify_code');
+            } else {
+                $this->addFlash('failed', $transferDomestic->getTransferStatusMessage());
+                return $this->redirectToRoute('app_transfer_domestic');
+            }
 
-            return $this->redirectToRoute('app_transfer_domestic');
+//            $this->addFlash(
+//                $transferGenerator->getTransferStatus(),
+//                $transferGenerator->getTransferStatusMessage()
+//            );
+
         }
 
-        return $this->render('transfer/transfer-domestic.twig', [
+        return $this->render('transfer/transfer-domestic.html.twig', [
             'transferForm' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/transfer/domestic/finalize", name="transfer_domestic_verify_code")
+     */
+    public function transferDomesticVerifyCode(Request $request)
+    {
+        $form = $this->createForm(TransferFinalizeFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+        }
+
+        return $this->render('transfer/transfer-domestic-finalize.html.twig', [
+            'transferFinalizeForm' => $form->createView(),
         ]);
     }
 }

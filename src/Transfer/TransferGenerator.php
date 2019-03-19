@@ -13,7 +13,6 @@ use App\Entity\BankAccount;
 use App\Entity\Transfer;
 use App\Utils\BankAccountUtils;
 use Doctrine\ORM\EntityManagerInterface;
-
 class TransferGenerator
 {
     private $em;
@@ -30,7 +29,7 @@ class TransferGenerator
     /**
      * @var Transfer $transfer
      */
-    public function sendTransfer($transfer)
+    public function validateTransfer($transfer)
     {
         $this->sendingAmount = $transfer->getAmount();
 
@@ -56,7 +55,6 @@ class TransferGenerator
             //checking if receiver acc number is the same as sender
             if ($receiverAccountNumber == $senderAccountNumber) {
                 $transfer
-//                    ->setIsSuccess(false)
                     ->setStatus('Cant transfer to the same acc number')
                 ;
                 $this->setTransferStatus('failed');
@@ -66,8 +64,8 @@ class TransferGenerator
                 if ($this->senderAvailableFunds >= $this->sendingAmount) {
                     // checking if transfer amount is higher than 0.00 PLN
                     if ($transfer->getAmount() > 0.00) {
+                        $this->sendVerificationCode();
                         $transfer
-//                            ->setIsSuccess(true)
                             ->setStatus('Transfer send to finalize');
                         $transfer->setSenderFundsAfterTransfer($this->senderAvailableFunds - $this->sendingAmount);
                         $this->setTransferStatus('to_finalize');
@@ -79,14 +77,12 @@ class TransferGenerator
                             ->setAvailableFunds($this->senderAvailableFunds - $this->sendingAmount);
                     } else {
                         $transfer
-//                            ->setIsSuccess(false)
                             ->setStatus('Amount of transfer must be higher than zero');
                         $this->setTransferStatus('failed');
                         $this->setTransferStatusMessage('Kwota przelewu musi być większa niż 0.00 PLN');
                     }
                 } else {
                     $transfer
-//                        ->setIsSuccess(false)
                         ->setStatus('Not enough funds')
                     ;
                     $this->setTransferStatus('failed');
@@ -95,7 +91,6 @@ class TransferGenerator
             }
         } else {
             $transfer
-//                ->setIsSuccess(false)
                 ->setStatus('Receiver account not exists')
             ;
             $this->setTransferStatus('failed');
@@ -104,6 +99,25 @@ class TransferGenerator
 
         $this->em->persist($transfer);
         $this->em->flush();
+    }
+
+    public function sendVerificationCode(\Swift_Mailer $mailer)
+    {
+        $userMail = $this->user->getMail();
+        $code = rand(100000, 999999);
+        $message = (new \Swift_Message('Kod transakcji'))
+            ->setFrom('transfer@freebank.pl')
+            ->setTo('kozupa.jakub@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    'tests/index.html.twig',
+                    ['code' => $code]
+                ),
+                'text/html'
+            )
+        ;
+
+        $mailer->send($message);
     }
 
     public function getTransferStatus()

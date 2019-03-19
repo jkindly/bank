@@ -95,6 +95,12 @@ class Transfer
      */
     private $receiverFundsAfterTransfer;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\NotBlank(message="Wprowadź kod")
+     */
+    private $verificationCode;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -252,6 +258,18 @@ class Transfer
     public function setReceiverFundsAfterTransfer($receiverFundsAfterTransfer): self
     {
         $this->receiverFundsAfterTransfer = $receiverFundsAfterTransfer;
+
+        return $this;
+    }
+
+    public function getVerificationCode(): ?int
+    {
+        return $this->verificationCode;
+    }
+
+    public function setVerificationCode(?int $verificationCode): self
+    {
+        $this->verificationCode = $verificationCode;
 
         return $this;
     }
