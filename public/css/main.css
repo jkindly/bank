@@ -650,6 +650,20 @@ td > .fa-long-arrow-alt-left {
     color: #fff;
     margin-right: 10px;
 }
+
+.transfer-domestic-finalize {
+    margin: 20px auto 0 auto;
+    width: 200px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+    /*justify-content: center;*/
+}
+
+.transfer-domestic-finalize-code {
+    margin-bottom: 20px;
+}
 /* END CONTENT OF TRANSFER */
 
 

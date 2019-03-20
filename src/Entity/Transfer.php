@@ -30,20 +30,20 @@ class Transfer
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Proszę wypełnić pole odbiorcy")
+     * @Assert\NotBlank(message="Proszę wypełnić pole odbiorcy", groups={"transfer_domestic"})
      */
     private $receiverName;
 
     // todo change length field receiverAccountNumber
     /**
      * @ORM\Column(type="string", length=32)
-     * @Assert\NotBlank(message="Proszę wypełnić nr rachunku odbiorcy")
+     * @Assert\NotBlank(message="Proszę wypełnić nr rachunku odbiorcy", groups={"transfer_domestic"})
      */
     private $receiverAccountNumber;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
-     * @Assert\NotBlank(message="Proszę wprowadzić kwotę")
+     * @Assert\NotBlank(message="Proszę wprowadzić kwotę", groups={"transfer_domestic"})
      */
     private $amount;
 
@@ -97,7 +97,13 @@ class Transfer
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\NotBlank(message="Wprowadź kod")
+     * @Assert\NotBlank(message="Wprowadź kod", groups={"transfer_domestic_finalize"})
+     * @Assert\Length(
+     *     min = 6,
+     *     max = 6,
+     *     minMessage = "Kod składa się z 6 cyfr",
+     *     maxMessage = "Kod składa się z 6 cyfr"
+     * )
      */
     private $verificationCode;
 

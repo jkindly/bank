@@ -14,7 +14,7 @@ class TransferFinalizeFormType extends AbstractType
     {
         $builder
             ->add('verificationCode', NumberType::class, [
-                'attr' => ['maxlength' => 6]
+                'attr' => ['maxlength' => 6],
             ])
         ;
     }
@@ -22,6 +22,7 @@ class TransferFinalizeFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'validation_groups' => 'transfer_domestic_finalize',
             'translation_domain' => 'forms',
             'data_class' => Transfer::class,
         ]);

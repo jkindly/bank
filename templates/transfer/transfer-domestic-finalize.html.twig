@@ -8,11 +8,15 @@
         <div class="transfer-type periodic-transfer">Przelew cykliczny</div>
 
         {{ form_start(transferFinalizeForm) }}
-            {{ form_widget(transferFinalizeForm) }}
-            {% for error in transferFinalizeForm.verificationCode.vars.errors %}
-                <p>{{ error.message }}</p>
-            {% endfor %}
-            <button type="submit" class="send-transfer-btn">Wyślij przelew</button>
+            <div class="transfer-domestic-finalize">
+                {{ form_label(transferFinalizeForm.verificationCode) }}
+                {{ form_widget(transferFinalizeForm.verificationCode,
+                    {'attr': {'class': 'transfer-domestic-finalize-code'}}) }}
+                {% for error in transferFinalizeForm.verificationCode.vars.errors %}
+                    <div class="send-transfer-error">{{ error.message }}</div>
+                {% endfor %}
+                <button type="submit" class="send-transfer-btn">Wyślij przelew</button>
+            </div>
         {{ form_end(transferFinalizeForm) }}
 
     </div>

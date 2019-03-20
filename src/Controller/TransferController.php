@@ -16,6 +16,8 @@ class TransferController extends AbstractController
 {
     /**
      * @Route("/transfer", name="app_transfer")
+     * @param EntityManagerInterface $em
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function transfer(EntityManagerInterface $em)
     {
@@ -31,6 +33,9 @@ class TransferController extends AbstractController
 
     /**
      * @Route("/transfer/domestic", name="app_transfer_domestic")
+     * @param Request $request
+     * @param TransferDomestic $transferDomestic
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function domesticTransfer(Request $request, TransferDomestic $transferDomestic)
     {
@@ -59,20 +64,14 @@ class TransferController extends AbstractController
                 ->setTitle($data->getTitle())
                 ->setSenderAccountNumber($senderAccountNumber->getAccountNumber());
 
-            $validateTransfer = $transferDomestic->validateTransfer($transfer, $this->getUser());
+            $transferDomestic->validateTransfer($transfer, $this->getUser());
 
-            if ($validateTransfer) {
+            if ($transferDomestic->getTransferStatus() == 'to_finalize') {
                 return $this->redirectToRoute('transfer_domestic_verify_code');
             } else {
                 $this->addFlash('failed', $transferDomestic->getTransferStatusMessage());
                 return $this->redirectToRoute('app_transfer_domestic');
             }
-
-//            $this->addFlash(
-//                $transferGenerator->getTransferStatus(),
-//                $transferGenerator->getTransferStatusMessage()
-//            );
-
         }
 
         return $this->render('transfer/transfer-domestic.html.twig', [
@@ -82,14 +81,20 @@ class TransferController extends AbstractController
 
     /**
      * @Route("/transfer/domestic/finalize", name="transfer_domestic_verify_code")
+     * @param Request $request
+     * @param TransferDomestic $transferDomestic
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function transferDomesticVerifyCode(Request $request)
+    public function transferDomesticVerifyCode(Request $request, TransferDomestic $transferDomestic)
     {
         $form = $this->createForm(TransferFinalizeFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            $transferDomestic->getVerificationCode();
+
+            dd($transferDomestic->getVerificationCode());
         }
 
         return $this->render('transfer/transfer-domestic-finalize.html.twig', [

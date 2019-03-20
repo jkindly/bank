@@ -14,24 +14,30 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class TransferDomestic extends AbstractTransferGenerator
 {
-    private $entityManager;
+    private $em;
+    private $transferStatus = 'failed';
     private $transferStatusMessage;
 
-    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating, EntityManagerInterface $entityManager)
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating, EntityManagerInterface $em)
     {
         parent::__construct($mailer, $templating);
-        $this->entityManager = $entityManager;
+        $this->em = $em;
     }
 
+    /**
+     * @param \App\Entity\Transfer $transfer
+     * @param \App\Entity\User $user
+     * @return bool
+     */
     public function validateTransfer($transfer, $user)
     {
-        $senderBankAccount = $this->entityManager->getRepository(BankAccount::class)
+        $senderBankAccount = $this->em->getRepository(BankAccount::class)
             ->findOneBy([
                 'accountNumber' => $transfer->getSenderAccountNumber()
             ])
         ;
 
-        $receiverBankAccount = $this->entityManager->getRepository(BankAccount::class)
+        $receiverBankAccount = $this->em->getRepository(BankAccount::class)
             ->findOneBy([
                 'accountNumber' => $transfer->getReceiverAccountNumber()
             ])
@@ -46,29 +52,30 @@ class TransferDomestic extends AbstractTransferGenerator
                 $sendingAmount = $transfer->getAmount();
                 if ($senderAvailableFunds >= $sendingAmount) {
                     if ($sendingAmount > 0.00) {
+                        $this->setTransferStatus('to_finalize');
                         $this->sendVerificationCode($user->getEmail());
-                        return true;
+                        $verificationCode = $this->getVerificationCode();
+                        $transfer->setVerificationCode($verificationCode);
+                        $transfer->setStatus('To finalize');
                     } else {
                         $transfer->setStatus('Amount of transfer must be higher than zero');
-                        $this->setTransferStatusMessage(3);
-                        return false;
+                        $this->setTransferStatusMessage(3);;
                     }
                 } else {
                     $transfer->setStatus('Not enough funds');
                     $this->setTransferStatusMessage(2);
-                    return false;
                 }
             } else {
                 $transfer->setStatus('Cant transfer to the same acc number');
                 $this->setTransferStatusMessage(1);
-                return false;
             }
         } else {
             $transfer->setStatus('Receiver account not exists');
-            $this->setTransferStatusMessage(0);
-            return false;
+            $this->setTransferStatusMessage(0);;
         }
 
+        $this->em->persist($transfer);
+        $this->em->flush();
     }
 
     public function setTransferStatusMessage(int $code)
@@ -99,5 +106,15 @@ class TransferDomestic extends AbstractTransferGenerator
     public function sendTransfer()
     {
         // TODO: Implement sendTransfer() method.
+    }
+
+    public function getTransferStatus()
+    {
+        return $this->transferStatus;
+    }
+
+    public function setTransferStatus($transferStatus): void
+    {
+        $this->transferStatus = $transferStatus;
     }
 }

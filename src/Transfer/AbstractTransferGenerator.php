@@ -16,6 +16,7 @@ abstract class AbstractTransferGenerator
 {
     private $mailer;
     private $templating;
+    private $code;
 
     public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating)
     {
@@ -33,7 +34,7 @@ abstract class AbstractTransferGenerator
 
     public function sendVerificationCode($userMail)
     {
-        $code = rand(100000, 999999);
+        $this->code = rand(100000, 999999);
 
         $message = (new \Swift_Message('Kod Transakcji'))
             ->setFrom('code@freebank.pl')
@@ -41,12 +42,25 @@ abstract class AbstractTransferGenerator
             ->setBody(
                 $this->templating->render(
                     'mailer/mailer.html.twig',
-                    ['code' => $code]
+                    ['code' => $this->code]
                 ),
                 'text/html'
             )
         ;
 
         $this->mailer->send($message);
+    }
+
+    public function validateVerificationCode($code)
+    {
+        if ($code == $this->getVerificationCode())
+            return true;
+        else
+            return false;
+    }
+
+    public function getVerificationCode()
+    {
+        return $this->code;
     }
 }

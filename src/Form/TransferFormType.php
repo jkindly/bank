@@ -50,7 +50,8 @@ class TransferFormType extends AbstractType
                 'attr' => ['maxlength' => 32]
             ])
             ->add('title', TextareaType::class, [
-                'attr' => ['class' => 'send-transfer-title']
+                'attr' => ['class' => 'send-transfer-title'],
+                'required' => false
             ])
             ->add('amount', NumberType::class, [
                 'attr' => ['maxlength' => 11]
@@ -62,6 +63,7 @@ class TransferFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'validation_groups' => ['transfer_domestic'],
             'translation_domain' => 'forms',
             'data_class' => Transfer::class
         ]);
