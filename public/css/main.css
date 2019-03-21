@@ -662,7 +662,7 @@ td > .fa-long-arrow-alt-left {
 }
 
 .transfer-domestic-finalize-code {
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
 }
 /* END CONTENT OF TRANSFER */
 
@@ -682,6 +682,10 @@ td > .fa-long-arrow-alt-left {
 
 .transfer-queue td, th {
     padding: 3px;
+}
+
+.transfer-finalize-btn {
+    margin-top: 20px;
 }
 
 td > .fa-check-circle {

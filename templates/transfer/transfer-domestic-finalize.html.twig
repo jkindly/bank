@@ -7,6 +7,8 @@
         <div class="transfer-type normal-transfer nav-item-underscore">Przelew jednorazowy</div>
         <div class="transfer-type periodic-transfer">Przelew cykliczny</div>
 
+        VERIFICATION CODE: {{ verificationCode }}
+
         {{ form_start(transferFinalizeForm) }}
             <div class="transfer-domestic-finalize">
                 {{ form_label(transferFinalizeForm.verificationCode) }}
@@ -15,7 +17,7 @@
                 {% for error in transferFinalizeForm.verificationCode.vars.errors %}
                     <div class="send-transfer-error">{{ error.message }}</div>
                 {% endfor %}
-                <button type="submit" class="send-transfer-btn">Wyślij przelew</button>
+                <button type="submit" class="send-transfer-btn transfer-finalize-btn">Wyślij przelew</button>
             </div>
         {{ form_end(transferFinalizeForm) }}
 

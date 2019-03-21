@@ -15,6 +15,7 @@ class TransferFinalizeFormType extends AbstractType
         $builder
             ->add('verificationCode', NumberType::class, [
                 'attr' => ['maxlength' => 6],
+                'invalid_message' => 'Wprowadź poprawny kod'
             ])
         ;
     }

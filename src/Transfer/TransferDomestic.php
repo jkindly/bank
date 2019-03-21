@@ -54,8 +54,7 @@ class TransferDomestic extends AbstractTransferGenerator
                     if ($sendingAmount > 0.00) {
                         $this->setTransferStatus('to_finalize');
                         $this->sendVerificationCode($user->getEmail());
-                        $verificationCode = $this->getVerificationCode();
-                        $transfer->setVerificationCode($verificationCode);
+                        $transfer->setVerificationCode($this->getVerificationCode());
                         $transfer->setStatus('To finalize');
                     } else {
                         $transfer->setStatus('Amount of transfer must be higher than zero');

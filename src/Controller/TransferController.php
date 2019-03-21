@@ -66,8 +66,18 @@ class TransferController extends AbstractController
 
             $transferDomestic->validateTransfer($transfer, $this->getUser());
 
+            $verificationCode = $transferDomestic->getVerificationCode();
+
             if ($transferDomestic->getTransferStatus() == 'to_finalize') {
-                return $this->redirectToRoute('transfer_domestic_verify_code');
+
+                $form = $this->createForm(TransferFinalizeFormType::class);
+                $form->handleRequest($request);
+
+                return $this->render('transfer/transfer-domestic-finalize.html.twig', [
+                    'verificationCode' => $verificationCode,
+                    'transferFinalizeForm' => $form->createView()
+                ]);
+
             } else {
                 $this->addFlash('failed', $transferDomestic->getTransferStatusMessage());
                 return $this->redirectToRoute('app_transfer_domestic');
@@ -82,23 +92,17 @@ class TransferController extends AbstractController
     /**
      * @Route("/transfer/domestic/finalize", name="transfer_domestic_verify_code")
      * @param Request $request
-     * @param TransferDomestic $transferDomestic
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function transferDomesticVerifyCode(Request $request, TransferDomestic $transferDomestic)
-    {
-        $form = $this->createForm(TransferFinalizeFormType::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $transferDomestic->getVerificationCode();
-
-            dd($transferDomestic->getVerificationCode());
-        }
-
-        return $this->render('transfer/transfer-domestic-finalize.html.twig', [
-            'transferFinalizeForm' => $form->createView(),
-        ]);
-    }
+//    public function transferDomesticVerifyCode(Request $request)
+//    {
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $userInputCode = $form->getData()->getVerificationCode();
+//            dd($userInputCode);
+//        }
+//
+//        return $this->render('transfer/transfer-domestic-finalize.html.twig', [
+//            'transferFinalizeForm' => $form->createView(),
+//        ]);
+//    }
 }
