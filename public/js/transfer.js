@@ -1,5 +1,4 @@
 (function($) {
-
     $.fn.inputFilter = function(inputFilter) {
         return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
             if (inputFilter(this.value)) {
@@ -56,26 +55,4 @@
             }
         });
     });
-    // $('.transfer-queue-decision > .fa-check-circle').click(function() {
-    //     let transferId = parseInt($(this).parent().parent().attr('id'));
-    //     let transferRow = $(this).parent().parent();
-    //     let transferTBody = $('.transfer-queue > tbody');
-    //     let transferCount = transferTBody.children('tr').length;
-    //     $.ajax({
-    //         url: '/transfer/queue/accept',
-    //         type: 'POST',
-    //         data: {transferId : transferId},
-    //         dataType: 'json',
-    //         async: true,
-    //         success: function(data) {
-    //             if (transferCount === 1) {
-    //                 transferRow.remove();
-    //                 transferTBody.html("<tr><td colspan='9'>Brak transferów do realizacji</td></tr>");
-    //             } else {
-    //                 transferRow.remove();
-    //             }
-    //         }
-    //     });
-    // });
-
 }(jQuery));

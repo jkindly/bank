@@ -7,8 +7,36 @@
         <div class="transfer-type normal-transfer nav-item-underscore">Przelew jednorazowy</div>
         <div class="transfer-type periodic-transfer">Przelew cykliczny</div>
 
-        VERIFICATION CODE: {{ verificationCode }}
-
+            <table class="transfer-finalize-details">
+                <tr>
+                    <td class="transfer-finalize-details-header">Przelew z rachunku</td>
+                    <td>{{ transfer.senderAccountNumber }}</td>
+                </tr>
+                <tr>
+                    <td class="transfer-finalize-details-header">Odbiorca</td>
+                    <td>{{ transfer.receiverName }}</td>
+                </tr>
+                <tr>
+                    <td class="transfer-finalize-details-header">Rachunek odbiorcy</td>
+                    <td>{{ transfer.receiverAccountNumber }}</td>
+                </tr>
+                <tr>
+                    <td class="transfer-finalize-details-header">Tytuł</td>
+                    <td>{{ transfer.title }}</td>
+                </tr>
+                <tr>
+                    <td class="transfer-finalize-details-header">Przelew na kwotę</td>
+                    <td>{{ transfer.amount|number_format(2, ',', ' ') }} PLN</td>
+                </tr>
+            </table>
+            {#<div class="transfer-finalize-receiver-name">#}
+                {#Odbiorca: {{ transfer.receiverName }}#}
+            {#</div>#}
+            {#<div class="transfer-finalize-receiver-account">#}
+                {#Nr rachunku odbiorcy: {{ transfer.receiverAccountNumber }}#}
+            {#</div>#}
+            {#<div class="transfer-finalize-amount">#}
+                {#Przelew na kwotę: {{ transfer.amount }} PLN#}
         {{ form_start(transferFinalizeForm) }}
             <div class="transfer-domestic-finalize">
                 {{ form_label(transferFinalizeForm.verificationCode) }}
@@ -17,10 +45,19 @@
                 {% for error in transferFinalizeForm.verificationCode.vars.errors %}
                     <div class="send-transfer-error">{{ error.message }}</div>
                 {% endfor %}
+                {% for message in app.flashes('wrong_code') %}
+                    <div class="send-transfer-error">{{ message }}</div>
+                {% endfor %}
+                <div class="transfer-finalize-remaining-time">Pozostały czas:</div>
                 <button type="submit" class="send-transfer-btn transfer-finalize-btn">Wyślij przelew</button>
             </div>
         {{ form_end(transferFinalizeForm) }}
 
     </div>
 </main>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/transfer.js') }}"></script>
+    <script src="{{ asset('js/transfer-finalize-countdown.js') }}"></script>
 {% endblock %}

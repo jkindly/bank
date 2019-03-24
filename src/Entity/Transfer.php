@@ -107,6 +107,17 @@ class Transfer
      */
     private $verificationCode;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $transferHash;
+
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    private $failCodeCount = 0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -276,6 +287,30 @@ class Transfer
     public function setVerificationCode(?int $verificationCode): self
     {
         $this->verificationCode = $verificationCode;
+
+        return $this;
+    }
+
+    public function getTransferHash(): ?string
+    {
+        return $this->transferHash;
+    }
+
+    public function setTransferHash(?string $transferHash): self
+    {
+        $this->transferHash = $transferHash;
+
+        return $this;
+    }
+
+    public function getFailCodeCount(): ?int
+    {
+        return $this->failCodeCount;
+    }
+
+    public function setFailCodeCount(int $failCodeCount): self
+    {
+        $this->failCodeCount = $failCodeCount;
 
         return $this;
     }

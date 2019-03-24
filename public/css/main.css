@@ -664,6 +664,30 @@ td > .fa-long-arrow-alt-left {
 .transfer-domestic-finalize-code {
     /*margin-bottom: 20px;*/
 }
+
+.transfer-finalize-details {
+    /*border: 1px solid black;*/
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #EFEFEF;
+    border: 1px solid #D4D4D4;
+    margin: 10px auto 0 auto;
+    text-align: left;
+}
+
+.transfer-finalize-details td {
+    font-size: 1.7rem;
+    padding: 3px 10px 3px 10px;
+}
+
+.transfer-finalize-details-header {
+    color: #2A83C7;
+}
+
+.transfer-finalize-remaining-time {
+    font-size: 1.5rem;
+}
 /* END CONTENT OF TRANSFER */
 
 

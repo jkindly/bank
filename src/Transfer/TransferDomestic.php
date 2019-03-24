@@ -8,54 +8,65 @@
 
 namespace App\Transfer;
 
-
-use App\Entity\BankAccount;
+use App\Entity\Transfer;
+use App\Entity\User;
+use App\Utils\BankAccountUtils;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TransferDomestic extends AbstractTransferGenerator
 {
-    private $em;
     private $transferStatus = 'failed';
     private $transferStatusMessage;
+    private $transferAmount;
+    private $failCodeCount;
+    private $em;
 
     public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating, EntityManagerInterface $em)
     {
-        parent::__construct($mailer, $templating);
+        parent::__construct($mailer, $templating, $em);
         $this->em = $em;
     }
 
     /**
-     * @param \App\Entity\Transfer $transfer
      * @param \App\Entity\User $user
-     * @return bool
+     * @param FormInterface $form
      */
-    public function validateTransfer($transfer, $user)
+    public function validateTransfer($form, $user)
     {
-        $senderBankAccount = $this->em->getRepository(BankAccount::class)
-            ->findOneBy([
-                'accountNumber' => $transfer->getSenderAccountNumber()
-            ])
-        ;
+        $transferData = $form->getData();
 
-        $receiverBankAccount = $this->em->getRepository(BankAccount::class)
-            ->findOneBy([
-                'accountNumber' => $transfer->getReceiverAccountNumber()
-            ])
-        ;
+        $transfer = new Transfer();
+
+        $senderAccountNumber = $form->get('senderAccountNumber')->getData();
+
+        $transfer
+            ->setUser($user)
+            ->setReceiverName($transferData->getReceiverName())
+            ->setReceiverAccountNumber($transferData->getReceiverAccountNumber())
+            ->setAmount($transferData->getAmount())
+            ->setTitle($transferData->getTitle())
+            ->setSenderAccountNumber($senderAccountNumber->getAccountNumber());
+
+        $bankAccount = $this->setBankAccounts($transfer);
+        $receiver = (object)$bankAccount['receiver'];
+        $sender = (object)$bankAccount['sender'];
 
         // Full Validation of Transfer
-        if ($receiverBankAccount) {
-            $receiverAccountNumber = $receiverBankAccount->getAccountNumber();
-            $senderAccountNumber = $senderBankAccount->getAccountNumber();
+        if (!empty($bankAccount['receiver'])) {
+            $receiverAccountNumber = $receiver->getAccountNumber();
+            $senderAccountNumber = $sender->getAccountNumber();
             if ($receiverAccountNumber != $senderAccountNumber) {
-                $senderAvailableFunds = $senderBankAccount->getAvailableFunds();
+                $senderAvailableFunds = $sender->getAvailableFunds();
                 $sendingAmount = $transfer->getAmount();
                 if ($senderAvailableFunds >= $sendingAmount) {
                     if ($sendingAmount > 0.00) {
-                        $this->setTransferStatus('to_finalize');
+                        $this->setTransferStatus('to_verify_code');
                         $this->sendVerificationCode($user->getEmail());
+                        $transfer->setTransferHash($this->setHash());
                         $transfer->setVerificationCode($this->getVerificationCode());
-                        $transfer->setStatus('To finalize');
+                        $transfer->setStatus('To code verification');
                     } else {
                         $transfer->setStatus('Amount of transfer must be higher than zero');
                         $this->setTransferStatusMessage(3);;
@@ -77,6 +88,66 @@ class TransferDomestic extends AbstractTransferGenerator
         $this->em->flush();
     }
 
+    /**
+     * @var Transfer $transfer
+     */
+    public function sendTransfer($transfer)
+    {
+        $this->transferAmount = $transfer->getAmount();
+        $bankAccount = $this->setBankAccounts($transfer);
+        $sender = (object)$bankAccount['sender'];
+        $senderAvailableFunds = $sender->getAvailableFunds();
+        $sendingAmount = $transfer->getAmount();
+
+        $transfer->setSenderFundsAfterTransfer($senderAvailableFunds - $sendingAmount);
+        $transfer->setStatus('Transfer send to finalize');
+        $this->setTransferStatus('to_finalize');
+        $this->setTransferStatusMessage(4);
+
+        $sender->setAvailableFunds($senderAvailableFunds - $sendingAmount);
+
+        $this->em->persist($transfer);
+        $this->em->flush();
+    }
+
+    /**
+     * @var Transfer $transfer
+     */
+    public function incrementFailCode($transfer)
+    {
+        $this->failCodeCount = $transfer->getFailCodeCount();
+        $transfer->setFailCodeCount($this->failCodeCount + 1);
+        $this->setTransferStatusMessage(5);
+        $this->em->persist($transfer);
+        $this->em->flush();
+    }
+
+    /**
+     * @var User $user
+     */
+    public function blockUser($user)
+    {
+        $user->setIsBlockedTransfers(true);
+        $this->em->flush();
+    }
+
+    /**
+     * @var Transfer $transfer
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function setTimeToInputCode($transfer)
+    {
+        $date = $transfer->getCreatedAt();
+        $now = new \DateTime('now');
+        $roznica = date_diff($date, $now);
+        $secondsLeft = $roznica->days * 24 * 60;
+        $secondsLeft += $roznica->h * 60;
+        $secondsLeft += $roznica->i * 60;
+        $secondsLeft += $roznica->s;
+        return new JsonResponse($secondsLeft);
+    }
+
     public function setTransferStatusMessage(int $code)
     {
         switch ($code) {
@@ -90,7 +161,14 @@ class TransferDomestic extends AbstractTransferGenerator
                 $this->transferStatusMessage = 'Nie masz wystarczających środków na koncie';
                 break;
             case 3:
-                $this->transferStatusMessage = 'Kwota przelewu musi być większa niż 0.00 PLN';
+                $this->transferStatusMessage = 'Kwota przelewu musi być większa niż 0,00 PLN';
+                break;
+            case 4:
+                $this->transferStatusMessage = 'Przelew na kwotę ' . BankAccountUtils::renderAmount($this->transferAmount) .
+                    ' PLN został przyjęty do realizacji';
+                break;
+            case 5:
+                $this->transferStatusMessage = 'Niepoprawny kod, pozostało prób: ' . (2 - $this->failCodeCount);
                 break;
             default:
                 $this->transferStatusMessage = 'Wystąpił nieznany błąd, prosimy o kontakt z supportem';
@@ -100,11 +178,6 @@ class TransferDomestic extends AbstractTransferGenerator
     public function getTransferStatusMessage()
     {
         return $this->transferStatusMessage;
-    }
-
-    public function sendTransfer()
-    {
-        // TODO: Implement sendTransfer() method.
     }
 
     public function getTransferStatus()

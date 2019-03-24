@@ -9,27 +9,32 @@
 namespace App\Transfer;
 
 
+use App\Entity\BankAccount;
 use App\Entity\Transfer;
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 
 abstract class AbstractTransferGenerator
 {
     private $mailer;
     private $templating;
     private $code;
+    private $transferHash;
+    private $em;
 
-    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating)
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating, EntityManagerInterface $em)
     {
         $this->mailer = $mailer;
         $this->templating = $templating;
+        $this->em = $em;
     }
 
     /**
      * @var Transfer $transfer
      * @var User $user
      */
-    abstract public function validateTransfer($transfer, $user);
-    abstract public function sendTransfer();
+    abstract public function validateTransfer($form, $user);
+    abstract public function sendTransfer($transfer);
     abstract public function setTransferStatusMessage(int $code);
 
     public function sendVerificationCode($userMail)
@@ -51,9 +56,42 @@ abstract class AbstractTransferGenerator
         $this->mailer->send($message);
     }
 
+    public function setHash()
+    {
+        $random = uniqid();
+        $this->transferHash = uniqid() . md5($random);
+        return $this->transferHash;
+    }
+
+    public function getHash()
+    {
+        return $this->transferHash;
+    }
+
+    /**
+     * @var Transfer $transfer*
+     * @return mixed
+     */
+    public function setBankAccounts($transfer)
+    {
+        $bankAccount['sender'] = $this->em->getRepository(BankAccount::class)
+            ->findOneBy([
+                'accountNumber' => $transfer->getSenderAccountNumber()
+            ])
+        ;
+
+        $bankAccount['receiver'] = $this->em->getRepository(BankAccount::class)
+            ->findOneBy([
+                'accountNumber' => $transfer->getReceiverAccountNumber()
+            ])
+        ;
+
+        return $bankAccount;
+    }
+
     public function validateVerificationCode($code)
     {
-        if ($code == $this->getVerificationCode())
+        if ($code === $this->getVerificationCode())
             return true;
         else
             return false;

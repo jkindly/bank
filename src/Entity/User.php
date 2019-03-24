@@ -77,6 +77,12 @@ class User implements UserInterface
      */
     private $city;
 
+    /**
+     * @var boolean
+     * @ORM\Column(type="boolean")
+     */
+    private $isBlockedTransfers = false;
+
     public function __construct()
     {
         $this->bankAccounts = new ArrayCollection();
@@ -306,6 +312,18 @@ class User implements UserInterface
     public function setCity(string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getIsBlockedTransfers(): ?bool
+    {
+        return $this->isBlockedTransfers;
+    }
+
+    public function setIsBlockedTransfers(bool $isBlockedTransfers): self
+    {
+        $this->isBlockedTransfers = $isBlockedTransfers;
 
         return $this;
     }
