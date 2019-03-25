@@ -12,8 +12,12 @@ use App\Entity\Transfer;
 use App\Entity\User;
 use App\Utils\BankAccountUtils;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Security;
 
 class TransferDomestic extends AbstractTransferGenerator
 {
@@ -22,18 +26,22 @@ class TransferDomestic extends AbstractTransferGenerator
     private $transferAmount;
     private $failCodeCount;
     private $em;
+    private $container;
+    private $user;
+    const TIME_TO_INPUT_CODE = 100;
 
-    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating, EntityManagerInterface $em)
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating, EntityManagerInterface $em, ContainerInterface $container, Security $security)
     {
-        parent::__construct($mailer, $templating, $em);
+        parent::__construct($mailer, $templating, $em, $security);
         $this->em = $em;
+        $this->container = $container;
+        $this->user = $security->getUser();
     }
 
     /**
-     * @param \App\Entity\User $user
      * @param FormInterface $form
      */
-    public function validateTransfer($form, $user)
+    public function validateTransferForm($form)
     {
         $transferData = $form->getData();
 
@@ -42,7 +50,7 @@ class TransferDomestic extends AbstractTransferGenerator
         $senderAccountNumber = $form->get('senderAccountNumber')->getData();
 
         $transfer
-            ->setUser($user)
+            ->setUser($this->getUser())
             ->setReceiverName($transferData->getReceiverName())
             ->setReceiverAccountNumber($transferData->getReceiverAccountNumber())
             ->setAmount($transferData->getAmount())
@@ -63,7 +71,7 @@ class TransferDomestic extends AbstractTransferGenerator
                 if ($senderAvailableFunds >= $sendingAmount) {
                     if ($sendingAmount > 0.00) {
                         $this->setTransferStatus('to_verify_code');
-                        $this->sendVerificationCode($user->getEmail());
+                        $this->sendVerificationCode($this->getUser()->getEmail());
                         $transfer->setTransferHash($this->setHash());
                         $transfer->setVerificationCode($this->getVerificationCode());
                         $transfer->setStatus('To code verification');
@@ -138,14 +146,64 @@ class TransferDomestic extends AbstractTransferGenerator
      */
     public function setTimeToInputCode($transfer)
     {
-        $date = $transfer->getCreatedAt();
-        $now = new \DateTime('now');
-        $roznica = date_diff($date, $now);
-        $secondsLeft = $roznica->days * 24 * 60;
-        $secondsLeft += $roznica->h * 60;
-        $secondsLeft += $roznica->i * 60;
-        $secondsLeft += $roznica->s;
-        return new JsonResponse($secondsLeft);
+        if ($transfer) {
+            $date = $transfer->getCreatedAt();
+            $now = new \DateTime('now');
+            $roznica = date_diff($date, $now);
+            $secondsLeft = $roznica->days * 24 * 60;
+            $secondsLeft += $roznica->h * 60;
+            $secondsLeft += $roznica->i * 60;
+            $secondsLeft += $roznica->s;
+            return new JsonResponse($secondsLeft);
+        }
+    }
+
+    /**
+     * @var Transfer $transfer
+     * @return boolean
+     * @throws \Exception
+     */
+    public function isCodeTimeExpired($transfer)
+    {
+        $passedTime = $this->setTimeToInputCode($transfer);
+
+        if ($passedTime->getContent() > self::TIME_TO_INPUT_CODE) {
+            $this->setTransferStatusMessage(6);
+            $this->container->get('session')->clear('transferHash');
+            $transfer->setStatus('Code time expired');
+            $this->em->flush();
+            return true;
+        }
+    }
+
+    /**
+     * @var Transfer $transfer
+     * @param $transferVerifictionCode
+     * @param $userInputCode
+     * @return mixed
+     */
+    public function validateVerificationCode($transfer, $transferVerifictionCode, $userInputCode)
+    {
+        $asd = [];
+
+        if ($userInputCode === $transferVerifictionCode) {
+            $this->sendTransfer($transfer);
+            $this->container->get('session')->clear('transferHash');
+            $asd['status'] = 'to_finalize';
+            $asd['message'] = $this->getTransferStatusMessage();
+        } else {
+            if ($transfer->getFailCodeCount() >= 2) {
+                $this->container->get('session')->clear('transferHash');
+                $this->blockUser($this->getUser());
+                $transfer->setStatus('Too much wrong codes, user blocked');
+                $this->em->flush();
+                $asd['status'] = 'block_user';
+            }
+            $this->incrementFailCode($transfer);
+            $asd['status'] = 'wrong_code';
+            $asd['message'] = $this->getTransferStatusMessage();
+        }
+        return $asd;
     }
 
     public function setTransferStatusMessage(int $code)
@@ -169,6 +227,13 @@ class TransferDomestic extends AbstractTransferGenerator
                 break;
             case 5:
                 $this->transferStatusMessage = 'Niepoprawny kod, pozostało prób: ' . (2 - $this->failCodeCount);
+                break;
+            case 6:
+                $this->transferStatusMessage = 'Przelew został anulowany z powodu nie wpisania kodu weryfikacyjnego
+                    przez dłużej niż ' . self::TIME_TO_INPUT_CODE . ' sekund';
+                break;
+            case 7:
+                $this->transferStatusMessage = 'Brak transferu do finalizacji';
                 break;
             default:
                 $this->transferStatusMessage = 'Wystąpił nieznany błąd, prosimy o kontakt z supportem';

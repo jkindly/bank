@@ -13,6 +13,7 @@ use App\Entity\BankAccount;
 use App\Entity\Transfer;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Security;
 
 abstract class AbstractTransferGenerator
 {
@@ -21,21 +22,24 @@ abstract class AbstractTransferGenerator
     private $code;
     private $transferHash;
     private $em;
+    private $user;
 
-    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating, EntityManagerInterface $em)
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating, EntityManagerInterface $em, Security $security)
     {
         $this->mailer = $mailer;
         $this->templating = $templating;
         $this->em = $em;
+        $this->user = $security->getUser();
     }
 
     /**
      * @var Transfer $transfer
      * @var User $user
      */
-    abstract public function validateTransfer($form, $user);
+    abstract public function validateTransferForm($form);
     abstract public function sendTransfer($transfer);
     abstract public function setTransferStatusMessage(int $code);
+    abstract public function getTransferStatusMessage();
 
     public function sendVerificationCode($userMail)
     {
@@ -52,7 +56,6 @@ abstract class AbstractTransferGenerator
                 'text/html'
             )
         ;
-
         $this->mailer->send($message);
     }
 
@@ -89,16 +92,16 @@ abstract class AbstractTransferGenerator
         return $bankAccount;
     }
 
-    public function validateVerificationCode($code)
-    {
-        if ($code === $this->getVerificationCode())
-            return true;
-        else
-            return false;
-    }
-
     public function getVerificationCode()
     {
         return $this->code;
+    }
+
+    /**
+     * @return object|string
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

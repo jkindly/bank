@@ -22,6 +22,22 @@ a:link, a:visited, a:checked {
     color: inherit;
 }
 
+.transfer-progress-bar {
+    width: 100%;
+    border: 1px solid black;
+    height: 30px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.transfer-progress-bar-progress {
+    background-color: #2A83C7;;
+    width: 1%;
+    height: 100%;
+}
+
 /* START TOP BAR */
 .logo {
     position: absolute;

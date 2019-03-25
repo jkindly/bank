@@ -49,7 +49,11 @@
                     <div class="send-transfer-error">{{ message }}</div>
                 {% endfor %}
                 <div class="transfer-finalize-remaining-time">Pozostały czas:</div>
+                <div class="transfer-progress-bar">
+                    <div class="transfer-progress-bar-progress"></div>
+                </div>
                 <button type="submit" class="send-transfer-btn transfer-finalize-btn">Wyślij przelew</button>
+                <button type="reset">Anuluj</button>
             </div>
         {{ form_end(transferFinalizeForm) }}
 

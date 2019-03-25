@@ -24,6 +24,7 @@ class TransferFinalize
 
     /**
      * @var Transfer $transfer
+     * @param $transferDecision
      */
     public function makeDecision($transfer, $transferDecision)
     {
