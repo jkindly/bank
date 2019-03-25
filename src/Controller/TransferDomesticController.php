@@ -111,4 +111,19 @@ class TransferDomesticController extends AbstractController
             'transfer' => $transfer
         ]);
     }
+
+    /**
+     * @Route("/transfer/domestic/ajaxDeclineDomesticTransfer", name="ajax_decline_domestic_transfer")
+     */
+    public function ajaxDeclineDomesticTransfer(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $transferHash = $this->container->get('session')->get('transferHash');
+            if ($transferHash) {
+                $this->container->get('session')->clear('transferHash');
+            }
+        }
+
+        return new JsonResponse('transfer_declined');
+    }
 }

@@ -1,12 +1,15 @@
 (function($) {
 
+    let time;
+
     $.ajax({
         url: '/transfer/domestic/finalize',
         dataType: 'json',
         async: true,
         cache: false,
         success: function(data) {
-            remainTime(data);
+            time = data;
+            remainTime(time);
         }
     });
 
@@ -17,8 +20,17 @@
             let difference = 100-time;
             if (difference <= 0) {
                 clearInterval();
-                // window.location.replace("http://localhost:8000/transfer/domestic");
-                location.reload();
+                $.ajax({
+                    url: '/transfer/domestic/ajaxDeclineDomesticTransfer',
+                    type: 'POST',
+                    async: true,
+                    cache: false,
+                    success: function(data) {
+                        if (data === 'transfer_declined') {
+                            location.reload();
+                        }
+                    }
+                });
                 progressBar.css('width', '100%');
                 remainingTime.html('Pozostały czas: <span style="color:red;">0 sekund</span>');
             } else if (difference <= 10) {

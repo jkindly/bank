@@ -53,7 +53,7 @@
                     <div class="transfer-progress-bar-progress"></div>
                 </div>
                 <button type="submit" class="send-transfer-btn transfer-finalize-btn">Wyślij przelew</button>
-                <button type="reset">Anuluj</button>
+                <button type="button" class="cancel-transfer-btn">Anuluj transfer</button>
             </div>
         {{ form_end(transferFinalizeForm) }}
 
@@ -63,5 +63,6 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/transfer.js') }}"></script>
+    <script src="{{ asset('js/transfer-finalize.js') }}"></script>
     <script src="{{ asset('js/transfer-finalize-countdown.js') }}"></script>
 {% endblock %}

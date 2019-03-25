@@ -22,6 +22,8 @@ a:link, a:visited, a:checked {
     color: inherit;
 }
 
+button:focus { outline: none; }
+
 .transfer-progress-bar {
     width: 100%;
     border: 1px solid black;
@@ -622,6 +624,22 @@ td > .fa-long-arrow-alt-left {
     background-color: #3493DB;
 }
 
+.cancel-transfer-btn {
+    background-color: #EFEFEF;
+    border: 1px solid #D4D4D4;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    /*width: 50%;*/
+    margin: 10px auto 0 auto;
+    padding: 0 5px 0 5px;
+}
+
+.cancel-transfer-btn:hover {
+    cursor: pointer;
+    background-color: #F9F9F9;
+}
+
 .send-transfer-error {
     color: red;
     font-size: 1.4rem;
@@ -704,6 +722,33 @@ td > .fa-long-arrow-alt-left {
 .transfer-finalize-remaining-time {
     font-size: 1.5rem;
 }
+
+.unfinished-transfer-alert {
+    width: 100%;
+    background: #BABABA;
+    border-left: 1px solid #9C9C9C;
+    border-right: 1px solid #9C9C9C;
+    border-bottom: 1px solid #9C9C9C;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /*background-color: #10C623;*/
+    padding: 5px;
+    color: #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.unfinished-transfer-alert > div {
+    margin-right: 50px;
+}
+
+/*.unfinished-transfer-alert-bar {*/
+    /*width: 20%;*/
+/*}*/
 /* END CONTENT OF TRANSFER */
 
 
