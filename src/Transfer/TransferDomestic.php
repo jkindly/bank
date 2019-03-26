@@ -184,26 +184,26 @@ class TransferDomestic extends AbstractTransferGenerator
      */
     public function validateVerificationCode($transfer, $transferVerifictionCode, $userInputCode)
     {
-        $asd = [];
+        $validationCode = [];
 
         if ($userInputCode === $transferVerifictionCode) {
             $this->sendTransfer($transfer);
             $this->container->get('session')->clear('transferHash');
-            $asd['status'] = 'to_finalize';
-            $asd['message'] = $this->getTransferStatusMessage();
+            $validationCode['status'] = 'to_finalize';
+            $validationCode['message'] = $this->getTransferStatusMessage();
         } else {
             if ($transfer->getFailCodeCount() >= 2) {
                 $this->container->get('session')->clear('transferHash');
                 $this->blockUser($this->getUser());
                 $transfer->setStatus('Too much wrong codes, user blocked');
                 $this->em->flush();
-                $asd['status'] = 'block_user';
+                $validationCode['status'] = 'block_user';
             }
             $this->incrementFailCode($transfer);
-            $asd['status'] = 'wrong_code';
-            $asd['message'] = $this->getTransferStatusMessage();
+            $validationCode['status'] = 'wrong_code';
+            $validationCode['message'] = $this->getTransferStatusMessage();
         }
-        return $asd;
+        return $validationCode;
     }
 
     public function setTransferStatusMessage(int $code)
