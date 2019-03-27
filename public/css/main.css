@@ -139,9 +139,14 @@ button:focus { outline: none; }
 
 
 /* START BOOTSTRAP SELF-CONFIG*/
+.container {
+    padding: 20px 0 0 0 !important;
+}
+
 .nav-link {
     font-size: 2rem;
     padding-bottom: 0 !important;
+    /*padding-left: 0 !important;*/
     margin: 0 !important;
     outline: 0;
 }
@@ -789,3 +794,89 @@ td > .fa-times-circle {
     text-align: center;
 }
 /* END CONTENT OF TRANSFER QUEUE */
+
+
+/* START CONTENT OF USER SETTINGS */
+.user-settings-container {
+    /*border: 1px solid black;*/
+    display: flex;
+    flex-direction: row;
+}
+
+.user-settings-options {
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*!*align-items: center;*!*/
+    /*!*align-content: center;*!*/
+    /*justify-content: center;*/
+}
+
+.user-settings-content {
+    /*border: 1px solid black;*/
+    position: relative;
+    margin-left: 50px;
+    min-width: 500px;
+}
+
+.user-settings-option {
+    border: 1px solid #2183C4;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    height: 50px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    /*justify-content: space-around;*/
+    /*width: 100px;*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #319FE8;
+    color: #fff;
+}
+
+.user-settings-option:hover {
+    background-color: #52B9FD;
+}
+
+.user-settings-option i {
+    /*border: 1px solid black;*/
+    width: 30px;
+}
+
+.settings-user-data-bar {
+    background-color: #319FE8;
+}
+
+.user-data-info {
+    display: flex;
+    flex-direction: row;
+    /*justify-content: space-around;*/
+}
+
+.user-data-info > p {
+    min-width: 300px;
+    margin-right: 50px;
+}
+
+.user-settings-content-header {
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin-bottom: 30px;
+    padding-top: 0 !important;
+}
+
+.edit-user-data-btn {
+    height: 20px;
+    font-size: 1.4rem;
+    line-height: 1;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* END CONTENT OF USER SETTINGS */

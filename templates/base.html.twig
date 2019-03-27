@@ -70,7 +70,7 @@
     </div>
 {% endblock %}
 
-<div class="container p-0">
+<div class="container">
     <div class="row">
         {% if app.session.get('transferHash') and app.request.get('_route') != 'transfer_domestic_verify_code' %}
             <div class="unfinished-transfer-alert">
