@@ -2,34 +2,31 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class TestsController extends AbstractController
 {
     /**
      * @Route("/tests", name="tests")
      */
-    public function index(\Swift_Mailer $mailer)
+    public function index(\Swift_Mailer $mailer, Security $security)
     {
-        $code = 123456123;
-        $message = (new \Swift_Message('Kod transakcji'))
-            ->setFrom('transfer@freebank.pl')
-            ->setTo('kozupa.jakub@gmail.com')
-            ->setBody(
-                $this->renderView(
-                    'tests/index.html.twig',
-                    ['code' => $code]
-                ),
-                'text/html'
-            )
-        ;
-
-        $mailer->send($message);
-
+        $email = $security->getUser()->getEmail();
+        dd($email);
 
         return $this->render('tests/index.html.twig', [
             'code' => $code
         ]);
+    }
+
+    /**
+     * @method User getUser()
+     */
+    protected function getUser(): User
+    {
+        return parent::getUser();
     }
 }
