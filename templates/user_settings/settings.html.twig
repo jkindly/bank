@@ -6,20 +6,20 @@
     <main>
         <div class="user-settings-container">
             <section class="user-settings-options">
-                <div class="user-settings-option settings-user-data-bar">
+                <div class="user-settings-option" id="settings-user-data-bar">
                     <i class="fas fa-user-edit"></i>
                     Twoje Dane
                 </div>
-                <div class="user-settings-option settings-security-bar">
+                <div class="user-settings-option" id="settings-security-bar">
                     <i class="fas fa-lock"></i>
                     Bezpieczeństwo
                 </div>
             </section>
             <section class="user-settings-content">
-                <div class="loading">
-                    <img src="{{ asset('img/loading.gif') }}" width="150px" height="150px" alt="Ładowanie">
-                </div>
             </section>
+            <div class="loading">
+                <img src="{{ asset('img/loading.gif') }}" width="150px" height="150px" alt="Ładowanie">
+            </div>
         </div>
     </main>
 {% endblock %}

@@ -801,6 +801,7 @@ td > .fa-times-circle {
     /*border: 1px solid black;*/
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 
 .user-settings-options {
@@ -813,7 +814,6 @@ td > .fa-times-circle {
 
 .user-settings-content {
     /*border: 1px solid black;*/
-    position: relative;
     margin-left: 50px;
     min-width: 500px;
 }

@@ -29,7 +29,7 @@ class UserFixture extends Fixture
             ->setLastName('Kozupa')
             ->setUsername('j.kozupa')
             ->setEmail('kozupa.jakub@gmail.com')
-            ->setAddress('Lipowa 57/59')
+            ->setStreet('Lipowa 57/59')
             ->setCity('Bydgoszcz')
             ->setPassword($this->passwordEncoder->encodePassword($user, 'mnkctnob'));
 
@@ -38,7 +38,7 @@ class UserFixture extends Fixture
             ->setLastName('Admin')
             ->setUsername('admin')
             ->setEmail('admin@freebank.pl')
-            ->setAddress('Karpacka 39B/70')
+            ->setStreet('Karpacka 39B/70')
             ->setCity('Inowrocław')
             ->setPassword($this->passwordEncoder->encodePassword($user, 'mnkctnob'))
             ->setRoles(['ROLE_ADMIN']);
@@ -48,7 +48,7 @@ class UserFixture extends Fixture
             ->setLastName('Kowalski')
             ->setUsername('j.kowalski')
             ->setEmail('j.kowalski@gmail.com')
-            ->setAddress('Nieznana 10')
+            ->setStreet('Nieznana 10')
             ->setCity('Bydgoszcz')
             ->setPassword($this->passwordEncoder->encodePassword($user, 'mnkctnob'));
 

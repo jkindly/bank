@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -69,11 +70,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Wprowadź ulicę", groups={"user_address"})
      */
-    private $address;
+    private $street;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Wprowadź miasto", groups={"user_address"})
      */
     private $city;
 
@@ -82,6 +85,38 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isBlockedTransfers = false;
+
+    /**
+     * @ORM\Column(type="string", length=6)
+     * @Assert\NotBlank(message="Wprowadź kod pocztowy", groups={"user_address"})
+     */
+    private $zipcode;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $streetPermanent;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cityPermanent;
+
+    /**
+     * @ORM\Column(type="string", length=6)
+     */
+    private $zipcodePermanent;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Wprowadź kraj", groups={"user_address"})
+     */
+    private $country;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $countryPermanent;
 
     public function __construct()
     {
@@ -292,14 +327,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getStreet(): ?string
     {
-        return $this->address;
+        return $this->street;
     }
 
-    public function setAddress(string $address): self
+    public function setStreet(string $street): self
     {
-        $this->address = $address;
+        $this->street = $street;
 
         return $this;
     }
@@ -324,6 +359,78 @@ class User implements UserInterface
     public function setIsBlockedTransfers(bool $isBlockedTransfers): self
     {
         $this->isBlockedTransfers = $isBlockedTransfers;
+
+        return $this;
+    }
+
+    public function getZipcode(): ?string
+    {
+        return $this->zipcode;
+    }
+
+    public function setZipcode(string $zipcode): self
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    public function getStreetPermanent(): ?string
+    {
+        return $this->streetPermanent;
+    }
+
+    public function setStreetPermanent(string $adressPermanent): self
+    {
+        $this->streetPermanent = $adressPermanent;
+
+        return $this;
+    }
+
+    public function getCityPermanent(): ?string
+    {
+        return $this->cityPermanent;
+    }
+
+    public function setCityPermanent(string $cityPermanent): self
+    {
+        $this->cityPermanent = $cityPermanent;
+
+        return $this;
+    }
+
+    public function getZipcodePermanent(): ?string
+    {
+        return $this->zipcodePermanent;
+    }
+
+    public function setZipcodePermanent(string $zipcodePermanent): self
+    {
+        $this->zipcodePermanent = $zipcodePermanent;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getCountryPermanent(): ?string
+    {
+        return $this->countryPermanent;
+    }
+
+    public function setCountryPermanent(string $countryPermanent): self
+    {
+        $this->countryPermanent = $countryPermanent;
 
         return $this;
     }

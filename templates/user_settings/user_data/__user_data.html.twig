@@ -2,35 +2,35 @@
     <i class="fas fa-user-edit"></i>
     Twoje dane
 </h1>
-<div class="user-data-info address-permanent">
+<div class="user-data-info" id="user-address-permanent">
     <p>
         <i class="fas fa-home"></i>
         Adres zameldowania
     </p>
     <p>
-        ul. Błażka 4/66
+        ul. {{ app.user.streetPermanent }}
         <br>
-        88-100 Inowrocław
+        {{ app.user.zipcodePermanent }} {{ app.user.cityPermanent }}
         <br>
-        Polska
+        {{ app.user.countryPermanent }}
     </p>
 </div>
-<div class="user-data-info address-permanent">
+<div class="user-data-info" id="user-address">
     <p>
         <i class="fas fa-home"></i>
         Adres korespondencyjny
     </p>
     <p>
-        ul. Karpacka 39B/70
+        ul. {{ app.user.street }}
         <br>
-        85-164 Bydgoszcz
+        {{ app.user.zipcode }} {{ app.user.city }}
         <br>
-        Polska
+        {{ app.user.country }}
         <br>
         <button class="edit-user-data-btn" type="button">Modyfikuj</button>
     </p>
 </div>
-<div class="user-data-info address-permanent">
+<div class="user-data-info">
     <p>
         <i class="fas fa-envelope"></i>
         Adres e-mail

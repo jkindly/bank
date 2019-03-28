@@ -1,0 +1,10 @@
+<h1 class="user-settings-content-header">
+    <i class="fas fa-home"></i>
+    Zmień adres korespondencyjny
+</h1>
+{{ form_start(UserAddressForm) }}
+    {{ form_label(UserAddressForm.street) }}
+    {{ form_widget(UserAddressForm.street) }}
+    {{ form_errors(UserAddressForm.street) }}
+    <button class="edit-user-data-btn" type="submit">Zaktualizuj</button>
+{{ form_end(UserAddressForm) }}

@@ -107,7 +107,7 @@ class TransferHistoryController extends BaseController
                 'receiverFundsAfterTransfer' => BankAccountUtils::renderAmount($transferDetails->getReceiverFundsAfterTransfer()),
                 'senderFirstName' => $transferDetails->getUser()->getFirstName(),
                 'senderLastName' => $transferDetails->getUser()->getLastName(),
-                'senderAddress' => $transferDetails->getUser()->getAddress(),
+                'senderAddress' => $transferDetails->getUser()->getStreet(),
                 'senderCity' => $transferDetails->getUser()->getCity(),
                 'receiverAccountNumber' => $transferDetails->getReceiverAccountNumber(),
                 'receiverName' => $transferDetails->getReceiverName(),
