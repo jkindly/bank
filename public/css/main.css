@@ -645,12 +645,12 @@ td > .fa-long-arrow-alt-left {
     background-color: #F9F9F9;
 }
 
-.send-transfer-error {
+.form-error {
     color: red;
     font-size: 1.4rem;
 }
 
-.send-transfer-error > p {
+.form-error > p {
     margin: -10px 0 0 0;
 }
 
@@ -879,4 +879,17 @@ td > .fa-times-circle {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.change-user-address input {
+    background-color: white;
+    border-radius: 5px;
+    color: #707070;
+    border: 1px solid #707070;
+    padding: 3px;
+}
+
+.change-user-address td {
+    padding-bottom: 5px;
+}
+
 /* END CONTENT OF USER SETTINGS */

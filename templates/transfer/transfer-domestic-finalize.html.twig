@@ -43,10 +43,10 @@
                 {{ form_widget(transferFinalizeForm.verificationCode,
                     {'attr': {'class': 'transfer-domestic-finalize-code'}}) }}
                 {% for error in transferFinalizeForm.verificationCode.vars.errors %}
-                    <div class="send-transfer-error">{{ error.message }}</div>
+                    <div class="form-error">{{ error.message }}</div>
                 {% endfor %}
                 {% for message in app.flashes('wrong_code') %}
-                    <div class="send-transfer-error">{{ message }}</div>
+                    <div class="form-error">{{ message }}</div>
                 {% endfor %}
                 <div class="transfer-finalize-remaining-time">Pozostały czas:</div>
                 <div class="transfer-progress-bar">

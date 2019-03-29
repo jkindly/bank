@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Form\UserAddressFormType;
+use App\Services\UserVerification;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +25,7 @@ class UserSettingsController extends AbstractController
 
     /**
      * @Route("/settings/ajaxSettingsContent", name="ajax_settings_content")
+     * @Method({"POST"})
      */
     public function ajaxUserDataSettings(Request $request)
     {
@@ -37,17 +40,13 @@ class UserSettingsController extends AbstractController
     }
 
     /**
-     * @Route("/settings/ajaxChange/user-address", name="ajax_change_address")
+     * @Route("/settings/ajaxLoadForm/user-address", name="ajax_load_form_address")
      */
-    public function changeUserAddress(Request $request)
+    public function ajaxLoadUserAddress(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
             $form = $this->createForm(UserAddressFormType::class);
             $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                dd('chuj');
-            }
 
             $response = $this->render('user_settings/user_data/__user_address.html.twig', [
                 'UserAddressForm' => $form->createView()
@@ -59,4 +58,24 @@ class UserSettingsController extends AbstractController
         return $this->redirectToRoute('app_user_settings');
     }
 
+    /**
+     * @Route("/settings/ajaxUpdate/user-address", name="ajax_update_address")
+     * @Method({"POST"})
+     */
+    public function ajaxUpdateUserAddress(Request $request, UserVerification $verification)
+    {
+        if (!$request->isXmlHttpRequest()) return $this->redirectToRoute('app_user_settings');
+
+        $form = $this->createForm(UserAddressFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $verification
+                ->setVerificationCode();
+        }
+        $response = $this->render('user_settings/user_data/__user_address.html.twig', [
+            'UserAddressForm' => $form->createView()
+        ])->getContent();
+        return new JsonResponse($response);
+    }
 }

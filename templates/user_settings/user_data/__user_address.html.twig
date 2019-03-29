@@ -2,9 +2,62 @@
     <i class="fas fa-home"></i>
     Zmień adres korespondencyjny
 </h1>
-{{ form_start(UserAddressForm) }}
-    {{ form_label(UserAddressForm.street) }}
-    {{ form_widget(UserAddressForm.street) }}
-    {{ form_errors(UserAddressForm.street) }}
-    <button class="edit-user-data-btn" type="submit">Zaktualizuj</button>
+
+{{ form_start(UserAddressForm,
+    {'attr': {'id': 'edit-user-address-form'}}) }}
+    <table class="change-user-address">
+        <tr>
+            <td>{{ form_label(UserAddressForm.street) }}</td>
+            <td>{{ form_widget(UserAddressForm.street,
+                    {'attr': {'value': app.user.street }}) }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="form-error">
+                {% for error in UserAddressForm.street.vars.errors %}
+                    <p>{{ error.message }}</p>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form_label(UserAddressForm.zipcode) }}</td>
+            <td>{{ form_widget(UserAddressForm.zipcode,
+                    {'attr': {'value': app.user.zipcode }}) }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="form-error">
+                {% for error in UserAddressForm.zipcode.vars.errors %}
+                    <p>{{ error.message }}</p>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form_label(UserAddressForm.city) }}</td>
+            <td>{{ form_widget(UserAddressForm.city,
+                    {'attr': {'value': app.user.city }}) }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="form-error">
+                {% for error in UserAddressForm.city.vars.errors %}
+                    <p>{{ error.message }}</p>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form_label(UserAddressForm.country) }}</td>
+            <td>{{ form_widget(UserAddressForm.country,
+                    {'attr': {'value': app.user.country }}) }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="form-error">
+                {% for error in UserAddressForm.country.vars.errors %}
+                    <p>{{ error.message }}</p>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+    <button id="edit-user-address-btn" class="edit-user-data-btn" type="submit">Zaktualizuj</button>
 {{ form_end(UserAddressForm) }}

@@ -5,21 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41e28ab7-6ae8-4f4f-9a7c-fde45366af01" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/user_settings/security/__security.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/user_settings/user_data/__user_address.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/dev/swiftmailer.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/dev/swiftmailer.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/user-settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/user-settings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TransferHistoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TransferHistoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/UserSettingsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserSettingsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/UserFixture.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/UserFixture.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20190225224720.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20190225224720.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20190306215543.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20190306215543.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20190306220456.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20190306220456.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user_settings/__user_data.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_settings/user_data/__user_data.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UserAddressFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserAddressFormType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/UserVerification.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/UserVerification.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/transfer/transfer-domestic-finalize.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/transfer/transfer-domestic-finalize.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/transfer/transfer-domestic.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/transfer/transfer-domestic.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/user_settings/settings.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_settings/settings.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user_settings/user_data/__user_address.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_settings/user_data/__user_address.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translations/forms.en.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/translations/forms.en.yaml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/vendor/composer/" />
     <ignored path="$PROJECT_DIR$/vendor/doctrine/annotations/" />
@@ -116,50 +112,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/user_settings/user_data/__user_data.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/user_settings/settings.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/user_settings/security/__security.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="77" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/user-settings.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="53" column="46" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/TransferDomesticController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-136">
-              <caret line="54" column="30" selection-start-line="54" selection-start-column="30" selection-end-line="54" selection-end-column="30" />
-              <folding>
-                <element signature="e#115#139#0#PHP" expanded="true" />
-                <element signature="e#1816#1854#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="658">
+              <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -167,8 +123,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Form/UserAddressFormType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+            <state relative-caret-position="391">
+              <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -176,14 +132,31 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/UserSettingsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="607">
-              <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
+            <state relative-caret-position="675">
+              <caret line="73" column="40" selection-start-line="73" selection-start-column="40" selection-end-line="73" selection-end-column="40" />
               <folding>
                 <element signature="e#34#67#0#PHP" expanded="true" />
-                <element signature="e#1121#1140#1#PHP" expanded="true" />
-                <element signature="e#1516#1566#1#PHP" expanded="true" />
-                <element signature="e#1512#1531#1#PHP" expanded="true" />
+                <element signature="e#2239#2258#1#PHP" expanded="true" />
+                <element signature="e#2762#2812#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Services/UserVerification.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/TransferQueueController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -191,8 +164,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/transfer/transfer-domestic.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="102" column="44" selection-start-line="102" selection-start-column="44" selection-end-line="102" selection-end-column="44" />
+            <state relative-caret-position="471">
+              <caret line="58" column="37" selection-start-line="58" selection-start-column="37" selection-end-line="58" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -200,8 +173,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/user_settings/user_data/__user_address.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+            <state relative-caret-position="748">
+              <caret line="50" column="56" selection-start-line="50" selection-start-column="56" selection-end-line="50" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="284">
+              <caret line="618" column="18" selection-start-line="618" selection-start-column="18" selection-end-line="618" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -217,9 +199,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>under</find>
-      <find>mess</find>
-      <find>app.fl</find>
       <find>sendtra</find>
       <find>transfer-options</find>
       <find>transfer-history-c</find>
@@ -247,6 +226,9 @@
       <find>check</find>
       <find>loading</find>
       <find>user-data</find>
+      <find>transfer-domestic input</find>
+      <find>transfer-domestic t</find>
+      <find>btn</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -270,7 +252,6 @@
         <option value="$PROJECT_DIR$/templates/mailer/mailer.html.twig" />
         <option value="$PROJECT_DIR$/src/Transfer/TransferGenerator.php" />
         <option value="$PROJECT_DIR$/src/Form/TransferFormType.php" />
-        <option value="$PROJECT_DIR$/translations/forms.en.yaml" />
         <option value="$PROJECT_DIR$/src/Form/TransferFinalizeFormType.php" />
         <option value="$PROJECT_DIR$/public/js/transfer.js" />
         <option value="$PROJECT_DIR$/config/packages/security.yaml" />
@@ -295,16 +276,17 @@
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/src/Services/AbstractUserVerification.php" />
         <option value="$PROJECT_DIR$/src/Controller/TestsController.php" />
-        <option value="$PROJECT_DIR$/src/Services/UserVerification.php" />
-        <option value="$PROJECT_DIR$/templates/user_settings/settings.html.twig" />
-        <option value="$PROJECT_DIR$/public/css/main.css" />
         <option value="$PROJECT_DIR$/templates/user_settings/__security.html.twig" />
         <option value="$PROJECT_DIR$/templates/user_settings/__user_data.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/templates/user_settings/user_data/__user_data.html.twig" />
+        <option value="$PROJECT_DIR$/templates/user_settings/settings.html.twig" />
         <option value="$PROJECT_DIR$/public/js/user-settings.js" />
         <option value="$PROJECT_DIR$/src/Form/UserAddressFormType.php" />
+        <option value="$PROJECT_DIR$/translations/forms.en.yaml" />
         <option value="$PROJECT_DIR$/templates/user_settings/user_data/__user_address.html.twig" />
+        <option value="$PROJECT_DIR$/public/css/main.css" />
+        <option value="$PROJECT_DIR$/src/Services/UserVerification.php" />
         <option value="$PROJECT_DIR$/src/Controller/UserSettingsController.php" />
       </list>
     </option>
@@ -519,6 +501,11 @@
               <item name="user_settings" type="462c0819:PsiDirectoryNode" />
               <item name="user_data" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="bank" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bank" type="462c0819:PsiDirectoryNode" />
+              <item name="translations" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -611,11 +598,13 @@
       <workItem from="1553592411386" duration="1628000" />
       <workItem from="1553692690920" duration="7671000" />
       <workItem from="1553702440333" duration="125000" />
+      <workItem from="1553803814665" duration="404000" />
+      <workItem from="1553807039237" duration="7319000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="314057000" />
+    <option name="totallyTimeSpent" value="321780000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -630,7 +619,7 @@
     <frame x="0" y="-1" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15741728" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16061899" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -655,27 +644,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/routing/Annotation/Route.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-170">
-          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/routing.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
@@ -879,13 +847,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Services/UserVerification.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="767">
-          <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/TransferHistoryController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-85">
@@ -917,13 +878,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="803" column="23" selection-start-line="803" selection-start-column="23" selection-end-line="803" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20190328112016.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -948,16 +902,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/TransferFormType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="692">
-          <caret line="65" column="12" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="57" />
-          <folding>
-            <element signature="e#110#137#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/TransferController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -976,31 +920,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/user-settings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="53" column="46" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/UserAddressFormType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/user_settings/settings.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/user_settings/user_data/__user_data.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/manage/transfer-queue.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1011,40 +943,97 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/transfer/transfer-domestic.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/user_settings/settings.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="102" column="44" selection-start-line="102" selection-start-column="44" selection-end-line="102" selection-end-column="44" />
+        <state relative-caret-position="306">
+          <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/user_settings/user_data/__user_address.html.twig">
+    <entry file="file://$PROJECT_DIR$/public/js/user-settings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+        <state relative-caret-position="658">
+          <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/TransferDomesticController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-136">
+        <state relative-caret-position="714">
           <caret line="54" column="30" selection-start-line="54" selection-start-column="30" selection-end-line="54" selection-end-column="30" />
           <folding>
             <element signature="e#115#139#0#PHP" expanded="true" />
-            <element signature="e#1816#1854#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/TransferFormType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="733">
+          <caret line="66" selection-start-line="66" selection-end-line="66" selection-end-column="44" />
+          <folding>
+            <element signature="e#110#137#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/forms.en.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/UserAddressFormType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/transfer/transfer-domestic.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="58" column="37" selection-start-line="58" selection-start-column="37" selection-end-line="58" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/user_settings/user_data/__user_address.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="50" column="56" selection-start-line="50" selection-start-column="56" selection-end-line="50" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="618" column="18" selection-start-line="618" selection-start-column="18" selection-end-line="618" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/TransferQueueController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Services/UserVerification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/UserSettingsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
-          <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
+        <state relative-caret-position="675">
+          <caret line="73" column="40" selection-start-line="73" selection-start-column="40" selection-end-line="73" selection-end-column="40" />
           <folding>
             <element signature="e#34#67#0#PHP" expanded="true" />
-            <element signature="e#1121#1140#1#PHP" expanded="true" />
-            <element signature="e#1516#1566#1#PHP" expanded="true" />
-            <element signature="e#1512#1531#1#PHP" expanded="true" />
+            <element signature="e#2239#2258#1#PHP" expanded="true" />
+            <element signature="e#2762#2812#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

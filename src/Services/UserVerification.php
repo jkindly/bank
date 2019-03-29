@@ -27,6 +27,7 @@ class UserVerification
 
     public function setVerificationCode(){
         $this->verificationCode = rand(100000, 999999);
+        return $this;
     }
 
     public function getVerificationCode(): int

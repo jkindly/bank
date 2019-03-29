@@ -57,7 +57,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td class="send-transfer-error">
+                            <td class="form-error">
                                 {% for error in transferForm.receiverName.vars.errors %}
                                     <p>{{ error.message }}</p>
                                 {% endfor %}
@@ -71,7 +71,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td class="send-transfer-error">
+                            <td class="form-error">
                                 {% for error in transferForm.receiverAccountNumber.vars.errors %}
                                     <p>{{ error.message }}</p>
                                 {% endfor %}
@@ -89,7 +89,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td class="send-transfer-error">
+                            <td class="form-error">
                                 {% for error in transferForm.amount.vars.errors %}
                                     <p>{{ error.message }}</p>
                                 {% endfor %}
