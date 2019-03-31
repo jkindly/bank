@@ -1,0 +1,17 @@
+{{ form_start(VerificationCodeForm,
+    {'attr': {'id': 'verification-code-form'}}) }}
+Wprowadź poniżej kod, który został wysłany na Twój adres e-mail
+<div class="verification-code">
+    {{ form_label(VerificationCodeForm.verificationCode) }}
+    {{ form_widget(VerificationCodeForm.verificationCode,
+        {'attr': {'class': 'verification-code-input'}}) }}
+    {% for error in VerificationCodeForm.verificationCode.vars.errors %}
+        <div class="form-error">{{ error.message }}</div>
+    {% endfor %}
+    {% for message in app.flashes('wrong_code') %}
+        <div class="form-error">{{ message }}</div>
+    {% endfor %}
+    <button type="submit" class="verification-code-btn">Zaktualizuj dane</button>
+    <button type="button" class="cancel-verification-code-btn">Anuluj</button>
+</div>
+{{ form_end(VerificationCodeForm) }}

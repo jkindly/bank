@@ -38,10 +38,10 @@
             {#<div class="transfer-finalize-amount">#}
                 {#Przelew na kwotę: {{ transfer.amount }} PLN#}
         {{ form_start(transferFinalizeForm) }}
-            <div class="transfer-domestic-finalize">
+            <div class="verification-code">
                 {{ form_label(transferFinalizeForm.verificationCode) }}
                 {{ form_widget(transferFinalizeForm.verificationCode,
-                    {'attr': {'class': 'transfer-domestic-finalize-code'}}) }}
+                    {'attr': {'class': 'verification-code-input'}}) }}
                 {% for error in transferFinalizeForm.verificationCode.vars.errors %}
                     <div class="form-error">{{ error.message }}</div>
                 {% endfor %}
@@ -52,8 +52,8 @@
                 <div class="transfer-progress-bar">
                     <div class="transfer-progress-bar-progress"></div>
                 </div>
-                <button type="submit" class="send-transfer-btn transfer-finalize-btn">Wyślij przelew</button>
-                <button type="button" class="cancel-transfer-btn">Anuluj transfer</button>
+                <button type="submit" class="verification-code-btn transfer-finalize-btn">Wyślij przelew</button>
+                <button type="button" class="cancel-verification-code-btn">Anuluj transfer</button>
             </div>
         {{ form_end(transferFinalizeForm) }}
 

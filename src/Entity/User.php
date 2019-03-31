@@ -118,11 +118,22 @@ class User implements UserInterface
      */
     private $countryPermanent;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $verificationCode;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserAddressSettings", mappedBy="user")
+     */
+    private $userAddressSettings;
+
     public function __construct()
     {
         $this->bankAccounts = new ArrayCollection();
         $this->loginLogs = new ArrayCollection();
         $this->transfers = new ArrayCollection();
+        $this->userAddressSettings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -431,6 +442,49 @@ class User implements UserInterface
     public function setCountryPermanent(string $countryPermanent): self
     {
         $this->countryPermanent = $countryPermanent;
+
+        return $this;
+    }
+
+    public function getVerificationCode(): ?int
+    {
+        return $this->verificationCode;
+    }
+
+    public function setVerificationCode(?int $verificationCode): self
+    {
+        $this->verificationCode = $verificationCode;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserAddressSettings[]
+     */
+    public function getUserAddressSettings(): Collection
+    {
+        return $this->userAddressSettings;
+    }
+
+    public function addUserAddressSetting(UserAddressSettings $userAddressSetting): self
+    {
+        if (!$this->userAddressSettings->contains($userAddressSetting)) {
+            $this->userAddressSettings[] = $userAddressSetting;
+            $userAddressSetting->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserAddressSetting(UserAddressSettings $userAddressSetting): self
+    {
+        if ($this->userAddressSettings->contains($userAddressSetting)) {
+            $this->userAddressSettings->removeElement($userAddressSetting);
+            // set the owning side to null (unless already changed)
+            if ($userAddressSetting->getUser() === $this) {
+                $userAddressSetting->setUser(null);
+            }
+        }
 
         return $this;
     }

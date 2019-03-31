@@ -97,7 +97,7 @@ class Transfer
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\NotBlank(message="Wprowadź kod", groups={"transfer_domestic_finalize"})
+     * @Assert\NotBlank(message="Wprowadź kod", groups={"verification_code"})
      * @Assert\Length(
      *     min = 6,
      *     max = 6,

@@ -1,8 +1,13 @@
-<h1 class="user-settings-content-header">
-    <i class="fas fa-home"></i>
-    Zmień adres korespondencyjny
-</h1>
-
+{% for message in app.flashes('address_changed') %}
+    <div class="row justify-content-md-center">
+        <div class="col-6 justify-content-md-center">
+            <div class="transfer-alert transfer-success">
+                <i class="fas fa-check-circle"></i>
+                <h3>{{ message }}</h3>
+            </div>
+        </div>
+    </div>
+{% endfor %}
 {{ form_start(UserAddressForm,
     {'attr': {'id': 'edit-user-address-form'}}) }}
     <table class="change-user-address">

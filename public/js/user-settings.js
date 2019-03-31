@@ -1,5 +1,6 @@
 (function($) {
     let loading = $('.loading');
+    let header = $('.user-settings-content-header');
     let content = $('.user-settings-content');
     let settingsName;
 
@@ -20,11 +21,17 @@
         return o;
     };
 
+    let headers = {
+        'user-data' : '<i class="fas fa-user-edit"></i>Twoje Dane',
+        'security' : '<i class="fas fa-lock"></i>Bezpieczeństwo'
+    };
+
+    // LOADING USER INFORMATION BY CHOOSING LEFT SETTINGS OPTION
     $('.user-settings-option').click(function() {
         let clickedBarId = $(this).attr('id');
         switch (clickedBarId) {
             case 'settings-user-data-bar':
-                settingsName = 'user_data';
+                settingsName = 'user-data';
                 break;
             case 'settings-security-bar':
                 settingsName = 'security';
@@ -42,6 +49,7 @@
                 loading.show();
             },
             success: function(data) {
+                header.html(headers[settingsName]);
                 content.html(data);
             },
             complete: function() {
@@ -51,6 +59,7 @@
     });
 
 
+    // LOADING FORM TO EDIT USER INFORMATIONS
     content.on('click', '.edit-user-data-btn', function() {
         let id = $(this).parent().parent().attr('id');
         if (id === undefined) return;
@@ -76,10 +85,37 @@
         });
     });
 
+    // VALIDATING FORM
     content.on('click', '#edit-user-address-btn', function(e) {
         e.preventDefault();
         let form = $('#edit-user-address-form').serializeObject();
 
+        $.ajax({
+            url: '/settings/ajaxValidateForm/user-address',
+            dataType: 'json',
+            method: 'POST',
+            data: form,
+            async: true,
+            cache: false,
+            beforeSend: function() {
+                content.html('');
+                loading.show();
+            },
+            success: function(data) {
+                content.html(data);
+            },
+            error: function() {
+                content.html('Wystąpił błąd');
+            },
+            complete: function() {
+                loading.hide();
+            }
+        });
+    });
+
+    content.on('click', '.verification-code-btn', function(e) {
+        e.preventDefault();
+        let form = $('#verification-code-form').serializeObject();
         $.ajax({
             url: '/settings/ajaxUpdate/user-address',
             dataType: 'json',
@@ -92,7 +128,6 @@
                 loading.show();
             },
             success: function(data) {
-                console.log(data);
                 content.html(data);
             },
             error: function() {

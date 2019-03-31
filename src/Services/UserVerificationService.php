@@ -8,40 +8,59 @@
 
 namespace App\Services;
 
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
 
-class UserVerification
+class UserVerificationService
 {
     private $mailer;
-    private $verificationCode;
     private $user;
     private $templating;
+    private $em;
+    private $userRepository;
     const SENDER_EMAIL = 'kozupa.jakub@gmail.com';
 
-    public function __construct(\Swift_Mailer $mailer, Security $security, \Twig_Environment $templating)
+    public function __construct(\Swift_Mailer $mailer, Security $security, \Twig_Environment $templating, EntityManagerInterface $em)
     {
         $this->mailer = $mailer;
         $this->user = $security->getUser();
         $this->templating = $templating;
+        $this->em = $em;
+        $this->userRepository = $this->em->getRepository(User::class)->find($this->user->getId());
     }
 
     public function setVerificationCode(){
-        $this->verificationCode = rand(100000, 999999);
+        $verificationCode = rand(100000, 999999);
+
+        $this->userRepository->setVerificationCode($verificationCode);
+        $this->em->flush();
+
         return $this;
     }
 
     public function getVerificationCode(): int
     {
-        return $this->verificationCode;
+        return $this->userRepository->getVerificationCode();
     }
 
     public function validateVerificationCode($userInputCode): bool
     {
-        return $userInputCode == $this->verificationCode ? true : false;
+        $validationCode = [];
+
+        if ($this->getVerificationCode() == $userInputCode) {
+            $validationCode['message'] = 'succeess';
+        }
+
+
+
+
+        return $userInputCode == $this->getVerificationCode() ? true : false;
     }
 
     public function sendVerificationCode()
     {
+        return;
         $message = (new \Swift_Message('Kod Transakcji'))
             ->setFrom(self::SENDER_EMAIL)
             ->setTo($this->user->getEmail())

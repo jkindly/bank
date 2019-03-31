@@ -1,6 +1,6 @@
 (function($) {
 
-    $('.cancel-transfer-btn').click(function() {
+    $('.cancel-verification-code-btn').click(function() {
         $.ajax({
             url: '/transfer/domestic/ajaxDeclineDomesticTransfer',
             type: 'POST',

@@ -616,20 +616,21 @@ td > .fa-long-arrow-alt-left {
     width: 30%;
 }
 
-.send-transfer-btn {
+.verification-code-btn {
     background-color: #2A83C7;
     color: white;
     cursor: pointer;
     border: none;
     border-radius: 5px;
     padding: 5px;
+    margin-top: 20px;
 }
 
-.send-transfer-btn:hover {
+.verification-code-btn:hover {
     background-color: #3493DB;
 }
 
-.cancel-transfer-btn {
+.cancel-verification-code-btn {
     background-color: #EFEFEF;
     border: 1px solid #D4D4D4;
     -webkit-border-radius: 5px;
@@ -640,7 +641,7 @@ td > .fa-long-arrow-alt-left {
     padding: 0 5px 0 5px;
 }
 
-.cancel-transfer-btn:hover {
+.cancel-verification-code-btn:hover {
     cursor: pointer;
     background-color: #F9F9F9;
 }
@@ -690,7 +691,7 @@ td > .fa-long-arrow-alt-left {
     margin-right: 10px;
 }
 
-.transfer-domestic-finalize {
+.verification-code {
     margin: 20px auto 0 auto;
     width: 200px;
     text-align: center;
@@ -700,7 +701,7 @@ td > .fa-long-arrow-alt-left {
     /*justify-content: center;*/
 }
 
-.transfer-domestic-finalize-code {
+.verification-code-input {
     /*margin-bottom: 20px;*/
 }
 
@@ -774,10 +775,6 @@ td > .fa-long-arrow-alt-left {
     padding: 3px;
 }
 
-.transfer-finalize-btn {
-    margin-top: 20px;
-}
-
 td > .fa-check-circle {
     font-size: 2rem;
     color: rgb(16, 198, 35);
@@ -804,18 +801,12 @@ td > .fa-times-circle {
     position: relative;
 }
 
-.user-settings-options {
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*!*align-items: center;*!*/
-    /*!*align-content: center;*!*/
-    /*justify-content: center;*/
-}
-
-.user-settings-content {
+.user-settings-content-container {
     /*border: 1px solid black;*/
     margin-left: 50px;
     min-width: 500px;
+    min-height: 300px;
+    position: relative;
 }
 
 .user-settings-option {
@@ -855,7 +846,13 @@ td > .fa-times-circle {
 .user-data-info {
     display: flex;
     flex-direction: row;
+    border-bottom: 1px solid #707070;
+    margin-top: 20px;
     /*justify-content: space-around;*/
+}
+
+.user-data-info:last-child {
+    border: 0;
 }
 
 .user-data-info > p {
@@ -863,11 +860,15 @@ td > .fa-times-circle {
     margin-right: 50px;
 }
 
+/*.user-settings-content-container {*/
+/*    width: 100%;*/
+/*    margin-left: 30px;*/
+/*    margin-bottom: 30px;*/
+/*    padding-top: 0 !important;*/
+/*}*/
+
 .user-settings-content-header {
-    width: 100%;
     border-bottom: 1px solid black;
-    margin-bottom: 30px;
-    padding-top: 0 !important;
 }
 
 .edit-user-data-btn {

@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Form\UserAddressFormType;
-use App\Services\UserVerification;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Form\VerificationCodeFormType;
+use App\Services\UserSettingsService;
+use App\Services\UserVerificationService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserSettingsController extends AbstractController
@@ -48,7 +50,7 @@ class UserSettingsController extends AbstractController
             $form = $this->createForm(UserAddressFormType::class);
             $form->handleRequest($request);
 
-            $response = $this->render('user_settings/user_data/__user_address.html.twig', [
+            $response = $this->render('user_settings/user-data/__change-user-address.html.twig', [
                 'UserAddressForm' => $form->createView()
             ])->getContent();
 
@@ -59,23 +61,69 @@ class UserSettingsController extends AbstractController
     }
 
     /**
-     * @Route("/settings/ajaxUpdate/user-address", name="ajax_update_address")
+     * @Route("/settings/ajaxValidateForm/user-address", name="ajax_validate_address")
      * @Method({"POST"})
      */
-    public function ajaxUpdateUserAddress(Request $request, UserVerification $verification)
+    public function ajaxValidateUserAddress(Request $request, UserVerificationService $verification, UserSettingsService $userSettings)
     {
         if (!$request->isXmlHttpRequest()) return $this->redirectToRoute('app_user_settings');
 
         $form = $this->createForm(UserAddressFormType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isValid()) {
+            $form = $this->createForm(VerificationCodeFormType::class);
+            $form->handleRequest($request);
+
+            $formData = $request->request->get('user_address_form');
+
+            $userSettings->insertNewAddressChange($formData);
+
             $verification
-                ->setVerificationCode();
+                ->setVerificationCode()
+                ->sendVerificationCode()
+            ;
+
+            $response =  $this->render('user_settings/__verification-code.html.twig', [
+                'VerificationCodeForm' => $form->createView()
+            ])->getContent();
+
+            return new JsonResponse($response);
         }
-        $response = $this->render('user_settings/user_data/__user_address.html.twig', [
+
+        $response = $this->render('user_settings/user-data/__change-user-address.html.twig', [
             'UserAddressForm' => $form->createView()
         ])->getContent();
+
         return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/settings/ajaxUpdate/user-address", name="ajax_update_user")
+     * @Method({"POST"})
+     */
+    public function ajaxUpdateUser(Request $request, UserVerificationService $verification, UserSettingsService $userSettings)
+    {
+        if (!$request->isXmlHttpRequest()) return $this->redirectToRoute('app_user_settings');
+
+        $userInputCode = $request->request->get('verification_code_form')['verificationCode'];
+
+        $form = $this->createForm(VerificationCodeFormType::class);
+        $form->handleRequest($request);
+
+        $formView = $this->render('user_settings/__verification-code.html.twig', [
+            'VerificationCodeForm' => $form->createView()
+        ])->getContent();
+
+        if (!$form->isValid()) {
+            return new JsonResponse($formView);
+        }
+
+        if ($verification->validateVerificationCode($userInputCode)) {
+            $userSettings->applyNewAddress();
+            return new JsonResponse('Twój adres został pomyślnie zmieniony!');
+        } else {
+            return new JsonResponse($formView);
+        }
     }
 }

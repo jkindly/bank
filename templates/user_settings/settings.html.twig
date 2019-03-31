@@ -15,12 +15,18 @@
                     Bezpieczeństwo
                 </div>
             </section>
-            <section class="user-settings-content">
-                Wybierz kategorię po lewej stronie
+            <section class="user-settings-content-container">
+                <div class="loading">
+                    <img src="{{ asset('img/loading.gif') }}" width="150px" height="150px" alt="Ładowanie">
+                </div>
+                <h1 class="user-settings-content-header">
+                    <i class="fas fa-home"></i>
+                    Ustawienia
+                </h1>
+                <div class="user-settings-content">
+                    Wybierz kategorię po lewej stronie
+                </div>
             </section>
-            <div class="loading">
-                <img src="{{ asset('img/loading.gif') }}" width="150px" height="150px" alt="Ładowanie">
-            </div>
         </div>
     </main>
 {% endblock %}

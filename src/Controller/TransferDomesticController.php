@@ -9,7 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\Transfer;
-use App\Form\TransferFinalizeFormType;
+use App\Form\VerificationCodeFormType;
 use App\Form\TransferFormType;
 use App\Transfer\TransferDomestic;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -85,7 +85,7 @@ class TransferDomesticController extends AbstractController
 
         if ($request->isXmlHttpRequest()) return $transferDomestic->setTimeToInputCode($transfer);
 
-        $form = $this->createForm(TransferFinalizeFormType::class);
+        $form = $this->createForm(VerificationCodeFormType::class);
 
         $form->handleRequest($request);
 

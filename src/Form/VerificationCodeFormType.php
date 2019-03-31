@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TransferFinalizeFormType extends AbstractType
+class VerificationCodeFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -23,7 +23,7 @@ class TransferFinalizeFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'validation_groups' => 'transfer_domestic_finalize',
+            'validation_groups' => 'verification_code',
             'translation_domain' => 'forms',
             'data_class' => Transfer::class,
         ]);
