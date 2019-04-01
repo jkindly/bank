@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\UserAddressFormType;
+use App\Form\UserPasswordFormType;
 use App\Form\VerificationCodeFormType;
 use App\Services\UserSettingsService;
 use App\Services\UserVerificationService;
@@ -31,53 +32,51 @@ class UserSettingsController extends AbstractController
      */
     public function ajaxUserDataSettings(Request $request)
     {
-        if ($request->isXmlHttpRequest()) {
-            $settingsName = $request->request->get('settingsName');
+        if (!$request->isXmlHttpRequest()) return $this->redirectToRoute('app_user_settings');
 
-            $response = $this->render('user_settings/'.$settingsName.'/__'.$settingsName.'.html.twig')->getContent();
-            return new JsonResponse($response);
-        }
+        $settingsName = $request->request->get('settingsName');
 
-        return $this->redirectToRoute('app_user_settings');
+        $response = $this->render('user_settings/'.$settingsName.'/__'.$settingsName.'.html.twig')->getContent();
+
+        return new JsonResponse($response);
     }
 
     /**
-     * @Route("/settings/ajaxLoadForm/user-address", name="ajax_load_form_address")
+     * @Route("/settings/address", name="app_user_settings_address")
      */
-    public function ajaxLoadUserAddress(Request $request)
+    public function addressSettings(Request $request)
     {
-        if ($request->isXmlHttpRequest()) {
-            $form = $this->createForm(UserAddressFormType::class);
-            $form->handleRequest($request);
+        $form = $this->createForm(UserAddressFormType::class);
+        $form->handleRequest($request);
 
-            $response = $this->render('user_settings/user-data/__change-user-address.html.twig', [
-                'UserAddressForm' => $form->createView()
-            ])->getContent();
-
-            return new JsonResponse($response);
-        }
-
-        return $this->redirectToRoute('app_user_settings');
+        return $this->render('user_settings/user-data/user_address.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
-     * @Route("/settings/ajaxValidateForm/user-address", name="ajax_validate_address")
+     * @Route("/settings/ajaxValidateForm/{option}", name="ajax_validate_form")
      * @Method({"POST"})
      */
-    public function ajaxValidateUserAddress(Request $request, UserVerificationService $verification, UserSettingsService $userSettings)
+    public function ajaxValidateUserAddress($option, Request $request, UserVerificationService $verification, UserSettingsService $userSettings)
     {
         if (!$request->isXmlHttpRequest()) return $this->redirectToRoute('app_user_settings');
 
-        $form = $this->createForm(UserAddressFormType::class);
+        $formsToValidate = [
+            'user_address_form' => UserAddressFormType::class,
+            'user_password_form' => UserPasswordFormType::class,
+        ];
+
+        $form = $this->createForm($formsToValidate[$option]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $form = $this->createForm(VerificationCodeFormType::class);
             $form->handleRequest($request);
 
-            $formData = $request->request->get('user_address_form');
+            $formData = $request->request->get($option);
 
-            $userSettings->insertNewAddressChange($formData);
+            $userSettings->insertNewChanges($formData, $option);
 
             $verification
                 ->setVerificationCode()
@@ -91,9 +90,7 @@ class UserSettingsController extends AbstractController
             return new JsonResponse($response);
         }
 
-        $response = $this->render('user_settings/user-data/__change-user-address.html.twig', [
-            'UserAddressForm' => $form->createView()
-        ])->getContent();
+        $response = 'failed_validation';
 
         return new JsonResponse($response);
     }

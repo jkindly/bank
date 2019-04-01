@@ -28,6 +28,7 @@
 
     // LOADING USER INFORMATION BY CHOOSING LEFT SETTINGS OPTION
     $('.user-settings-option').click(function() {
+        window.history.pushState('settings', 'Ustawienia', '/settings');
         let clickedBarId = $(this).attr('id');
         switch (clickedBarId) {
             case 'settings-user-data-bar':
@@ -86,12 +87,14 @@
     });
 
     // VALIDATING FORM
-    content.on('click', '#edit-user-address-btn', function(e) {
+    content.on('click', '.confirm-edit-btn', function(e) {
         e.preventDefault();
-        let form = $('#edit-user-address-form').serializeObject();
+        let form = $(this).parent().serializeObject();
+        let option = $(this).parent().attr('name');
+        let htmlContent = content.html();
 
         $.ajax({
-            url: '/settings/ajaxValidateForm/user-address',
+            url: '/settings/ajaxValidateForm/'+option,
             dataType: 'json',
             method: 'POST',
             data: form,
@@ -102,7 +105,8 @@
                 loading.show();
             },
             success: function(data) {
-                content.html(data);
+                if (data === 'failed_validation') content.html(htmlContent)
+                else content.html(data);
             },
             error: function() {
                 content.html('Wystąpił błąd');

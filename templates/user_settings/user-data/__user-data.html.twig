@@ -23,7 +23,7 @@
         <br>
         {{ app.user.country }}
         <br>
-        <button class="edit-user-data-btn" type="button">Modyfikuj</button>
+        <a href="{{ path('app_user_settings_address') }}"><button class="edit-user-data-btn" type="button">Modyfikuj</button></a>
     </p>
 </div>
 <div class="user-data-info" id="user-email">

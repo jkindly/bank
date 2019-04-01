@@ -50,6 +50,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Wprowadź hasło", groups={"user_password"})
      */
     private $password;
 
@@ -128,12 +129,18 @@ class User implements UserInterface
      */
     private $userAddressSettings;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserPasswordSettings", mappedBy="user")
+     */
+    private $userPasswordSettings;
+
     public function __construct()
     {
         $this->bankAccounts = new ArrayCollection();
         $this->loginLogs = new ArrayCollection();
         $this->transfers = new ArrayCollection();
         $this->userAddressSettings = new ArrayCollection();
+        $this->userPasswordSettings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -483,6 +490,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($userAddressSetting->getUser() === $this) {
                 $userAddressSetting->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserPasswordSettings[]
+     */
+    public function getUserPasswordSettings(): Collection
+    {
+        return $this->userPasswordSettings;
+    }
+
+    public function addUserPasswordSetting(UserPasswordSettings $userPasswordSetting): self
+    {
+        if (!$this->userPasswordSettings->contains($userPasswordSetting)) {
+            $this->userPasswordSettings[] = $userPasswordSetting;
+            $userPasswordSetting->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserPasswordSetting(UserPasswordSettings $userPasswordSetting): self
+    {
+        if ($this->userPasswordSettings->contains($userPasswordSetting)) {
+            $this->userPasswordSettings->removeElement($userPasswordSetting);
+            // set the owning side to null (unless already changed)
+            if ($userPasswordSetting->getUser() === $this) {
+                $userPasswordSetting->setUser(null);
             }
         }
 

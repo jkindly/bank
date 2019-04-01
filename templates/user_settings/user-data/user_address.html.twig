@@ -1,0 +1,60 @@
+{% extends 'user_settings/settings.html.twig' %}
+{% block content %}
+{{ form_start(form) }}
+    <table class="change-user-address">
+        <tr>
+            <td>{{ form_label(form.street) }}</td>
+            <td>{{ form_widget(form.street,
+                    {'attr': {'value': app.user.street }}) }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="form-error">
+                {% for error in form.street.vars.errors %}
+                    <p>{{ error.message }}</p>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.zipcode) }}</td>
+            <td>{{ form_widget(form.zipcode,
+                    {'attr': {'value': app.user.zipcode }}) }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="form-error">
+                {% for error in form.zipcode.vars.errors %}
+                    <p>{{ error.message }}</p>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.city) }}</td>
+            <td>{{ form_widget(form.city,
+                    {'attr': {'value': app.user.city }}) }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="form-error">
+                {% for error in form.city.vars.errors %}
+                    <p>{{ error.message }}</p>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.country) }}</td>
+            <td>{{ form_widget(form.country,
+                    {'attr': {'value': app.user.country }}) }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="form-error">
+                {% for error in form.country.vars.errors %}
+                    <p>{{ error.message }}</p>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+    <button class="edit-user-data-btn confirm-edit-btn" type="submit">Zaktualizuj</button>
+{{ form_end(form) }}
+{% endblock %}

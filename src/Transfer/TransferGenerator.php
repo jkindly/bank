@@ -110,7 +110,7 @@ class TransferGenerator
             ->setTo('kozupa.jakub@gmail.com')
             ->setBody(
                 $this->renderView(
-                    'tests/index.html.twig',
+                    'tests/verification-code.html.twig',
                     ['code' => $code]
                 ),
                 'text/html'
