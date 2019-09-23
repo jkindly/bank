@@ -1,4 +1,4 @@
-# APPLICATION CREATED BY JAKUB KOZUPA #
+APPLICATION CREATED BY JAKUB KOZUPA
 It's a simple application simulating a Bank account.
 ----------------------------------------------------
 What can you do:
