@@ -52,9 +52,6 @@ class UserVerificationService
             $validationCode['message'] = 'succeess';
         }
 
-
-
-
         return $userInputCode == $this->getVerificationCode() ? true : false;
     }
 
